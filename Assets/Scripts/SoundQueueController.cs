@@ -1,9 +1,13 @@
+using Assets.Scripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using static Assets.Scripts.Outlinev2;
 
 public class SoundQueueController : MonoBehaviour
 {
@@ -15,15 +19,55 @@ public class SoundQueueController : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip loseSound;
     public AudioClip winSound;
+    public bool ShowOutline;
     public bool PlayFullWinSound;
+    public bool catsClickable;
+    public float range;
     private int CurrentNum;
+    private RoundState roundState;
+    enum RoundState
+    {
+        roundStarting,
+        playingSounds,
+        playing,
+        lost,
+    }
     private void Start()
     {
         audioSource =GetComponent<AudioSource>();
     }
     private void Awake()
     {
-        instance=this;    
+        instance=this; 
+        
+    }
+    private void Update()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                RaycastHit2D hit =  Physics2D.GetRayIntersection(ray);
+                if (hit && catsClickable)
+                {
+                    Cat cat = hit. collider.GetComponent<Cat>();
+                    if (cat != null)
+                    {   
+                        cat.Play();
+                        //SoundQueueController.instance.OnCatClick(this);
+                        OnCatClick(cat);
+                    }
+
+                }
+            }
+        }
+    }
+    public void SetUpGame(Cat[] AvailableCats, int StartedSequenceLength)
+    {
+        this.AvailableCats = AvailableCats;
+        this.StartedSequenceLength = StartedSequenceLength;
     }
     public void StartNewGame()
     {
@@ -32,26 +76,24 @@ public class SoundQueueController : MonoBehaviour
     }
     public void StartRound()
     {
+        roundState = RoundState.roundStarting;
         CurrentNum = 0;
         StartCoroutine(PlayStartSoundSequence());
     }
     private IEnumerator PlayStartSoundSequence()
     {
-        foreach (Cat cat in AvailableCats)
-        {
-            cat.gameObject.GetComponent<Clickable>().clickAvailable = false;
-        }
+        roundState = RoundState.playingSounds;
+        SetCatsClickable(false);
         for (int i = 0; i < CatSequence.Count; i++)
         {
             CatSequence[i].Play();
             yield return new WaitForSeconds(CatSequence[i].MeowSound.length);
         }
-        Debug.Log("Sounds have played");
-        foreach (Cat cat in AvailableCats)
-        {
-            cat.gameObject.GetComponent<Clickable>().clickAvailable = true;
-        }
+        roundState = RoundState.playing;
+        SetCatsClickable(true);
     }
+
+    
 
     public void OnCatClick(Cat cat)
     {
@@ -105,6 +147,7 @@ public class SoundQueueController : MonoBehaviour
         else
             yield return new WaitForSeconds(1f);
         audioSource.Stop();
+        yield return new WaitForSeconds(0.5f);
         AddToSequence();
         StartRound();
     }
@@ -112,5 +155,18 @@ public class SoundQueueController : MonoBehaviour
     {
         CurrentNum = 0;
         audioSource.PlayOneShot(loseSound);
+        SetCatsClickable(false);
+        roundState = RoundState.lost;
+    }
+    private void SetCatsClickable(bool b)
+    {
+        catsClickable = b;
+    }
+    public void OutlineValueChanged(Toggle change)
+    {
+        if(change.isOn)
+            Outlinev2.state = OutlineState.show;
+        else
+            Outlinev2.state = OutlineState.hide;
     }
 }
