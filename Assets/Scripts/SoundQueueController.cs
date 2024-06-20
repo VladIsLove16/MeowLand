@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using static Assets.Scripts.Outlinev2;
 
@@ -16,19 +17,20 @@ public class SoundQueueController : MonoBehaviour
     public int StartedSequenceLength;
     public Cat[] AvailableCats;
     public List<Cat> CatSequence;
-    public AudioSource audioSource;
+    [HideInInspector]
+    private AudioSource audioSource;
     public AudioClip loseSound;
     public AudioClip winSound;
-    public bool ShowOutline;
     public bool PlayFullWinSound;
     public bool catsClickable;
-    public float range;
+    public UnityEvent<RoundState> roundStateChanged;
     private int CurrentNum;
     private RoundState roundState;
-    enum RoundState
+    public enum RoundState
     {
-        roundStarting,
+        gameStarting,
         playingSounds,
+        roundStarting,
         playing,
         lost,
     }
@@ -49,12 +51,12 @@ public class SoundQueueController : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                RaycastHit2D hit =  Physics2D.GetRayIntersection(ray);
+                RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
                 if (hit && catsClickable)
                 {
-                    Cat cat = hit. collider.GetComponent<Cat>();
+                    Cat cat = hit.collider.GetComponent<Cat>();
                     if (cat != null)
-                    {   
+                    {
                         cat.Play();
                         //SoundQueueController.instance.OnCatClick(this);
                         OnCatClick(cat);
@@ -63,6 +65,7 @@ public class SoundQueueController : MonoBehaviour
                 }
             }
         }
+
     }
     public void SetUpGame(Cat[] AvailableCats, int StartedSequenceLength)
     {
@@ -71,30 +74,35 @@ public class SoundQueueController : MonoBehaviour
     }
     public void StartNewGame()
     {
+        ScoreManager.instance.ResetPoints();
         CreateSequence(StartedSequenceLength);
         StartRound();
     }
     public void StartRound()
     {
-        roundState = RoundState.roundStarting;
+        SetRoundState(RoundState.roundStarting);
         CurrentNum = 0;
         StartCoroutine(PlayStartSoundSequence());
     }
+
+    private void SetRoundState(RoundState state)
+    {
+        roundState = state;
+        roundStateChanged.Invoke(roundState);
+    }
+
     private IEnumerator PlayStartSoundSequence()
     {
-        roundState = RoundState.playingSounds;
+        SetRoundState(RoundState.playingSounds);
         SetCatsClickable(false);
         for (int i = 0; i < CatSequence.Count; i++)
         {
             CatSequence[i].Play();
             yield return new WaitForSeconds(CatSequence[i].MeowSound.length);
         }
-        roundState = RoundState.playing;
+        SetRoundState(roundState = RoundState.roundStarting);
         SetCatsClickable(true);
     }
-
-    
-
     public void OnCatClick(Cat cat)
     {
         QueueCheck(cat);
@@ -118,14 +126,12 @@ public class SoundQueueController : MonoBehaviour
     private void QueueCheck(Cat cat)
     {
         if (CurrentNum== CatSequence.Count) return;
+        if(CurrentNum > 0 && roundState != RoundState.playing)
+            SetRoundState(RoundState.playing);
         if(cat == CatSequence[CurrentNum])
-        {
             OnRightAnswer();
-        }
         else
-        {
             OnWrongAnswer();
-        }
     }
     private void OnRightAnswer()
     {
@@ -134,13 +140,10 @@ public class SoundQueueController : MonoBehaviour
            StartCoroutine(OnRoundWin());
         }
         CurrentNum++;
-        //else
-        //{
-        //    audioSource.PlayOneShot(loseSound);  
-        //}
     }
     private IEnumerator OnRoundWin()
     {
+        ScoreManager.instance.Set(CatSequence.Count);
         audioSource.PlayOneShot(winSound);
         if(PlayFullWinSound)
             yield return new WaitForSeconds(winSound.length+1f);
@@ -156,17 +159,10 @@ public class SoundQueueController : MonoBehaviour
         CurrentNum = 0;
         audioSource.PlayOneShot(loseSound);
         SetCatsClickable(false);
-        roundState = RoundState.lost;
+        SetRoundState(roundState = RoundState.lost);
     }
     private void SetCatsClickable(bool b)
     {
         catsClickable = b;
-    }
-    public void OutlineValueChanged(Toggle change)
-    {
-        if(change.isOn)
-            Outlinev2.state = OutlineState.show;
-        else
-            Outlinev2.state = OutlineState.hide;
     }
 }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4448099074333721454}
   - component: {fileID: 190444527898482821}
   - component: {fileID: 4638706123238234289}
-  - component: {fileID: 538157791368491807}
   - component: {fileID: 8217523627834271367}
   - component: {fileID: 8691318830456833800}
   - component: {fileID: 2006668166837131525}
@@ -114,24 +113,6 @@ MonoBehaviour:
   OutlineEnabled: 0
   OutlineSprite: {fileID: 21300000, guid: 06d2208ef0a98c94a9b57b978176efe3, type: 3}
   NoOutlineSprite: {fileID: 21300000, guid: 0b79a162204ffc64b96a92bb0f306f29, type: 3}
---- !u!114 &538157791368491807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4704011193121710641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!58 &8217523627834271367
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -176,7 +157,7 @@ AudioSource:
   m_GameObject: {fileID: 4704011193121710641}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6122517621758289289, guid: f24d4b1c610c2a246854e58b26afb15f, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.425

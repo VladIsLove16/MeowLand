@@ -1,0 +1,3 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button" style="width: 80px; height: 80px; background-image: url(&quot;project://database/Assets/Sprites/[removal.ai]_0e4947bb-bae7-4e2a-aa9a-9aef0b796895-c5f4fb629ddf4f2da25df54b2e2d60df-1_DBL3YJ.png?fileID=21300000&amp;guid=46bd4fc825a0af240ba12a1300775450&amp;type=3#[removal.ai]_0e4947bb-bae7-4e2a-aa9a-9aef0b796895-c5f4fb629ddf4f2da25df54b2e2d60df-1_DBL3YJ&quot;); background-color: rgba(188, 188, 188, 0);" />
+</ui:UXML>

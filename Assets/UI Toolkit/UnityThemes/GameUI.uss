@@ -1,0 +1,6 @@
+.unity-toggle {
+}
+
+.unity-label {
+    min-width: 96px;
+}

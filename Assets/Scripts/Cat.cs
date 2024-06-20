@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 [RequireComponent(typeof(AudioSource))]
@@ -18,17 +19,17 @@ public class Cat : MonoBehaviour
     private Button button;
     private AudioSource AudioSource;
 
+    public UnityEvent<Cat> Clicked;
+
     public bool OutlineEnabled;
     [SerializeField]
     private Sprite OutlineSprite;
     [SerializeField]
     private Sprite NoOutlineSprite;
     private SpriteRenderer spriteRenderer; 
-    private Outline Outline;
     private void Start()
     {
         AudioSource = GetComponent<AudioSource>();   
-        Outline = GetComponent<Outline>();
         SetOutlineMode(true);
     }
     private void Awake()
@@ -37,6 +38,7 @@ public class Cat : MonoBehaviour
     }
     public void Play()
     {
+        Clicked.Invoke(this);
         AudioSource.PlayOneShot(MeowSound);
         ShowOutline();
     }

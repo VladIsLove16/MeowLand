@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="SettingsMenu" style="flex-grow: 1; justify-content: space-around; background-color: rgba(0, 0, 0, 0.38); border-top-width: 4px; border-right-width: 4px; border-bottom-width: 4px; border-left-width: 4px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); -unity-background-image-tint-color: rgb(255, 57, 57); border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px;">
+        <ui:Slider label="Music" high-value="1" name="Music" low-value="-80" />
+        <ui:Slider label="Meowing" high-value="1" name="Meowing" low-value="-80" />
+        <ui:Slider label="Buttons" high-value="1" name="Buttons" low-value="-80" show-input-field="false" />
+    </ui:VisualElement>
+</ui:UXML>
