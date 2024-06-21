@@ -10,23 +10,34 @@ using UnityEngine.UI;
 [RequireComponent(typeof(AudioSource))]
 public class Cat : MonoBehaviour
 {
-    public int SceneID;
     public string Name;
     [SerializeField]
     public AudioClip MeowSound;
     [HideInInspector]
     public bool clickAvailable;
-    private Button button;
     private AudioSource AudioSource;
-
-    public UnityEvent<Cat> Clicked;
-
+    public UnityEvent<Cat> OnPlay;
     public bool OutlineEnabled;
     [SerializeField]
     private Sprite OutlineSprite;
     [SerializeField]
     private Sprite NoOutlineSprite;
-    private SpriteRenderer spriteRenderer; 
+    private SpriteRenderer spriteRenderer;
+    public void SetOutlineMode(bool b)
+    {
+        OutlineEnabled = b;
+        //if (Outline.ShowOutline == true)
+        //    Outline.enabled = false;
+
+    }
+    public void Click()
+    {
+        Debug.Log("ButtonClicked");
+        if (clickAvailable)
+        {
+            Play();
+        }
+    }
     private void Start()
     {
         AudioSource = GetComponent<AudioSource>();   
@@ -38,25 +49,12 @@ public class Cat : MonoBehaviour
     }
     public void Play()
     {
-        Clicked.Invoke(this);
+        
+        OnPlay.Invoke(this);
         AudioSource.PlayOneShot(MeowSound);
         ShowOutline();
     }
-    public void SetOutlineMode(bool b)
-    {
-        OutlineEnabled = b;
-        //if (Outline.ShowOutline == true)
-        //    Outline.enabled = false;
-
-    }
-    private void OnButtonClick()
-    {
-        Debug.Log("ButtonClicked");
-        if (clickAvailable)
-        {
-            Play();
-        }
-    }
+   
     private void ShowOutline() 
     {
         if(Outlinev2.state==Outlinev2.OutlineState.show)

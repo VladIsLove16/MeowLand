@@ -11,41 +11,39 @@ public class GameUi : MonoBehaviour
 
     private UIDocument document;
     private VisualElement root;
-#if true==useToolkit
     [SerializeField]
-#endif
+    private Wallet Wallet;
     public Label ScoreText;
+    public Label SoftMoney;
+    public Label HardMoney;
+    public Label Lifes;
     [SerializeField]
     public Button NewGamebtn;
     [SerializeField]
     public Button RepeatSoundsbtn;
     [SerializeField]
     public Toggle Outline;
-    public bool useToolkit;
     private void Awake()
     {
-        if (useToolkit)
+        document = GetComponent<UIDocument>();
+        root = document.rootVisualElement;
+        ScoreText = root.Q("ScoreText") as Label;
+
+        NewGamebtn = root.Q("NewGame") as Button;
+        NewGamebtn.clicked += () =>
         {
-            document = GetComponent<UIDocument>();
-            root = document.rootVisualElement;
-            ScoreText = root.Q("ScoreText") as Label;
+            SoundSequenceController.instance.StartNewGame();
+        };
 
-            NewGamebtn = root.Q("NewGame") as Button;
-            NewGamebtn.clicked += () =>
-            {
-                SoundQueueController.instance.StartNewGame();
-            };
-
-            RepeatSoundsbtn = root.Q("RepeatSounds") as Button;
-            RepeatSoundsbtn.clicked += () =>
-            {
-                SoundQueueController.instance.StartRound();
-            };
-
-            Outline = root.Q("Outline") as Toggle;
-        }
+        RepeatSoundsbtn = root.Q("RepeatSounds") as Button;
+        RepeatSoundsbtn.clicked += () =>
+        {
+            SoundSequenceController.instance.StartRound();
+        };
+        
+        Outline = root.Q("Outline") as Toggle;
         Outline.RegisterCallback<ClickEvent>(evt => OutlineChange(Outline.value));
-        SoundQueueController.instance.roundStateChanged.AddListener(OnController_RoundStateChanged);
+        SoundSequenceController.instance.roundStateChanged.AddListener(OnController_RoundStateChanged);
         ScoreManager.instance.ScoreChanged.AddListener(OnScoreChanged);
         ScoreManager.instance.NewHighScoreReached.AddListener(OnHighScoreReached);
     }
@@ -57,36 +55,36 @@ public class GameUi : MonoBehaviour
     {
         ScoreText.text = "New High Score!! \n"+ ScoreText.text;
     }
-    private void OnController_RoundStateChanged(SoundQueueController.RoundState state)
+    private void OnController_RoundStateChanged(SoundSequenceController.RoundState state)
     {
         switch (state)
         {
-            case SoundQueueController.RoundState.gameStarting:
+            case SoundSequenceController.RoundState.gameStarting:
                 {
                     NewGamebtn.SetEnabled(true);
                     RepeatSoundsbtn.SetEnabled(false);
                     break;
                 }
-            case SoundQueueController.RoundState.playingSounds:
+            case SoundSequenceController.RoundState.playingSounds:
                 {
                     NewGamebtn.SetEnabled(false);
                     RepeatSoundsbtn.SetEnabled(false);
                     break;
                 };
-            case SoundQueueController.RoundState.roundStarting:
+            case SoundSequenceController.RoundState.roundStarting:
                 {
                     NewGamebtn.SetEnabled(false);
                     RepeatSoundsbtn.SetEnabled(true);
                     break;
                 }
-            case SoundQueueController.RoundState.playing:
+            case SoundSequenceController.RoundState.playing:
                 {
                     NewGamebtn.SetEnabled(false);
                     RepeatSoundsbtn.SetEnabled(false);
                     break;
                 }
             
-            case SoundQueueController.RoundState.lost:
+            case SoundSequenceController.RoundState.lost:
                 {
                     NewGamebtn.SetEnabled(true);
                     RepeatSoundsbtn.SetEnabled(false);
@@ -99,7 +97,7 @@ public class GameUi : MonoBehaviour
     }
     private void OnDisable()
     {
-        SoundQueueController.instance.roundStateChanged.RemoveListener(OnController_RoundStateChanged);
+        SoundSequenceController.instance.roundStateChanged.RemoveListener(OnController_RoundStateChanged);
     }
     private void OutlineChange(bool b)
     {
