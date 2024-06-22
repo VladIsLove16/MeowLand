@@ -15,7 +15,7 @@ public class SoundSequenceController : MonoBehaviour
     public static SoundSequenceController instance;
     [SerializeField]
     public int StartedSequenceLength;
-    public Cat[] AvailableCats;
+    public List<Cat> AvailableCats;
     public List<Cat> CatSequence;
     [HideInInspector]
     private AudioSource audioSource;
@@ -44,7 +44,7 @@ public class SoundSequenceController : MonoBehaviour
     {
         instance=this; 
     }
-    public void SetUpGame(Cat[] AvailableCats, int StartedSequenceLength)
+    public void SetUpGame(List<Cat> AvailableCats, int StartedSequenceLength)
     {
         this.AvailableCats = AvailableCats;
         this.StartedSequenceLength = StartedSequenceLength;
@@ -92,9 +92,13 @@ public class SoundSequenceController : MonoBehaviour
             AddToSequence();
         }
     }
+    public void AddNewCat(Cat cat)
+    {
+        AvailableCats.Add(cat);
+    }
     public void AddToSequence()
     {
-        int num = UnityEngine.Random.Range(0, AvailableCats.Length);
+        int num = UnityEngine.Random.Range(0, AvailableCats.Count);
         Cat cat = AvailableCats[num];
         CatSequence.Add(cat);
         Debug.Log(cat.MeowSound.ToSafeString() + " added");

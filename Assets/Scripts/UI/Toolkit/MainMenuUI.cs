@@ -17,6 +17,7 @@ public class MainMenuUI : MonoBehaviour
     private Button Play;
     private Button MyVK;
     private Button MyTG;
+    private Button GoToShop;
     private Button SettingsBtn;
     [SerializeField]
     private AudioMixer audioMixer;
@@ -46,7 +47,11 @@ public class MainMenuUI : MonoBehaviour
         {
             Application.OpenURL("https://t.me/MeowLand_Vladislove");
         };
-
+        GoToShop = UpperPanel.Q("GoToShop") as Button;
+        GoToShop.clicked += () =>
+        {
+            Loader.Load(Loader.Scene.Shop);
+        };
         SettingsMenu = CenterPanel.Q("SettingsMenu");
         SettingsMenu.style.display = DisplayStyle.None;
         settingsUI.Setup(SettingsMenu); 

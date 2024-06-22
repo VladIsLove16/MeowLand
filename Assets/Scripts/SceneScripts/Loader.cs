@@ -14,7 +14,8 @@ public static class Loader
     {
         Game,
         Loading,
-        MainMenu
+        MainMenu,
+        Shop
     }
     private static Action onLoaderCallback;
     public static void Load(Scene scene)
