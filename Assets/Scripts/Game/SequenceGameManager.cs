@@ -10,15 +10,16 @@ public class SequenceGameManager : MonoBehaviour
     public UnityEvent<int> HealthCHanged;
     private void Awake()
     {
-        SoundSequenceController.instance.RoundWon.AddListener(OnRoundWon);
-        SoundSequenceController.instance.RoundLost.AddListener(OnRoundLost);
+        SoundSequenceGame.instance.RoundWon.AddListener(OnRoundWon);
+        SoundSequenceGame.instance.RoundLost.AddListener(OnRoundLost);
+        SoundSequenceGame.instance.StartNewGame();
     }
     public void HealAndSaveRound(int health)
     {
         wallet.SpendMoney(new Money(0, 1));
         Health = health;
         HealthCHanged.Invoke(Health);
-        SoundSequenceController.instance.StartNewGame();
+        SoundSequenceGame.instance.StartNewGame();
     }
 
     private void OnRoundLost(int round)
@@ -31,7 +32,7 @@ public class SequenceGameManager : MonoBehaviour
             Debug.Log("Health is 0");
             return;
         }
-        SoundSequenceController.instance.StartRound();
+        SoundSequenceGame.instance.StartRound();
     }
     private void OnRoundWon(int round)
     {

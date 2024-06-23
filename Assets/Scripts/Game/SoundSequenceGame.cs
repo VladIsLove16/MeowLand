@@ -10,9 +10,9 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using static Assets.Scripts.Outlinev2;
 
-public class SoundSequenceController : MonoBehaviour
+public class SoundSequenceGame : MonoBehaviour
 {
-    public static SoundSequenceController instance;
+    public static SoundSequenceGame instance;
     [SerializeField]
     public int StartedSequenceLength;
     public List<Cat> AvailableCats;

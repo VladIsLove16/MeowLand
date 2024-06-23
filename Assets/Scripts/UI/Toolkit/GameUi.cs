@@ -35,20 +35,20 @@ public class GameUi : MonoBehaviour
         NewGamebtn = root.Q("NewGame") as Button;
         NewGamebtn.clicked += () =>
         {
-            SoundSequenceController.instance.StartNewGame();
+            SoundSequenceGame.instance.StartNewGame();
         };
 
         RepeatSoundsbtn = root.Q("RepeatSounds") as Button;
         RepeatSoundsbtn.clicked += () =>
         {
-            SoundSequenceController.instance.StartRound();
+            SoundSequenceGame.instance.StartRound();
         };
 
         Lifes.text = HealthSystem.Health.ToString();
         HealthSystem.healthChanged.AddListener(OnHealthChange);
         Outline = root.Q("Outline") as Toggle;
         Outline.RegisterCallback<ClickEvent>(evt => OutlineChange(Outline.value));
-        SoundSequenceController.instance.roundStateChanged.AddListener(OnController_RoundStateChanged);
+        SoundSequenceGame.instance.roundStateChanged.AddListener(OnController_RoundStateChanged);
         ScoreManager.instance.ScoreChanged.AddListener(OnScoreChanged);
         ScoreManager.instance.NewHighScoreReached.AddListener(OnHighScoreReached);
     }
@@ -70,36 +70,36 @@ public class GameUi : MonoBehaviour
     {
         ScoreText.text = "New High Score!! \n"+ ScoreText.text;
     }
-    private void OnController_RoundStateChanged(SoundSequenceController.RoundState state)
+    private void OnController_RoundStateChanged(SoundSequenceGame.RoundState state)
     {
         switch (state)
         {
-            case SoundSequenceController.RoundState.gameStarting:
+            case SoundSequenceGame.RoundState.gameStarting:
                 {
                     NewGamebtn.SetEnabled(true);
                     RepeatSoundsbtn.SetEnabled(false);
                     break;
                 }
-            case SoundSequenceController.RoundState.playingSounds:
+            case SoundSequenceGame.RoundState.playingSounds:
                 {
                     NewGamebtn.SetEnabled(false);
                     RepeatSoundsbtn.SetEnabled(false);
                     break;
                 };
-            case SoundSequenceController.RoundState.roundStarting:
+            case SoundSequenceGame.RoundState.roundStarting:
                 {
                     NewGamebtn.SetEnabled(false);
                     RepeatSoundsbtn.SetEnabled(true);
                     break;
                 }
-            case SoundSequenceController.RoundState.playing:
+            case SoundSequenceGame.RoundState.playing:
                 {
                     NewGamebtn.SetEnabled(false);
                     RepeatSoundsbtn.SetEnabled(false);
                     break;
                 }
             
-            case SoundSequenceController.RoundState.lost:
+            case SoundSequenceGame.RoundState.lost:
                 {
                     NewGamebtn.SetEnabled(true);
                     RepeatSoundsbtn.SetEnabled(false);
@@ -112,7 +112,7 @@ public class GameUi : MonoBehaviour
     }
     private void OnDisable()
     {
-        SoundSequenceController.instance.roundStateChanged.RemoveListener(OnController_RoundStateChanged);
+        SoundSequenceGame.instance.roundStateChanged.RemoveListener(OnController_RoundStateChanged);
     }
     private void OutlineChange(bool b)
     {
