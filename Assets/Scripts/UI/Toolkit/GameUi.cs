@@ -16,6 +16,7 @@ public class GameUi : MonoBehaviour
     public Label ScoreText;
     public Label SoftMoney;
     public Label HardMoney;
+    public Label TimeToHealLeft;
     public Label Lifes;
     [SerializeField]
     public Button NewGamebtn;
@@ -28,6 +29,8 @@ public class GameUi : MonoBehaviour
         document = GetComponent<UIDocument>();
         root = document.rootVisualElement;
         ScoreText = root.Q("ScoreText") as Label;
+        TimeToHealLeft = root.Q("TimeToHealLeft") as Label;
+        Lifes = root.Q("Lifes") as Label;
 
         NewGamebtn = root.Q("NewGame") as Button;
         NewGamebtn.clicked += () =>
@@ -40,12 +43,24 @@ public class GameUi : MonoBehaviour
         {
             SoundSequenceController.instance.StartRound();
         };
-        
+
+        Lifes.text = HealthSystem.Health.ToString();
+        HealthSystem.healthChanged.AddListener(OnHealthChange);
         Outline = root.Q("Outline") as Toggle;
         Outline.RegisterCallback<ClickEvent>(evt => OutlineChange(Outline.value));
         SoundSequenceController.instance.roundStateChanged.AddListener(OnController_RoundStateChanged);
         ScoreManager.instance.ScoreChanged.AddListener(OnScoreChanged);
         ScoreManager.instance.NewHighScoreReached.AddListener(OnHighScoreReached);
+    }
+
+    private void OnHealthChange(int arg0)
+    {
+        Lifes.text = HealthSystem.Health.ToString();
+    }
+
+    private void Update()
+    {
+        TimeToHealLeft.text = HealthSystem.TimeLeftString;
     }
     private void OnScoreChanged(int score)
     {

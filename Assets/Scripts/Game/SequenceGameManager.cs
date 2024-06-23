@@ -39,10 +39,3 @@ public class SequenceGameManager : MonoBehaviour
         //SoundSequenceController.instance.AddNewCat(new Cat());
     }
 }
-
-public static class HealthSystem
-{
-    public static int Health;
-    public static Time TimeToRestore;
-
-}
