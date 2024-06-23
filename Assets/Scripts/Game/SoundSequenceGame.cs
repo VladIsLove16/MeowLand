@@ -27,7 +27,8 @@ public class SoundSequenceGame : MonoBehaviour
     public UnityEvent<int> RoundWon;
     public UnityEvent<int> RoundLost;
     private int CurrentNum;
-    private RoundState roundState;
+    [SerializeField]
+    public RoundState roundState { get; private set; } = RoundState.gameStarting;
     public enum RoundState
     {
         gameStarting,
@@ -40,7 +41,7 @@ public class SoundSequenceGame : MonoBehaviour
     {
         audioSource =GetComponent<AudioSource>();
     }
-    private void Awake()
+    public void Awake()
     {
         instance=this; 
     }

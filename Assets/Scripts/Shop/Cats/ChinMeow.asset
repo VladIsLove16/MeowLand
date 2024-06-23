@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: ChinMeow
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: 28a450f8ec9f2324ab34191b5cecd37c, type: 3}
+  OutlineSprite: {fileID: 21300000, guid: e69298375e1f3c34ab958d1b96ef648c, type: 3}
+  MeowSound: {fileID: 8300000, guid: bffa6d2c14701ad4489e16575bab6939, type: 3}
   Cost:
     SoftMoney: 3
     HardMoney: 0
   IsUnlocked: 1
-  IsBought: 0
+  IsBought: 1
   NotUnlockedMessage: ChinMeow not unclocked yet
   NotEnoughtMoneyMessage: 
   stateChanged:

@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: LyaoMeow
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: 0b79a162204ffc64b96a92bb0f306f29, type: 3}
+  OutlineSprite: {fileID: 21300000, guid: 06d2208ef0a98c94a9b57b978176efe3, type: 3}
+  MeowSound: {fileID: 8300000, guid: fa7d1b7e5913e3c4dbca9991acaf3a20, type: 3}
   Cost:
     SoftMoney: 0
     HardMoney: 1
   IsUnlocked: 1
-  IsBought: 0
+  IsBought: 1
   NotUnlockedMessage: LyaoMeow not unclocked yet
   NotEnoughtMoneyMessage: 
   stateChanged:

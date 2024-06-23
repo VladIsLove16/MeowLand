@@ -10,19 +10,17 @@ using UnityEngine.UI;
 [RequireComponent(typeof(AudioSource))]
 public class Cat : MonoBehaviour
 {
-    public string Name;
-    [SerializeField]
-    public AudioClip MeowSound;
+    public ShopItem shopItem;
+    public bool OutlineEnabled;
     [HideInInspector]
     public bool clickAvailable;
+    public AudioClip MeowSound;
     private AudioSource AudioSource;
-    public UnityEvent<Cat> OnPlay;
-    public bool OutlineEnabled;
     [SerializeField]
     private Sprite OutlineSprite;
     [SerializeField]
     private Sprite NoOutlineSprite;
-    private SpriteRenderer spriteRenderer;
+    private Image Image;
     public void SetOutlineMode(bool b)
     {
         OutlineEnabled = b;
@@ -45,27 +43,29 @@ public class Cat : MonoBehaviour
     }
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        Image = GetComponent<Image>();
+        OutlineSprite = shopItem.OutlineSprite;
+        NoOutlineSprite = shopItem.Sprite;
+        MeowSound = shopItem.MeowSound;
     }
     public void Play()
     {
-        
-        OnPlay.Invoke(this);
         AudioSource.PlayOneShot(MeowSound);
         ShowOutline();
     }
    
     private void ShowOutline() 
     {
+        if (!OutlineEnabled) return;
         if(Outlinev2.state==Outlinev2.OutlineState.show)
         { //if (Outline.ShowOutline == true)
             //    Outline.enabled = true;
-            spriteRenderer.sprite = OutlineSprite;
+            Image.sprite = OutlineSprite;
             Invoke("HideOutline", MeowSound.length);
         }
     }
     private void HideOutline()
     {
-        spriteRenderer.sprite = NoOutlineSprite;
+        Image.sprite = NoOutlineSprite;
     }
 }

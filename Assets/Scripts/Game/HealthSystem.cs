@@ -50,7 +50,12 @@ public static class HealthSystem
     }
     private static void UpdateTimePassed()
     {
-        if (!loaded) { loaded = true; LastTimeRestored = SaveSystem.Load<HealthData>().LastTimeRestored; }
+        if (!loaded) { loaded = true;try {
+                HealthData a = SaveSystem.Load<HealthData>();
+                LastTimeRestored = a.LastTimeRestored;
+                Health = a.Health;
+
+            } catch { } }
         TimePassed = DateTime.Now - LastTimeRestored;
         if (TimePassed > TimeToHeal)
             HealByTime();
@@ -58,6 +63,6 @@ public static class HealthSystem
     private static bool loaded = false;
     private static void OnApplicationQuit()
     {
-        SaveSystem.Save<HealthData>(new HealthData(LastTimeRestored)); ;
+        SaveSystem.Save<HealthData>(new HealthData(LastTimeRestored,Health)); ;
     }
 }

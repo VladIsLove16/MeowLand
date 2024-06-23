@@ -5,6 +5,8 @@ using UnityEngine.Events;
 public class ShopItem : ScriptableObject
 {
     public Sprite Sprite;
+    public Sprite OutlineSprite;
+    public AudioClip MeowSound;
     public Money Cost;
     public bool IsUnlocked;
     public bool IsBought;
