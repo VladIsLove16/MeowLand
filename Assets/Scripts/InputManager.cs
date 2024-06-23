@@ -34,7 +34,7 @@ public class InputManager : MonoBehaviour
                             Cat cat = hit.collider.GetComponent<Cat>();
                             if (cat != null)
                             {
-                                cat.Click();
+                                cat.OnClick();
                             }
                         }
                     }

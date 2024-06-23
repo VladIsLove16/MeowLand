@@ -102,7 +102,7 @@ public class GameUi : MonoBehaviour
             case SoundSequenceGame.RoundState.lost:
                 {
                     NewGamebtn.SetEnabled(true);
-                    RepeatSoundsbtn.SetEnabled(false);
+                    RepeatSoundsbtn.SetEnabled(true);
                     break;
                 }
             

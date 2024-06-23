@@ -15,6 +15,7 @@ public class SequenceGameManager : MonoBehaviour
     public List<Cat> WaitingTheirTimeCats=new();
     public int StartedSequenceLength;
     public int StartedAvailableCatsCount;
+    public int RoundToAddNewCat;
     private void Awake()
     {
         SoundSequenceGame.Awake();
@@ -26,6 +27,10 @@ public class SequenceGameManager : MonoBehaviour
             Cat randomCat = GetRandom(WaitingTheirTimeCats);
             CatsInPlay.Add(randomCat);
             WaitingTheirTimeCats.Remove(randomCat);
+        }
+        foreach (Cat cat in WaitingTheirTimeCats)
+        {
+            cat.gameObject.SetActive(false);
         }
         SoundSequenceGame.SetUpGame(CatsInPlay, 2);
         //SoundSequenceGame.StartNewGame();
@@ -57,22 +62,27 @@ public class SequenceGameManager : MonoBehaviour
     private void OnRoundLost(int round)
     { 
         wallet.SpendMoney(new Money() { SoftMoney = 1 });
+        HealthSystem.LoseHealth(1);
+        if(HealthSystem.Health == 0)
         {
-            Debug.Log("Health is not 0");
+            Debug.Log("Health is 0");
             return;
         }
-        SoundSequenceGame.StartRound();
+        Invoke("SoundSequenceGame.StartRound", 1f);
+        //SoundSequenceGame.StartRound();
     }
     private void OnRoundWon(int round)
     {
         wallet.AddMoney(new Money() { SoftMoney = round - 1 });
-        if (round % 500 == 0)
+        if (RoundToAddNewCat == 0) 
+            return; 
+        if  (round % RoundToAddNewCat == 0)
         {
             Cat randomCat = GetRandom(WaitingTheirTimeCats);
             CatsInPlay.Add(randomCat);
             WaitingTheirTimeCats.Remove(randomCat);
             SoundSequenceGame.AddNewCat(randomCat);
+            randomCat.gameObject.SetActive(true);
         }
-        //SoundSequenceController.instance.AddNewCat(new Cat());
     }
 }

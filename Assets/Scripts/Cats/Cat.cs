@@ -12,8 +12,6 @@ public class Cat : MonoBehaviour
 {
     public ShopItem shopItem;
     public bool OutlineEnabled;
-    [HideInInspector]
-    public bool clickAvailable;
     public AudioClip MeowSound;
     private AudioSource AudioSource;
     [SerializeField]
@@ -21,6 +19,8 @@ public class Cat : MonoBehaviour
     [SerializeField]
     private Sprite NoOutlineSprite;
     private Image Image;
+    public UnityEvent Clicked;
+    private Button button;
     public void SetOutlineMode(bool b)
     {
         OutlineEnabled = b;
@@ -28,13 +28,15 @@ public class Cat : MonoBehaviour
         //    Outline.enabled = false;
 
     }
-    public void Click()
+    public void SetUnclickable(bool b)
+    {
+        button.enabled = b;
+    }
+    public void OnClick()
     {
         Debug.Log("ButtonClicked");
-        if (clickAvailable)
-        {
-            Play();
-        }
+        Play();
+        Clicked.Invoke();
     }
     private void Start()
     {
@@ -47,6 +49,7 @@ public class Cat : MonoBehaviour
         OutlineSprite = shopItem.OutlineSprite;
         NoOutlineSprite = shopItem.Sprite;
         MeowSound = shopItem.MeowSound;
+        button = GetComponent<Button>();
     }
     public void Play()
     {
