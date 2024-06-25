@@ -10,26 +10,27 @@ public class Shop : MonoBehaviour
     Wallet wallet;
     [SerializeField]
     List<ShopItemView> DisplayShopItemList;
-    ShopData data = new();
     public void Awake()
     {
         foreach (var DisplayshopItem in DisplayShopItemList)
         {
-            ShopDataItem ShopItemData = data.Get(DisplayshopItem.item.name);
+            CatInfoSO item = DisplayshopItem.cat.shopItem;
+            DisplayshopItem.OnClick.AddListener(() => TryBuy(item));
+            ShopDataItem ShopItemData = ShopData.Get(item.name);
             if (ShopItemData != null)
             {
-                DisplayshopItem.item.IsBought = ShopItemData.IsBought;
-                DisplayshopItem.item.IsUnlocked = ShopItemData.IsUnlocked;
+               item.IsBought = ShopItemData.IsBought;
+               item.IsUnlocked = ShopItemData.IsUnlocked;
             }
-            DisplayshopItem.item.stateChanged.AddListener(() => SaveChanges(DisplayshopItem.item.name, DisplayshopItem.item.IsBought, DisplayshopItem.item.IsUnlocked));
+            item.stateChanged.AddListener(() => SaveChanges(item.name, item.IsBought, item.IsUnlocked));
         }
     }
-    private void SaveChanges(string item,bool a ,bool b)
+    private void SaveChanges(string itemname,bool a ,bool b)
     {
         Debug.Log("SaveChanges called");
-            data.Set(item, new ShopDataItem() { IsBought = a, IsUnlocked = b });
+            ShopData.Set(itemname, new ShopDataItem() { IsBought = a, IsUnlocked = b });
     }
-    public void TryBuy(ShopItem item)
+    public void TryBuy(CatInfoSO item)
     {
         if(item.IsUnlocked==false)
         {
@@ -54,26 +55,26 @@ public class Shop : MonoBehaviour
     {
         foreach (var DisplayshopItem in DisplayShopItemList)
         {
-            DisplayshopItem.item.Sell();
+            DisplayshopItem.cat.shopItem.Sell();
         }
     }
-    public void Unlock(ShopItem item)
+    public void Unlock(CatInfoSO item)
     {
         Debug.Log("Unlocked");
         item.Unlock();
     }
-    private void AlreadyBought(ShopItem item)
+    private void AlreadyBought(CatInfoSO item)
     {
         Debug.Log("AlreadyBought");
     }
     
-    private void Buy(ShopItem item)
+    private void Buy(CatInfoSO item)
     {
         Debug.Log("Bought");
         item.Buy();
     }
 
-    private void CantBuy(ShopItem item)
+    private void CantBuy(CatInfoSO item)
     {
         
         if(wallet.Money.SoftMoney<item.Cost.SoftMoney)
@@ -84,5 +85,8 @@ public class Shop : MonoBehaviour
     public void ReloadScene()
     {
         Loader.Load(Loader.Scene.Shop);
+    }public void GoToMainScene()
+    {
+        Loader.Load(Loader.Scene.MainMenu);
     }
 }

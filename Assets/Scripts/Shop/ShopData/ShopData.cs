@@ -3,43 +3,45 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEditor;
 [Serializable]
-public class ShopData
+public static class ShopData
 {
     //public Dictionary<Guid, ShopItem> items=new();
-    public Dictionary<string, ShopDataItem> Data = new();
+    public static Dictionary<string, ShopDataItem> Data = new();
 
-    public void Set(string name, ShopDataItem item)
+    public static void Set(string name, ShopDataItem item)
     {
         LoadIfNull();
         Data[name] = item;
         SaveChanges();
     }
-    public ShopDataItem Get(string name)
+    public static ShopDataItem Get(string name)
     {
         LoadIfNull();
-        Data.TryGetValue(name, out ShopDataItem idata);
+        if(Data.TryGetValue(name, out ShopDataItem idata))
         return idata;
+        else return null;
     }
-    private void LoadIfNull()
+    public static void LoadIfNull()
     {
         if (Data.Count == 0)
         {
-            ShopData LoadedShopData;
+            var LoadedShopData=new Dictionary<string, ShopDataItem>();
             try
             {
-                LoadedShopData = SaveSystem.Load<ShopData>();
+               LoadedShopData = SaveSystem.Load<Dictionary<string, ShopDataItem>>("ShopData");
+                Debug.Write("Loaded");
+
             }
             catch
             {
-                LoadedShopData = null;
-            }
-            if (LoadedShopData == null)
+                Debug.Write("notloaded");
                 return;
-            Data= LoadedShopData.Data;
+            }
+            Data= LoadedShopData;
         }
     }
-    public void SaveChanges()
+    public static void SaveChanges()
     {
-        SaveSystem.Save<ShopData>(this);
+        SaveSystem.Save<Dictionary<string, ShopDataItem>>(Data, "ShopData");
     }
 }

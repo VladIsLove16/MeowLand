@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 [CreateAssetMenu(fileName = "new Item", menuName = "ShopItems/Item")]
-public class ShopItem : ScriptableObject
+public class CatInfoSO : ScriptableObject
 {
     public Sprite Sprite;
     public Sprite OutlineSprite;

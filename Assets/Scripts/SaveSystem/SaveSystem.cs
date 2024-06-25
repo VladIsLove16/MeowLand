@@ -13,14 +13,42 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/"+typeof(T).ToString()+".fun";
-        FileStream stream = new FileStream ( path,FileMode.Create, FileAccess.Write );
+        FileStream stream = new FileStream ( path,FileMode.OpenOrCreate, FileAccess.Write );
         formatter.Serialize( stream, data );
         stream.Close();
         Debug.Log("Saved");
     }
+    public static void Save<T>(T data,string Filename) where T : class
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/"+ Filename+"a.fun";
+        FileStream stream = new FileStream ( path,FileMode.OpenOrCreate, FileAccess.Write );
+        formatter.Serialize( stream, data );
+        stream.Close();
+        Debug.Log("Saved");
+    }
+    public static T  Load<T>(string Filename) where T : class
+    {
+        string path = Application.persistentDataPath + "/"+ Filename + ".fun";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+
+            T data = formatter.Deserialize(stream) as T;
+            stream.Close();
+            Debug.Log("Loaded");
+            return data;
+        }
+        else
+        {
+            Debug.Log("Save file not found in " + path);
+        }
+        return null;
+    }
     public static T  Load<T>() where T : class
     {
-        string path = Application.persistentDataPath + "/"+typeof(T).ToString()+".fun";
+        string path = Application.persistentDataPath + "/"+ typeof(T).ToString() + ".fun";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();

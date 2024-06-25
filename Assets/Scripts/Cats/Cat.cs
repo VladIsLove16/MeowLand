@@ -7,26 +7,31 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEngine.UI.CanvasScaler;
 [RequireComponent(typeof(AudioSource))]
 public class Cat : MonoBehaviour
 {
-    public ShopItem shopItem;
+    public CatInfoSO shopItem;
     public bool OutlineEnabled;
+    [HideInInspector]
     public AudioClip MeowSound;
     private AudioSource AudioSource;
-    [SerializeField]
     private Sprite OutlineSprite;
-    [SerializeField]
     private Sprite NoOutlineSprite;
     private Image Image;
     public UnityEvent Clicked;
     private Button button;
+    public void Init(CatInfoSO shopItemSO)
+    {
+        shopItem = shopItemSO;
+        OutlineSprite = shopItemSO.OutlineSprite;
+        NoOutlineSprite = shopItemSO.Sprite;
+        MeowSound = shopItemSO.MeowSound;
+        GetComponent<Image>().sprite = NoOutlineSprite;
+    }
     public void SetOutlineMode(bool b)
     {
         OutlineEnabled = b;
-        //if (Outline.ShowOutline == true)
-        //    Outline.enabled = false;
-
     }
     public void SetUnclickable(bool b)
     {
@@ -43,13 +48,12 @@ public class Cat : MonoBehaviour
         AudioSource = GetComponent<AudioSource>();   
         SetOutlineMode(true);
     }
-    private void Awake()
+    public void Awake()
     {
         Image = GetComponent<Image>();
-        OutlineSprite = shopItem.OutlineSprite;
-        NoOutlineSprite = shopItem.Sprite;
-        MeowSound = shopItem.MeowSound;
         button = GetComponent<Button>();
+        Init(shopItem);
+
     }
     public void Play()
     {

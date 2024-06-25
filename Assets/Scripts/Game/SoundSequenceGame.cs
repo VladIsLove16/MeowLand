@@ -37,18 +37,12 @@ public class SoundSequenceGame : MonoBehaviour
         playing,
         lost,
     }
-    private void Start()
-    {
-        audioSource =GetComponent<AudioSource>();
-    }
     public void Awake()
     {
-        instance=this; 
-        foreach(Cat cat in AvailableCats)
-        {
-            cat.Clicked.AddListener(()=>OnCat_Click(cat));
-        }
+        instance=this;
+        audioSource = GetComponent<AudioSource>();
     }
+
     public void SetUpGame(List<Cat> AvailableCats, int StartedSequenceLength)
     {
         this.AvailableCats = AvailableCats;
@@ -56,6 +50,10 @@ public class SoundSequenceGame : MonoBehaviour
     }
     public void StartNewGame()
     {
+        foreach (Cat cat in AvailableCats)
+        {
+            cat.Clicked.AddListener(() => OnCat_Click(cat));
+        }
         CreateSequence(StartedSequenceLength);
         StartRound();
     }
@@ -100,7 +98,6 @@ public class SoundSequenceGame : MonoBehaviour
     public void AddNewCat(Cat cat)
     {
         AvailableCats.Add(cat);
-        cat.Clicked.AddListener(() => OnCat_Click(cat));
     }
     public void AddToSequence()
     {

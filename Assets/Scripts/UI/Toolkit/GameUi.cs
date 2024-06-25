@@ -18,10 +18,9 @@ public class GameUi : MonoBehaviour
     public Label HardMoney;
     public Label TimeToHealLeft;
     public Label Lifes;
-    [SerializeField]
     public Button NewGamebtn;
-    [SerializeField]
     public Button RepeatSoundsbtn;
+    public Button GoToMenu;
     [SerializeField]
     public Toggle Outline;
     private void Awake()
@@ -43,7 +42,11 @@ public class GameUi : MonoBehaviour
         {
             SoundSequenceGame.instance.StartRound();
         };
-
+        GoToMenu = root.Q("GoToMenu") as Button;
+        GoToMenu.clicked += () =>
+        {
+            Loader.Load(Loader.Scene.MainMenu);
+        };
         Lifes.text = HealthSystem.Health.ToString();
         HealthSystem.healthChanged.AddListener(OnHealthChange);
         Outline = root.Q("Outline") as Toggle;
@@ -52,12 +55,10 @@ public class GameUi : MonoBehaviour
         ScoreManager.instance.ScoreChanged.AddListener(OnScoreChanged);
         ScoreManager.instance.NewHighScoreReached.AddListener(OnHighScoreReached);
     }
-
     private void OnHealthChange(int arg0)
     {
         Lifes.text = HealthSystem.Health.ToString();
     }
-
     private void Update()
     {
         TimeToHealLeft.text = HealthSystem.TimeLeftString;

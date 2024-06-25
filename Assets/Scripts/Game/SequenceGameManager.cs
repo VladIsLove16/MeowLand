@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,44 +9,91 @@ public class SequenceGameManager : MonoBehaviour
     SoundSequenceGame SoundSequenceGame;
     [SerializeField]
     Wallet wallet;
+    [HideInInspector]
     public UnityEvent<int> HealthCHanged;
     [SerializeField]
-    public List<Cat> AllTheCatsWeKnow;
-    public List<Cat> CatsInPlay=new();
-    public List<Cat> WaitingTheirTimeCats=new();
+    public List<CatInfoSO> AllCatsInfo;
+    [HideInInspector]
+    public List<CatInfoSO> WaitingTheirTimeCatsInfo = new();
+    [HideInInspector]
+    public List<CatInfoSO> CatsInfoInPlay=new();
+    [SerializeField]
+    public List<Cat> DisabledCats;
+    [SerializeField]
+    public List<Cat> EnabledCats;
     public int StartedSequenceLength;
     public int StartedAvailableCatsCount;
-    public int RoundToAddNewCat;
+    public int RoundToAddNewAvailableCat;
     private void Awake()
     {
         SoundSequenceGame.Awake();
         SoundSequenceGame.RoundWon.AddListener(OnRoundWon);
         SoundSequenceGame.RoundLost.AddListener(OnRoundLost);
-        WaitingTheirTimeCats = GetBoughtCats();
-        for (int i = 0; i < StartedAvailableCatsCount; i++)
+    }
+    private void Start()
+    {
+        foreach (var cat in AllCatsInfo)
         {
-            Cat randomCat = GetRandom(WaitingTheirTimeCats);
-            CatsInPlay.Add(randomCat);
-            WaitingTheirTimeCats.Remove(randomCat);
+            var item = ShopData.Get(cat.name);
+            if (item != null)
+            {
+                cat.IsBought = item.IsBought;
+                cat.IsUnlocked = item.IsUnlocked;
+            }
         }
-        foreach (Cat cat in WaitingTheirTimeCats)
+        GameInit();
+    }
+    private void GameInit()
+    {
+        foreach (var cat in DisabledCats)
         {
             cat.gameObject.SetActive(false);
         }
-        SoundSequenceGame.SetUpGame(CatsInPlay, 2);
+        for (int i = 0; i < StartedAvailableCatsCount; i++)
+            AddNewCatInGame();
+        SoundSequenceGame.SetUpGame(EnabledCats, StartedSequenceLength);
         //SoundSequenceGame.StartNewGame();
     }
-    private List<Cat> GetBoughtCats()
+    private Cat GetDisabledCat()
     {
-        List<Cat> BoughtCats = new();
-        foreach (var cat in AllTheCatsWeKnow)
+        return DisabledCats[0];
+    }
+    public void AddNewCatInGame()
+    {
+        if (!DisabledCats.Any()) 
+            return;
+        Cat cat = GetDisabledCat();//GetRandom(DisabledCats);
+        EnabledCats.Add(cat);
+        DisabledCats.Remove(cat);
+        cat.gameObject.SetActive(true);
+        cat.Init(AddNewCatInfoInPlay());
+    }
+    private CatInfoSO AddNewCatInfoInPlay()
+    {
+        if (WaitingTheirTimeCatsInfo.Count == 0)
+            WaitingTheirTimeCatsInfo = GetBoughtCats();
+        CatInfoSO randomCat = GetRandom(WaitingTheirTimeCatsInfo);
+        CatsInfoInPlay.Add(randomCat);
+        WaitingTheirTimeCatsInfo.Remove(randomCat);
+        return randomCat;
+    }
+    private void SetCatsSOList()
+    {
+        for (int i = 0; i < StartedAvailableCatsCount; i++)
+            AddNewCatInfoInPlay();
+    }
+
+    private List<CatInfoSO> GetBoughtCats()
+    {
+        List<CatInfoSO> BoughtCats = new();
+        foreach (var item in AllCatsInfo)
         {
-            if (cat.shopItem.IsBought)
-            { BoughtCats.Add(cat); }
+            if (item.IsBought)
+            { BoughtCats.Add(item); }
         }
         return BoughtCats;
     }
-    private T GetRandom<T>(List<T> list)
+    private static T GetRandom<T>(List<T> list)
      {
         if (list.Count == 0) return default(T);
         int count  = list.Count;
@@ -74,15 +122,14 @@ public class SequenceGameManager : MonoBehaviour
     private void OnRoundWon(int round)
     {
         wallet.AddMoney(new Money() { SoftMoney = round - 1 });
-        if (RoundToAddNewCat == 0) 
+        if (RoundToAddNewAvailableCat == 0) 
             return; 
-        if  (round % RoundToAddNewCat == 0)
+        if  (round % RoundToAddNewAvailableCat == 0)
         {
-            Cat randomCat = GetRandom(WaitingTheirTimeCats);
-            CatsInPlay.Add(randomCat);
-            WaitingTheirTimeCats.Remove(randomCat);
-            SoundSequenceGame.AddNewCat(randomCat);
+            Cat randomCat = DisabledCats[StartedSequenceLength++];
+            randomCat.Init(AddNewCatInfoInPlay());
             randomCat.gameObject.SetActive(true);
+            SoundSequenceGame.AddNewCat(randomCat);
         }
     }
 }

@@ -7,5 +7,6 @@
         <ui:Toggle label="Outline" name="Outline" value="true" focusable="true" style="justify-content: flex-start; align-self: flex-end; flex-direction: row-reverse; display: flex; visibility: visible;" />
         <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Lifes" style="position: absolute; top: 40px; left: 7px;" />
     </ui:VisualElement>
+    <ui:Button text="GoToMenu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GoToMenu" style="position: absolute; top: 90px; left: -3px;" />
     <ui:Label tabindex="-1" text="0&#10;&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ScoreText" style="position: relative; align-self: center; top: -80%; font-size: 60px; align-items: center; justify-content: center; width: 275px; -unity-text-align: upper-center; left: 3px; white-space: normal; height: 70px;" />
 </ui:UXML>

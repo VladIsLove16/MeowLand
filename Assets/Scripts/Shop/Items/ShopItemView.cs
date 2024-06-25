@@ -1,28 +1,34 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 public class ShopItemView : MonoBehaviour
 {
-    [SerializeField]
-    Shop Shop;
-    public ShopItem item;
-    [SerializeField]
+    private CatInfoSO item;
     public Cat cat;
     private Image Image;
     private Button btn;
     public float NotBoughtAlpha=0.3f;
-    private void Awake()
+    public UnityEvent OnClick;
+    public void Awake()
     {
-        Shop.Awake();
+        cat=GetComponent<Cat>();
         item  = cat.shopItem;
         cat.OutlineEnabled = false;
         Image = GetComponent<Image>();
         Image.sprite = item.Sprite;
         item.stateChanged.AddListener(SetImageColor);
+        btn = GetComponent<Button>();
+        btn.onClick.AddListener(()=> OnClick.Invoke());
+    }
+    private void Start()
+    {
         SetImageColor();
-        btn= GetComponent<Button>();
-        btn.onClick.AddListener(()=>Shop.TryBuy(item));
+    }
+    private void OnEnable()
+    {
+        SetImageColor();
     }
     private void SetImageColor()
     {
