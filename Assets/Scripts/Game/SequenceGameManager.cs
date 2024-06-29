@@ -32,15 +32,6 @@ public class SequenceGameManager : MonoBehaviour
     }
     private void Start()
     {
-        foreach (var cat in AllCatsInfo)
-        {
-            var item = ShopData.Get(cat.name);
-            if (item != null)
-            {
-                cat.IsBought = item.IsBought;
-                cat.IsUnlocked = item.IsUnlocked;
-            }
-        }
         GameInit();
     }
     private void GameInit()

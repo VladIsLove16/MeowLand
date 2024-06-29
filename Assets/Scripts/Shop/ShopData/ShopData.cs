@@ -1,43 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEditor;
+using UnityEngine;
 [Serializable]
-public static class ShopData
+public class ShopData : MonoBehaviour
 {
     //public Dictionary<Guid, ShopItem> items=new();
-    public static Dictionary<string, ShopDataItem> Data = new();
-
-    public static void Set(string name, ShopDataItem item)
+    private static Dictionary<string, ShopDataItem> Data=new();
+    public static void Set(CatInfoSO infoSO, ShopDataItem item)
     {
         LoadIfNull();
-        Data[name] = item;
+        Data[infoSO.name] = item;
         SaveChanges();
     }
-    public static ShopDataItem Get(string name)
+    public static bool Get(CatInfoSO infoSO, out ShopDataItem item)
     {
         LoadIfNull();
-        if(Data.TryGetValue(name, out ShopDataItem idata))
-        return idata;
-        else return null;
+        return Data.
+            TryGetValue(infoSO.name, out item);
+        
     }
     public static void LoadIfNull()
     {
         if (Data.Count == 0)
         {
-            var LoadedShopData=new Dictionary<string, ShopDataItem>();
+            Dictionary<string, ShopDataItem> LoadedShopData;
             try
             {
-               LoadedShopData = SaveSystem.Load<Dictionary<string, ShopDataItem>>("ShopData");
-                Debug.Write("Loaded");
+                LoadedShopData = SaveSystem.Load<Dictionary<string, ShopDataItem>>("ShopData");
+                Debug.Log("Loaded");
 
             }
-            catch
+            catch(Exception e)
             {
-                Debug.Write("notloaded");
+                Debug.Log("notloaded");
+                Debug.Log(e);
                 return;
             }
-            Data= LoadedShopData;
+            if(LoadedShopData != null)
+                Data= LoadedShopData;
         }
     }
     public static void SaveChanges()

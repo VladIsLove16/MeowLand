@@ -16,19 +16,13 @@ public class Shop : MonoBehaviour
         {
             CatInfoSO item = DisplayshopItem.cat.shopItem;
             DisplayshopItem.OnClick.AddListener(() => TryBuy(item));
-            ShopDataItem ShopItemData = ShopData.Get(item.name);
-            if (ShopItemData != null)
-            {
-               item.IsBought = ShopItemData.IsBought;
-               item.IsUnlocked = ShopItemData.IsUnlocked;
-            }
-            item.stateChanged.AddListener(() => SaveChanges(item.name, item.IsBought, item.IsUnlocked));
+            item.stateChanged.AddListener(() => SaveChanges(item, item.IsBought, item.IsUnlocked));
         }
     }
-    private void SaveChanges(string itemname,bool a ,bool b)
+    private void SaveChanges(CatInfoSO item,bool a ,bool b)
     {
         Debug.Log("SaveChanges called");
-            ShopData.Set(itemname, new ShopDataItem() { IsBought = a, IsUnlocked = b });
+        ShopData.Set(item, new ShopDataItem() { IsBought = a, IsUnlocked = b });
     }
     public void TryBuy(CatInfoSO item)
     {

@@ -8,30 +8,56 @@ public class CatInfoSO : ScriptableObject
     public Sprite OutlineSprite;
     public AudioClip MeowSound;
     public Money Cost;
-    public bool IsUnlocked;
-    public bool IsBought;
+    [SerializeField]
+    private bool isUnlocked;
+
+    // Свойство позволяет только чтение из кода
+    public bool IsUnlocked
+    {
+        get { return isUnlocked; }
+    }
+    [SerializeField]
+    private bool isBought;
+
+    // Свойство позволяет только чтение из кода
+    public bool IsBought
+    {
+        get { return isBought; }
+    }
+    public bool CanBeSold;
     public string NotUnlockedMessage;
     public string NotEnoughtMoneyMessage;
     public UnityEvent stateChanged;
+    public void Awake()
+    {
+        Debug.Log("So awake");
+        if(ShopData.Get(this,out ShopDataItem item))
+        {
+            isBought = item.IsBought;
+            isUnlocked = item.IsUnlocked;
+        }; 
+    }
     public virtual void Unlock()
     {
-        
-        IsUnlocked = true;
+        isUnlocked = true;
         stateChanged.Invoke();
     }
     public virtual void Buy()
     {
-        IsBought = true;
+        isBought = true;
         stateChanged.Invoke();
     }
     public virtual void Sell()
     {
-        IsBought = false;
-        stateChanged.Invoke();
+        if (CanBeSold)
+        {
+            isBought = false;
+            stateChanged.Invoke();
+        }
     }
     public virtual void Lock()
     {
-        IsUnlocked = false;
+        isUnlocked = false;
         stateChanged.Invoke();
     }
 }

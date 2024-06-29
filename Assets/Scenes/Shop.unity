@@ -2083,7 +2083,7 @@ MonoBehaviour:
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 1884ac6b88fae2c40b550ee7ffc26257, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ShopItem, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: CatInfoSO, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

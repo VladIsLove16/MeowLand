@@ -18,8 +18,9 @@ MonoBehaviour:
   Cost:
     SoftMoney: 3
     HardMoney: 0
-  IsUnlocked: 1
-  IsBought: 1
+  isUnlocked: 1
+  isBought: 1
+  CanBeSold: 0
   NotUnlockedMessage: ChinMeow not unclocked yet
   NotEnoughtMoneyMessage: 
   stateChanged:

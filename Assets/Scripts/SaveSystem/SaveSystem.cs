@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,56 +7,75 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-
 public static class SaveSystem
 {
     public static void Save<T>(T data) where T : class
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/"+typeof(T).ToString()+".fun";
-        FileStream stream = new FileStream ( path,FileMode.OpenOrCreate, FileAccess.Write );
-        formatter.Serialize( stream, data );
-        stream.Close();
-        Debug.Log("Saved");
+        string path = Application.persistentDataPath + "/" + typeof(T) + ".json";
+
+        try
+        {
+            // Сериализация данных в JSON
+            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+            // Запись JSON в файл
+            File.WriteAllText(path, json);
+            Debug.Log("Saved");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Failed to save file at " + path + ": " + ex.Message);
+        }
     }
-    public static void Save<T>(T data,string Filename) where T : class
+    public static void Save<T>(T data, string filename) where T : class
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/"+ Filename+"a.fun";
-        FileStream stream = new FileStream ( path,FileMode.OpenOrCreate, FileAccess.Write );
-        formatter.Serialize( stream, data );
-        stream.Close();
-        Debug.Log("Saved");
+        string path = Application.persistentDataPath + "/" + filename + ".json";
+
+        try
+        {
+            // Сериализация данных в JSON
+            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+
+            // Запись JSON в файл
+            File.WriteAllText(path, json);
+            Debug.Log("Saved");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Failed to save file at " + path + ": " + ex.Message);
+        }
     }
-    public static T  Load<T>(string Filename) where T : class
+    public static T Load<T>(string filename) where T : class
     {
-        string path = Application.persistentDataPath + "/"+ Filename + ".fun";
+        string path = Application.persistentDataPath + "/" + filename + ".json";
+
         if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-
-            T data = formatter.Deserialize(stream) as T;
-            stream.Close();
-            Debug.Log("Loaded");
-            return data;
+            try
+            {
+                string json = File.ReadAllText(path);
+                T data = JsonConvert.DeserializeObject<T>(json);
+                return data;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("Failed to load file at " + path + ": " + ex.Message);
+            }
         }
         else
         {
             Debug.Log("Save file not found in " + path);
         }
+
         return null;
     }
     public static T  Load<T>() where T : class
     {
-        string path = Application.persistentDataPath + "/"+ typeof(T).ToString() + ".fun";
+        string path = Application.persistentDataPath + "/"+ typeof(T).ToString() + ".json";
         if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-
-            T data = formatter.Deserialize(stream) as T;
-            stream.Close();
+            string json = File.ReadAllText(path);
+            T data = JsonConvert.DeserializeObject<T>(json);
             Debug.Log("Loaded");
             return data;
         }
