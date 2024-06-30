@@ -13,36 +13,51 @@ public class GameUi : MonoBehaviour
     private VisualElement root;
     [SerializeField]
     private Wallet Wallet;
-    public Label ScoreText;
+
+    private VisualElement UpperPanel;
     public Label SoftMoney;
     public Label HardMoney;
     public Label TimeToHealLeft;
     public Label Lifes;
+    public Button GoToMenu;
+    public Button Pause;
+
+    private VisualElement PreUpper;
+    public Label ScoreText;
+    public ProgressBar LevelProgress;
+
+
+    private VisualElement CatsContainer;
+    private VisualElement Hearts;
     public Button NewGamebtn;
     public Button RepeatSoundsbtn;
-    public Button GoToMenu;
     [SerializeField]
     public Toggle Outline;
     private void Awake()
     {
         document = GetComponent<UIDocument>();
         root = document.rootVisualElement;
-        ScoreText = root.Q("ScoreText") as Label;
+        UpperPanel = root.Q("UpperPanel");
+
+
+        SoftMoney =root.
+        ScoreText = root.Q("PreUpper").Q("Progress").Q("LvlText") as Label;
         TimeToHealLeft = root.Q("TimeToHealLeft") as Label;
         Lifes = root.Q("Lifes") as Label;
-
+        RepeatSoundsbtn = root.Q("RepeatSounds") as Button;
         NewGamebtn = root.Q("NewGame") as Button;
+        GoToMenu = root.Q("GoToMenu") as Button;
+
+
         NewGamebtn.clicked += () =>
         {
             SoundSequenceGame.instance.StartNewGame();
         };
 
-        RepeatSoundsbtn = root.Q("RepeatSounds") as Button;
         RepeatSoundsbtn.clicked += () =>
         {
             SoundSequenceGame.instance.StartRound();
         };
-        GoToMenu = root.Q("GoToMenu") as Button;
         GoToMenu.clicked += () =>
         {
             Loader.Load(Loader.Scene.MainMenu);
@@ -69,7 +84,7 @@ public class GameUi : MonoBehaviour
     }
     private void OnHighScoreReached()
     {
-        ScoreText.text = "New High Score!! \n"+ ScoreText.text;
+        ScoreText.text = "New High Score!! \n" + ScoreText.text;
     }
     private void OnController_RoundStateChanged(SoundSequenceGame.RoundState state)
     {
@@ -99,15 +114,15 @@ public class GameUi : MonoBehaviour
                     RepeatSoundsbtn.SetEnabled(false);
                     break;
                 }
-            
+
             case SoundSequenceGame.RoundState.lost:
                 {
                     NewGamebtn.SetEnabled(true);
                     RepeatSoundsbtn.SetEnabled(true);
                     break;
                 }
-            
-            
+
+
         }
 
     }

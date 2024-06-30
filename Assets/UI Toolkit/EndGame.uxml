@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/MainMenu.uss?fileID=7433441132597879392&amp;guid=6a4281d9f0439ce40bb8753c14e408c4&amp;type=3#MainMenu" />
+    <ui:VisualElement name="Back" picking-mode="Ignore" style="flex-grow: 1; width: 543px; height: 687px; overflow: visible; visibility: visible;">
+        <ui:VisualElement name="Result" style="flex-grow: 0; width: 281px; height: 371px; align-self: center; align-items: center; justify-content: space-between;">
+            <ui:Label tabindex="-1" text="Конец Игры" parse-escape-sequences="true" display-tooltip-when-elided="true" name="End" class="text" style="color: rgb(31, 135, 228);" />
+            <ui:VisualElement name="Hearts" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=2800000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;); height: 101px; width: 110px; justify-content: space-around;">
+                <ui:Label tabindex="-1" text="0/9" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="color: rgb(255, 255, 255); align-self: center; justify-content: flex-end; align-items: flex-start; top: -15%;" />
+            </ui:VisualElement>
+            <ui:Label tabindex="-1" text="Результат:" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Result" class="text" />
+            <ui:Label tabindex="-1" text="20" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Score" class="text" style="color: rgb(31, 135, 228);" />
+            <ui:Label tabindex="-1" text="Новый рекорд" parse-escape-sequences="true" display-tooltip-when-elided="true" name="newHighScore" class="text" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Btns" style="flex-grow: 1; justify-content: center; align-self: center; overflow: visible;">
+            <ui:Button text="Продолжить" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Btn1" class="btn text" style="margin-bottom: 25px; color: rgb(255, 255, 255);" />
+            <ui:Button text="Главное Меню" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Btn2" class="btn text blue" style="color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" class="closebtn" />
+    </ui:VisualElement>
+</ui:UXML>
