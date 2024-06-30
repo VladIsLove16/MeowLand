@@ -47,7 +47,7 @@ public class SequenceGameManager : MonoBehaviour
     }
     private Cat GetDisabledCat()
     {
-        return DisabledCats[0];
+        return GetRandom(DisabledCats);
     }
     public void AddNewCatInGame()
     {
@@ -117,7 +117,7 @@ public class SequenceGameManager : MonoBehaviour
             return; 
         if  (round % RoundToAddNewAvailableCat == 0)
         {
-            Cat randomCat = DisabledCats[StartedSequenceLength++];
+            Cat randomCat = GetRandom(DisabledCats);
             randomCat.Init(AddNewCatInfoInPlay());
             randomCat.gameObject.SetActive(true);
             SoundSequenceGame.AddNewCat(randomCat);

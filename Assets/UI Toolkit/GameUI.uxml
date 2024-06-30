@@ -51,5 +51,9 @@
             <ui:VisualElement name="Heart" style="align-self: flex-start; height: 80px; width: 80px; background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=21300000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;);" />
             <ui:VisualElement name="Heart" style="align-self: flex-start; height: 80px; width: 80px; background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=21300000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;);" />
         </ui:VisualElement>
+        <ui:VisualElement name="PlayButtons" style="flex-grow: 1; position: absolute; top: 532px; left: 1421px;">
+            <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Play" class="play" style="width: 160px; height: 160px; background-color: rgba(188, 188, 188, 0);" />
+            <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Repeat" class="repeat" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
