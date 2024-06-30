@@ -12,7 +12,8 @@ public class ScoreManager: MonoBehaviour
     {
         get { return score; }
         set {
-            score = value; ScoreChanged.Invoke(value); 
+            score = value; ScoreChanged.Invoke(value);
+            Debug.Log("Score Changed Invoke");
         }
     }
     private int highScore = 0;

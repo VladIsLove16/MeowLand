@@ -4,15 +4,15 @@
         <ui:VisualElement name="Result" style="flex-grow: 0; width: 281px; height: 371px; align-self: center; align-items: center; justify-content: space-between;">
             <ui:Label tabindex="-1" text="Конец Игры" parse-escape-sequences="true" display-tooltip-when-elided="true" name="End" class="text" style="color: rgb(31, 135, 228);" />
             <ui:VisualElement name="Hearts" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=2800000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;); height: 101px; width: 110px; justify-content: space-around;">
-                <ui:Label tabindex="-1" text="0/9" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="color: rgb(255, 255, 255); align-self: center; justify-content: flex-end; align-items: flex-start; top: -15%;" />
+                <ui:Label tabindex="-1" text="0/9" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="color: rgb(255, 255, 255); align-self: center; justify-content: flex-end; align-items: flex-start; top: -15%; -unity-font-style: normal; font-size: 25px;" />
             </ui:VisualElement>
-            <ui:Label tabindex="-1" text="Результат:" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Result" class="text" />
-            <ui:Label tabindex="-1" text="20" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Score" class="text" style="color: rgb(31, 135, 228);" />
-            <ui:Label tabindex="-1" text="Новый рекорд" parse-escape-sequences="true" display-tooltip-when-elided="true" name="newHighScore" class="text" />
+            <ui:Label tabindex="-1" text="Результат:" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Result" class="text" style="font-size: 40px;" />
+            <ui:Label tabindex="-1" text="20" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Score" class="text" style="color: rgb(31, 135, 228); font-size: 40px;" />
+            <ui:Label tabindex="-1" text="Новый рекорд" parse-escape-sequences="true" display-tooltip-when-elided="true" name="newHighScore" class="text" style="font-size: 40px;" />
         </ui:VisualElement>
         <ui:VisualElement name="Btns" style="flex-grow: 1; justify-content: center; align-self: center; overflow: visible;">
-            <ui:Button text="Продолжить" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Btn1" class="btn text" style="margin-bottom: 25px; color: rgb(255, 255, 255);" />
-            <ui:Button text="Главное Меню" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Btn2" class="btn text blue" style="color: rgb(255, 255, 255);" />
+            <ui:Button text="Продолжить" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Btn1" class="btn text" style="margin-bottom: 25px; color: rgb(255, 255, 255); font-size: 35px;" />
+            <ui:Button text="Главное Меню" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Btn2" class="btn text blue" style="color: rgb(255, 255, 255); font-size: 35px;" />
         </ui:VisualElement>
         <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" class="closebtn" />
     </ui:VisualElement>

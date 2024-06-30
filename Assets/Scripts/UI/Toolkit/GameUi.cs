@@ -45,9 +45,9 @@ public class GameUi : MonoBehaviour
 
         UpperPanel = root.Q("UpperPanel");
         SoftMoney = UpperPanel.Q("Money").Q("MoneyText") as Label;
-        HardMoney = UpperPanel.Q("Fishes").Q("FishText") as Label;
-        TimeToHealLeft = UpperPanel.Q("HeartsRecovery").Q("HealthText") as Label;
-        Lifes = UpperPanel.Q("HeartsRecovery").Q("TimeText") as Label;
+        HardMoney = UpperPanel.Q("Fishes").Q("FishText") as Label; 
+        TimeToHealLeft = UpperPanel.Q("HeartsRecovery").Q("TimeText") as Label;
+        Lifes = UpperPanel.Q("HeartsRecovery").Q("HealthText") as Label;
         Pause = UpperPanel.Q("Buttons").Q("Pause") as Button;
         GoToMenu = UpperPanel.Q("Buttons").Q("Menu") as Button;
 
@@ -70,7 +70,7 @@ public class GameUi : MonoBehaviour
         Lifes.text = HealthSystem.Health.ToString()+"/9";
 
         ScoreText.text = "Уровень " + "1";
-        LevelProgress.value = 0;
+        LevelProgress.value = 10;
 
         NewGamebtn.clicked += () =>
         {
@@ -93,7 +93,7 @@ public class GameUi : MonoBehaviour
     }
     private void OnHealthChange(int arg0)
     {
-        Lifes.text = HealthSystem.Health.ToString();
+        Lifes.text = HealthSystem.Health.ToString()+"/9";
     }
     private void Update()
     {
@@ -101,11 +101,12 @@ public class GameUi : MonoBehaviour
         HardMoney.text = Wallet.Money.HardMoney.ToString();
         TimeToHealLeft.text = HealthSystem.TimeLeftString;
         if(SoundSequenceGame.instance.CatSequence.Count!=0)
-            LevelProgress.value = SoundSequenceGame.instance.CurrentNum/ SoundSequenceGame.instance.CatSequence.Count;
+            LevelProgress.value = SoundSequenceGame.instance.CurrentNum * 100 / SoundSequenceGame.instance.CatSequence.Count;
     }
     private void OnScoreChanged(int score)
     {
-        ScoreText.text = "Уровень " +score.ToString();
+        Debug.Log("dcore changed");
+        ScoreText.text = "Уровень " +(score+1).ToString();
     }
     private void OnHighScoreReached()
     {

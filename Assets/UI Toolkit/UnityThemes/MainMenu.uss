@@ -16,6 +16,10 @@
     height: 67px;
     display: flex;
     -unity-background-scale-mode: stretch-to-fill;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
 }
 
 .btn:hover {
@@ -39,4 +43,26 @@
 
 .closebtn:hover {
     background-image: url("project://database/Assets/Sprites/new/%D0%9A%D0%BE%D0%BD%D0%B5%D1%86%20%D0%B8%D0%B3%D1%80%D1%8B/%D0%BA%D0%BD%D0%BE%D0%BF%D0%BA%D0%B0%20%D0%B7%D0%B0%D0%BA%D1%80%D1%8B%D1%82%D1%8C%20%D0%BD%D0%B0%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5.png?fileID=21300000&guid=f64d3f9714bbdfd4b9752c5fca03d67c&type=3#кнопка закрыть наведение");
+}
+
+.mainmenubtn {
+    background-image: url("project://database/Assets/Sprites/new/%D0%9A%D0%BD%D0%BE%D0%BF%D0%BA%D0%B8/%D0%BE%D0%B1%D1%8B%D1%87%D0%BD%D0%B0%D1%8F%20%D0%BA%D0%BD%D0%BE%D0%BF%D0%BA%D0%B0.png?fileID=21300000&guid=c03ec69d0c883744c9bcaa61e2d172b2&type=3#обычная кнопка");
+    background-color: rgba(255, 255, 255, 0);
+    width: 253px;
+    height: 67px;
+    display: flex;
+    -unity-background-scale-mode: stretch-to-fill;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    margin-bottom: 39px;
+}
+
+.mainmenubtn:hover {
+    background-image: url("project://database/Assets/Sprites/new/%D0%9A%D0%BD%D0%BE%D0%BF%D0%BA%D0%B8/%D0%BF%D1%80%D0%B8%20%D0%BD%D0%B0%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B8.png?fileID=21300000&guid=0efd1401dc4dee3408095cca15a3d98e&type=3#при наведении");
+}
+
+.mainmenubtn:active {
+    background-image: url("project://database/Assets/Sprites/new/%D0%9A%D0%BD%D0%BE%D0%BF%D0%BA%D0%B8/%D0%BF%D1%80%D0%B8%20%D0%BD%D0%B0%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B8.png?fileID=21300000&guid=0efd1401dc4dee3408095cca15a3d98e&type=3#при наведении");
 }

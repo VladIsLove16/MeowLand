@@ -14,11 +14,14 @@ public class MainMenuUI : MonoBehaviour
     private VisualElement CenterPanel;
     private VisualElement DownPanel;
     private VisualElement SettingsMenu;
-    private Button Play;
+
+
     private Button MyVK;
     private Button MyTG;
-    private Button GoToShop;
+    private Button Play;
     private Button SettingsBtn;
+    private Button GoToShop;
+    private Button Exit;
     [SerializeField]
     private AudioMixer audioMixer;
     [SerializeField]
@@ -28,34 +31,39 @@ public class MainMenuUI : MonoBehaviour
     {
         document = GetComponent<UIDocument>();
         root = document.rootVisualElement;
-        UpperPanel = root.Q("UpperPanel");
-        CenterPanel = root.Q("CenterPanel");
-        DownPanel = root.Q("DownPanel");
-        Play = CenterPanel.Q("Play") as Button;
+        //UpperPanel = root.Q("UpperPanel");
+        //CenterPanel = root.Q("CenterPanel");
+        //DownPanel = root.Q("DownPanel");
+        Play = root.Q("A").Q("B").Q("Play") as Button;
         Play.clicked += () =>
         {
             Debug.Log("play clicke");
             Loader.Load(Loader.Scene.Game);
         };
-        MyVK = DownPanel.Q("MyVK") as Button;
+        MyVK = root.Q("A").Q("B").Q("MyVK") as Button;
         MyVK.clicked += () =>
         {
             Application.OpenURL("https://vk.com/hochu_microbov");
         };
-        MyTG = DownPanel.Q("MyTG") as Button;
+        MyTG = root.Q("A").Q("B").Q("MyTG") as Button;
         MyTG.clicked += () =>
         {
             Application.OpenURL("https://t.me/MeowLand_Vladislove");
         };
-        GoToShop = UpperPanel.Q("GoToShop") as Button;
+        GoToShop = root.Q("A").Q("B").Q("Shop") as Button;
         GoToShop.clicked += () =>
         {
             Loader.Load(Loader.Scene.Shop);
         };
-        SettingsMenu = CenterPanel.Q("SettingsMenu");
+        Exit = root.Q("A").Q("B").Q("Exit") as Button;
+        Exit.clicked += () =>
+        {
+            Application.Quit();
+        };
+        SettingsMenu = root.Q("SettingsMenu");
         SettingsMenu.style.display = DisplayStyle.None;
         settingsUI.Setup(SettingsMenu); 
-        SettingsBtn = UpperPanel.Q("OpenSettings") as Button;
+        SettingsBtn = root.Q("A").Q("B").Q("Settings") as Button;
         SettingsBtn.clicked += () =>
         {
             ManageSettingsMenu();

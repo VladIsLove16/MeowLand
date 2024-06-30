@@ -88,7 +88,6 @@ public class SoundSequenceGame : MonoBehaviour
     }
     public void CreateSequence(int count)
     {
-        CurrentNum = 0;
         CatSequence.Clear();
         for (int i = 0; i <count; i++)
         {

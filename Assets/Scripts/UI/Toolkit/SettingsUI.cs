@@ -18,6 +18,7 @@ public class SettingsUI : MonoBehaviour
     private Slider MusicVolumeSlider;
     private Slider MeowingVolumeSlider;
     private Slider ButtonsVolumeSlider;
+    private Button Close;
     
     const string MusicVolume = "MusicVolume";
     const string MeowingVolume = "MeowingVolume";
@@ -33,9 +34,21 @@ public class SettingsUI : MonoBehaviour
         ButtonsVolumeSlider = root.Q("Buttons") as Slider;
         ButtonsVolumeSlider.RegisterValueChangedCallback(evt => VolumeChange(evt.newValue, ButtonsVolume));
 
+        Close = root.Q("Close") as Button;
+        Close.clicked += () =>
+        {
+            ManageSettingsMenu(root);
+        };
+
         SetupInitialValues();
     }
-
+    private void ManageSettingsMenu(VisualElement root)
+    {
+        if (root.style.display == DisplayStyle.Flex)
+            root.style.display = DisplayStyle.None;
+        else
+            root.style.display = DisplayStyle.Flex;
+    }
     private void SetupInitialValues()
     {
         ButtonsVolumeSlider.value = PlayerPrefs.GetFloat(ButtonsVolume, 0.5f);
