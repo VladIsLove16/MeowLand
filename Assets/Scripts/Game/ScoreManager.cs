@@ -31,14 +31,14 @@ public class ScoreManager: MonoBehaviour
         if (instance == null)
             instance = this;
         SoundSequenceGame.instance.roundStateChanged.AddListener(OnSoundQueueController_StateChanged);
-        SoundSequenceGame.instance.RoundWon.AddListener(Set);
+        //SoundSequenceGame.instance.RoundWon.AddListener(Set);
     }
     private void OnSoundQueueController_StateChanged(SoundSequenceGame.RoundState state)
     {
         switch (state)
         {
-            case SoundSequenceGame.RoundState.gameStarting:
-                ResetPoints();
+            case SoundSequenceGame.RoundState.roundStarting: 
+                Set(SoundSequenceGame.instance.CatSequence.Count) ;
                 break;
 
         }

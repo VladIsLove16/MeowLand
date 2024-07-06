@@ -1,0 +1,101 @@
+.Button {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 32px;
+    -unity-font-style: normal;
+    -unity-font: url("project://database/Assets/_UI/Sprites/2D/Comic%20Sans%20MS.ttf?fileID=12800000&guid=4fa93e44b556f2a46a472a76fabd473b&type=3#Comic Sans MS");
+    -unity-font-definition: initial;
+    width: 445px;
+    height: 63px;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+    margin-top: 0;
+    transform-origin: center;
+    border-top-width: 0;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    padding-top: 0;
+    background-image: none;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.Button:hover {
+    background-image: url("project://database/Assets/_UI/Sprites/2D/%D0%9D%D0%B0%D1%87%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD/Hovering2_445x63.png?fileID=21300000&guid=0c67e52d4a95704428345e8f02fcc471&type=3#Hovering2_445x63");
+    width: 445px;
+    height: 63px;
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.Button:active {
+    background-image: url("project://database/Assets/_UI/Sprites/2D/%D0%9D%D0%B0%D1%87%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD/Press_400x60.png?fileID=2800000&guid=91f626e97c75df14e854b89778c96540&type=3#Press_400x60");
+}
+
+.Slider {
+    flex-direction: column;
+    width: 300px;
+    height: 91px;
+    margin-top: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    justify-content: space-around;
+    align-self: center;
+    display: flex;
+    visibility: visible;
+    overflow: visible;
+    position: relative;
+    flex-basis: auto;
+    flex-shrink: initial;
+    flex-grow: 0;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    padding-top: 0;
+    padding-right: 0;
+}
+
+.Slider .unity-base-slider__dragger {
+    width: 10px;
+    height: 24px;
+    border: none;
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+}
+
+.Slider .unity-base-slider__dragger-border {
+    display: none;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.Slider .unity-base-slider__drag-container {
+    flex-direction: column;
+    margin-left: 40px;
+    justify-content: space-around;
+}
+
+.Slider .unity-base-slider__tracker {
+    margin-left: 0;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("project://database/Assets/_UI/Sprites/2D/%D0%9C%D0%B5%D0%BD%D1%8E%20%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B8/Groove_340x40.png?fileID=2800000&guid=ca3eb61be7cbb0d43b29848d86817706&type=3#Groove_340x40");
+    display: flex;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.SliderText {
+    translate: 0 0;
+    font-size: 26px;
+    -unity-font: url("project://database/Assets/_UI/Sprites/2D/Comic%20Sans%20MS.ttf?fileID=12800000&guid=4fa93e44b556f2a46a472a76fabd473b&type=3#Comic Sans MS");
+    -unity-font-definition: initial;
+    color: rgb(255, 255, 255);
+}

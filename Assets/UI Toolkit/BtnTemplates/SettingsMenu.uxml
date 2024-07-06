@@ -1,9 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/Sliders.uss?fileID=7433441132597879392&amp;guid=8755ae3056f10284e966e24c86d820dd&amp;type=3#Sliders" />
     <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/MainMenu.uss?fileID=7433441132597879392&amp;guid=6a4281d9f0439ce40bb8753c14e408c4&amp;type=3#MainMenu" />
-    <ui:VisualElement name="SettingsMenu" style="flex-grow: 1; justify-content: space-around; background-color: rgba(0, 0, 0, 0.38); border-top-width: 4px; border-right-width: 4px; border-bottom-width: 4px; border-left-width: 4px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); -unity-background-image-tint-color: rgb(255, 57, 57); border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px;">
-        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Close" class="closebtn" style="position: absolute; left: 88%; top: -27%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
-        <ui:Slider label="Music" high-value="1" name="Music" low-value="-80" />
-        <ui:Slider label="Meowing" high-value="1" name="Meowing" low-value="-80" />
-        <ui:Slider label="Buttons" high-value="1" name="Buttons" low-value="-80" show-input-field="false" />
+    <ui:VisualElement name="SettingsMenu" style="flex-grow: 1; justify-content: center; height: auto; width: auto; visibility: visible; overflow: visible; background-image: none; background-color: rgb(255, 255, 255); border-top-left-radius: 61px; border-top-right-radius: 61px; border-bottom-right-radius: 61px; border-bottom-left-radius: 61px;">
+        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Close" class="closebtn" style="position: absolute; align-self: flex-end; top: -35px; left: auto; right: -37px; display: flex; overflow: visible; bottom: auto; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+        <ui:Label tabindex="-1" text="Настройки" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="-unity-text-align: upper-center; color: rgb(31, 135, 228); border-bottom-width: 0; padding-bottom: 70px; padding-top: 33px;" />
+        <ui:Slider label="Music" high-value="1" name="Music" low-value="-80" class="Slider text unity-base-slider__tracker" />
+        <ui:Slider label="Meowing" high-value="1" name="Meowing" low-value="-80" class="meowing text Slider unity-base-slider__tracker" />
+        <ui:Slider label="Buttons" high-value="1" name="Buttons" low-value="-80" show-input-field="false" class="Slider text" style="display: none;" />
     </ui:VisualElement>
 </ui:UXML>

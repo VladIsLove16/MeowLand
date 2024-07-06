@@ -1,0 +1,32 @@
+.Progressbar {
+}
+
+.Progressbar .unity-progress-bar__background {
+    background-image: none;
+    background-color: rgb(233, 244, 255);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    overflow: hidden;
+}
+
+.Progressbar .unity-progress-bar__progress {
+    background-image: none;
+    translate: -1px 0;
+    background-color: rgb(255, 185, 75);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.Progressbar .unity-progress-bar__container {
+    height: auto;
+    width: auto;
+    flex-grow: 1;
+}

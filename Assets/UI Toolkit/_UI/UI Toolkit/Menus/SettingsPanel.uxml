@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_UI/UI%20Toolkit/Menus/ButtonTemplate.uss?fileID=7433441132597879392&amp;guid=ed3366f90261b6b4fbe09d4579a072c0&amp;type=3#ButtonTemplate" />
+    <ui:GroupBox style="height: 427px; width: 501px; position: absolute; top: 106px; left: 12px; align-items: flex-start; margin-top: 0; justify-content: flex-start;">
+        <ui:Slider label="Общая громкость" name="MasterVolume" high-value="20" low-value="-80" class="Slider SliderText" />
+        <ui:Slider label="Музыка" high-value="20" name="MusicVolume" low-value="-80" class="Slider SliderText" />
+        <ui:Slider label="Звуки" high-value="20" name="SoundVolume" low-value="-80" class="Slider SliderText" />
+    </ui:GroupBox>
+</ui:UXML>

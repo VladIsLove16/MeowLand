@@ -52,6 +52,7 @@ public class SoundSequenceGame : MonoBehaviour
     {
         foreach (Cat cat in AvailableCats)
         {
+            cat.Clicked.RemoveAllListeners();
             cat.Clicked.AddListener(() => OnCat_Click(cat));
         }
         CreateSequence(StartedSequenceLength);
@@ -77,7 +78,7 @@ public class SoundSequenceGame : MonoBehaviour
         for (int i = 0; i < CatSequence.Count; i++)
         {
             CatSequence[i].Play();
-            yield return new WaitForSeconds(CatSequence[i].MeowSound.length);
+            yield return new WaitForSeconds(CatSequence[i].MeowSound.length+0.1f);
         }
         SetRoundState(roundState = RoundState.roundStarting);
         SetCatsClickable(true);
@@ -139,7 +140,6 @@ public class SoundSequenceGame : MonoBehaviour
     private void OnWrongAnswer()
     {
         RoundLost.Invoke(CurrentNum);
-        CurrentNum = 0;
         audioSource.PlayOneShot(loseSound);
         SetCatsClickable(false);
         SetRoundState(RoundState.lost);

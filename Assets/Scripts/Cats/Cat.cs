@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -16,18 +17,31 @@ public class Cat : MonoBehaviour
     [HideInInspector]
     public AudioClip MeowSound;
     private AudioSource AudioSource;
-    private Sprite OutlineSprite;
-    private Sprite NoOutlineSprite;
+    //private Sprite OutlineSprite;
+    //private Sprite NoOutlineSprite;
     private Image Image;
     public UnityEvent Clicked;
     private Button button;
+    public Animator animator;
     public void Init(CatInfoSO shopItemSO)
     {
         shopItem = shopItemSO;
-        OutlineSprite = shopItemSO.OutlineSprite;
-        NoOutlineSprite = shopItemSO.Sprite;
+        //OutlineSprite = shopItemSO.OutlineSprite;
+        //NoOutlineSprite = shopItemSO.Sprite;
         MeowSound = shopItemSO.MeowSound;
-        GetComponent<Image>().sprite = NoOutlineSprite;
+        //GetComponent<Image>().sprite = NoOutlineSprite;
+    }
+    private void Start()
+    {
+        AudioSource = GetComponent<AudioSource>();   
+        SetOutlineMode(true);
+    }
+    public void Awake()
+    {
+        Image = GetComponent<Image>();
+        button = GetComponent<Button>();
+        Init(shopItem);
+        animator = GetComponent<Animator>();
     }
     public void SetOutlineMode(bool b)
     {
@@ -43,36 +57,35 @@ public class Cat : MonoBehaviour
         Play();
         Clicked.Invoke();
     }
-    private void Start()
-    {
-        AudioSource = GetComponent<AudioSource>();   
-        SetOutlineMode(true);
-    }
-    public void Awake()
-    {
-        Image = GetComponent<Image>();
-        button = GetComponent<Button>();
-        Init(shopItem);
-
-    }
     public void Play()
     {
         AudioSource.PlayOneShot(MeowSound);
-        ShowOutline();
+        PlayAnimation();
     }
-   
+
+    private void PlayAnimation()
+    {
+        StartCoroutine(Animation());
+    }
+    private IEnumerator Animation()
+    {
+        animator.SetBool("IsMeowing", true);
+        float meowingLength = animator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(meowingLength);
+        animator.SetBool("IsMeowing", false);
+    }
     private void ShowOutline() 
     {
         if (!OutlineEnabled) return;
         if(Outlinev2.state==Outlinev2.OutlineState.show)
         { //if (Outline.ShowOutline == true)
             //    Outline.enabled = true;
-            Image.sprite = OutlineSprite;
+            //Image.sprite = OutlineSprite;
             Invoke("HideOutline", MeowSound.length);
         }
     }
     private void HideOutline()
     {
-        Image.sprite = NoOutlineSprite;
+        //Image.sprite = NoOutlineSprite;
     }
 }

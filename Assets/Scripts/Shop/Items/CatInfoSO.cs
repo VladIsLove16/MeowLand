@@ -4,13 +4,10 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "new Item", menuName = "ShopItems/Item")]
 public class CatInfoSO : ScriptableObject
 {
-    public Sprite Sprite;
-    public Sprite OutlineSprite;
     public AudioClip MeowSound;
     public Money Cost;
     [SerializeField]
     private bool isUnlocked;
-
     // Свойство позволяет только чтение из кода
     public bool IsUnlocked
     {
@@ -25,8 +22,8 @@ public class CatInfoSO : ScriptableObject
         get { return isBought; }
     }
     public bool CanBeSold;
-    public string NotUnlockedMessage;
-    public string NotEnoughtMoneyMessage;
+    //public string NotUnlockedMessage;
+    //public string NotEnoughtMoneyMessage;
     public UnityEvent stateChanged;
     public void Awake()
     {

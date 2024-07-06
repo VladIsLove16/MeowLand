@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1;">
-        <ui:ProgressBar value="66.5" title="Loading" name="LoadingProgress" style="position: relative; bottom: -90%; height: 169px;" />
+    <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/ProgressBars.uss?fileID=7433441132597879392&amp;guid=a75a3200e2f4a3f41983b4a3bf27962d&amp;type=3#ProgressBars" />
+    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/new/%D0%97%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0/%D0%A4%D0%BE%D0%BD%20%D0%B1%D0%B5%D0%B7%20%D0%BF%D0%BE%D0%BB%D0%BE%D1%81%D0%BA%D0%B8.png?fileID=2800000&amp;guid=f0f36161294c1e64cba057abd18062c0&amp;type=3#Фон без полоски&quot;);">
+        <ui:ProgressBar value="98.6" title="Loading" name="LoadingProgress" class="unity-progress-bar Progressbar" style="position: relative; bottom: -60%; height: 5%; width: 56%; align-self: center;" />
     </ui:VisualElement>
 </ui:UXML>

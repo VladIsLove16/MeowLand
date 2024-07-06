@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ButtonsContainer" src="project://database/Assets/_UI/UI%20Toolkit/Menus/ButtonsContainer.uxml?fileID=9197481963319205126&amp;guid=8018535de4e4dc448b76f36298cb1b78&amp;type=3#ButtonsContainer" />
+    <ui:Template name="SettingsMenu" src="project://database/Assets/SettingsMenu.uxml?fileID=9197481963319205126&amp;guid=135148740118d734aa85ad2fe9aabd9c&amp;type=3#SettingsMenu" />
+    <Style src="project://database/Assets/_UI/UI%20Toolkit/Menus/ButtonTemplate.uss?fileID=7433441132597879392&amp;guid=ed3366f90261b6b4fbe09d4579a072c0&amp;type=3#ButtonTemplate" />
+    <Style src="project://database/Assets/Text.uss?fileID=7433441132597879392&amp;guid=0cc575614b5b522468cfe64544f13ebf&amp;type=3#Text" />
+    <ui:VisualElement name="root" style="flex-grow: 1; background-image: none; width: 925px; height: 1080px; -unity-background-scale-mode: scale-and-crop; flex-direction: row; display: flex; visibility: visible;">
+        <ui:VisualElement name="PauseMenu" style="height: 851px; width: 744px; position: absolute; top: 297px; left: 120px;">
+            <ui:VisualElement name="Background" style="flex-grow: 1; position: absolute; background-image: url(&quot;project://database/Assets/_UI/Sprites/2D/%D0%9C%D0%B5%D0%BD%D1%8E%20%D0%BF%D0%B0%D1%83%D0%B7%D1%8B/Back_1040x820.png?fileID=21300000&amp;guid=ab2ed818f44521f4b90dac3e0df39823&amp;type=3#Back_1040x820&quot;); height: 785px; width: 1011px; -unity-background-scale-mode: stretch-to-fill; transform-origin: center; translate: 0 0; rotate: 0; scale: 1 1; top: -139px; left: -192px; display: flex;" />
+            <ui:Button text="Продолжить" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Resume" class="Button" style="position: absolute; top: 36px; left: 112px;" />
+            <ui:Instance template="ButtonsContainer" name="ButtonsContainer" style="height: 335px; width: 707px; position: absolute; top: 129px; left: 112px; justify-content: center; margin-top: 0; margin-right: 0; margin-bottom: 0; align-items: stretch;" />
+            <ui:Label tabindex="-1" text="ПАУЗА" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Pause" class="Text" style="position: absolute; top: -121px; left: 264px; height: 73px; width: 140px; font-size: 40px;" />
+        </ui:VisualElement>
+        <ui:Instance template="SettingsMenu" name="SettingsMenu" />
+    </ui:VisualElement>
+</ui:UXML>

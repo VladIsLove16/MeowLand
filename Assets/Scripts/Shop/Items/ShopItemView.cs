@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
+[RequireComponent(typeof(Cat))]
 public class ShopItemView : MonoBehaviour
 {
     private CatInfoSO item;
@@ -16,7 +16,7 @@ public class ShopItemView : MonoBehaviour
         item  = cat.shopItem;
         cat.OutlineEnabled = false;
         Image = GetComponent<Image>();
-        Image.sprite = item.Sprite;
+        //Image.sprite = item.Sprite;
         item.stateChanged.AddListener(SetImageColor);
         btn = GetComponent<Button>();
         btn.onClick.AddListener(()=> OnClick.Invoke());

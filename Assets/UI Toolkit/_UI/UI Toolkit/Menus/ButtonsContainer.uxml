@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_UI/UI%20Toolkit/Menus/ButtonTemplate.uss?fileID=7433441132597879392&amp;guid=ed3366f90261b6b4fbe09d4579a072c0&amp;type=3#ButtonTemplate" />
+    <ui:VisualElement name="Container" style="flex-grow: 1; cursor: initial; background-image: none; align-items: center; align-self: auto; -unity-text-align: upper-left; -unity-background-scale-mode: scale-and-crop; overflow: visible; display: flex; width: 451px; height: 333px; margin-top: 0; flex-basis: auto; justify-content: space-between;">
+        <ui:Button text="Новая игра" parse-escape-sequences="true" display-tooltip-when-elided="true" usage-hints="None" name="Play" class="Button" style="padding-top: -66px;" />
+        <ui:Button text="Загрузка" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Load" class="Button" />
+        <ui:Button text="Настройки" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Settings" class="Button" />
+        <ui:Button text="Выход" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Exit" class="Button" />
+    </ui:VisualElement>
+</ui:UXML>

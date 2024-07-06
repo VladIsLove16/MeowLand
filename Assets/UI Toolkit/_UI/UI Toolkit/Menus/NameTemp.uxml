@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="root" style="flex-grow: 1; width: 1160px; height: 405px;">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-image: none; width: 100%; height: 100%;" />
+        <ui:VisualElement name="NameEmblem" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/_UI/Sprites/2D/Name_1160x405.png?fileID=2800000&amp;guid=1c11274b7dc9e124083001c3a96fec68&amp;type=3#Name_1160x405&quot;); position: absolute; height: 405px; width: 1160px; top: 0; left: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

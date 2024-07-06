@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine.Events;
 using UnityEngineInternal;
 public static class HealthSystem
 {
-    public static int Health { get; private set; } = 8;
-    public static UnityEvent<int> healthChanged=new();
-    public static int MaxHealth { get; private set; } = 9;
+    public static int Health { get; private set; } = 9;
+    public static UnityEvent<int> healthLost=new();
+    public static UnityEvent<int> healthHealed=new();
+    public static readonly int MaxHealth = 9;
     public static TimeSpan TimeToHeal = TimeSpan.FromMinutes(15); 
     public static DateTime LastTimeRestored = DateTime.Now;
     public static TimeSpan TimePassed = TimeSpan.Zero;
+    private static bool Loaded =false;
     public static string TimeLeftString
     {
         get
@@ -18,6 +21,7 @@ public static class HealthSystem
             return (int)a.TotalMinutes+":"+(int)a.TotalSeconds%60;
         }
     }
+    
     public static TimeSpan GetTimeToHealLeft()
     {
         UpdateTimePassed();
@@ -25,18 +29,21 @@ public static class HealthSystem
     }
     public static void LoseHealth(int amount = 1)
     {
-        if(amount>0 && Health==MaxHealth)
+        Health-=amount;
+        Health = Math.Clamp(Health,0, MaxHealth); 
+        if (amount > 0 && Health == MaxHealth)
         {
             LastTimeRestored = DateTime.Now;
         }
-        Health-=amount;
-        healthChanged.Invoke(Health);
+        healthLost.Invoke(Health);
+        SaveData();
     }
     public static void Heal(int amount = 1)
     {
         Health+= amount;
-        Health = Math.Max(MaxHealth, Health);
-        healthChanged.Invoke(Health);
+        Health = Math.Clamp(Health, 0, MaxHealth);
+        SaveData();
+        healthHealed.Invoke(Health);
     }
     private static void HealByTime()
     {
@@ -61,7 +68,7 @@ public static class HealthSystem
             HealByTime();
     }
     private static bool loaded = false;
-    private static void OnApplicationQuit()
+    public static void SaveData()
     {
         SaveSystem.Save<HealthData>(new HealthData(LastTimeRestored,Health)); ;
     }

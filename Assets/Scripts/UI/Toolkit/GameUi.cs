@@ -2,10 +2,12 @@ using Assets.Scripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
+using static UnityEditor.Progress;
 
 public class GameUi : MonoBehaviour
 {
@@ -20,6 +22,12 @@ public class GameUi : MonoBehaviour
     public Label HardMoney;
     public Label TimeToHealLeft;
     public Label Lifes;
+    [SerializeField]
+    public List<VisualElement> HeartsList;
+    [SerializeField]
+    public Sprite AliveHeart;
+    [SerializeField]
+    public Sprite DeadHeart;
     public Button Pause;
     public Button GoToMenu;
     
@@ -35,9 +43,16 @@ public class GameUi : MonoBehaviour
     private VisualElement Hearts;
 
     public Button NewGamebtn;
+    [SerializeField]
     public Button RepeatSoundsbtn;
     [SerializeField]
+
     public Toggle Outline;
+    [SerializeField]
+
+    private SettingsUI settingsUI;
+
+    private VisualElement SettingsMenu;
     private void Awake()
     {
         document = GetComponent<UIDocument>();
@@ -60,6 +75,8 @@ public class GameUi : MonoBehaviour
         Row2 = CatsContainer.Q("Row2");
 
         Hearts = root.Q("Hearts");
+        Debug.Log(Hearts.Children().Count());
+        HeartsList = Hearts.Children().ToList();
 
         RepeatSoundsbtn = root.Q("PlayButtons"). Q("Repeat") as Button;
         NewGamebtn = root.Q("PlayButtons").Q("Play") as Button;
@@ -68,7 +85,13 @@ public class GameUi : MonoBehaviour
         HardMoney.text = Wallet.Money.HardMoney.ToString();
         TimeToHealLeft.text = HealthSystem.TimeLeftString;
         Lifes.text = HealthSystem.Health.ToString()+"/9";
-
+        for (int i = 0;i<9;i++)
+        {
+            if (i < HealthSystem.Health)
+                OnHealthHeal(i);
+            else 
+                OnHealthLost(i);
+        }
         ScoreText.text = "Уровень " + "1";
         LevelProgress.value = 10;
 
@@ -83,17 +106,45 @@ public class GameUi : MonoBehaviour
         GoToMenu.clicked += () =>
         {
             Loader.Load(Loader.Scene.MainMenu);
-        };
-        HealthSystem.healthChanged.AddListener(OnHealthChange);
+        }; 
+        HealthSystem.healthLost.AddListener(OnHealthLost);
+        HealthSystem.healthHealed.AddListener(OnHealthHeal);
         //Outline = root.Q("Outline") as Toggle;
         //Outline.RegisterCallback<ClickEvent>(evt => OutlineChange(Outline.value));
         SoundSequenceGame.instance.roundStateChanged.AddListener(OnController_RoundStateChanged);
         ScoreManager.instance.ScoreChanged.AddListener(OnScoreChanged);
         //ScoreManager.instance.NewHighScoreReached.AddListener(OnHighScoreReached);
+
+        SettingsMenu = root.Q("SettingsMenu");
+        SettingsMenu.style.display = DisplayStyle.None;
+        settingsUI.Setup(SettingsMenu);
+        Pause.clicked += () =>
+        {
+            ManageSettingsMenu();
+        };
     }
-    private void OnHealthChange(int arg0)
+
+    private void OnHealthHeal(int arg0)
     {
-        Lifes.text = HealthSystem.Health.ToString()+"/9";
+        if (arg0 > 0)
+        HeartsList[arg0-1].style.backgroundImage = new StyleBackground(AliveHeart);
+        Lifes.text = arg0.ToString() + "/9";
+    }
+
+    private void OnHealthLost(int arg0)
+    {
+        if(arg0 < HeartsList.Count)
+        HeartsList[arg0].style.backgroundImage = new StyleBackground(DeadHeart);
+        Lifes.text = arg0.ToString() + "/9";
+    }
+
+    private void ManageSettingsMenu()
+    {
+        if (SettingsMenu.style.display == DisplayStyle.Flex)
+            SettingsMenu.style.display = DisplayStyle.None;
+        else
+            SettingsMenu.style.display = DisplayStyle.Flex;
+        
     }
     private void Update()
     {
@@ -106,7 +157,7 @@ public class GameUi : MonoBehaviour
     private void OnScoreChanged(int score)
     {
         Debug.Log("dcore changed");
-        ScoreText.text = "Уровень " +(score+1).ToString();
+        ScoreText.text = "Уровень " +score.ToString();
     }
     private void OnHighScoreReached()
     {

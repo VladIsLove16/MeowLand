@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf519bfed4256a4aaf390437dc83ee1, type: 3}
+  m_Name: Cat4.1
+  m_EditorClassIdentifier: 
+  Sprite: {fileID: 21300000, guid: 0be72f0e19b94bc4daf933b6a8827bf6, type: 3}
+  OutlineSprite: {fileID: 21300000, guid: ab85b5d95091ce045b3de5bdcb2a7983, type: 3}
+  MeowSound: {fileID: 8300000, guid: 9b3022b9fa7fc194691105bd14e06183, type: 3}
+  Cost:
+    SoftMoney: 3
+    HardMoney: 0
+  isUnlocked: 1
+  isBought: 1
+  CanBeSold: 0
+  NotUnlockedMessage: ChinMeow not unclocked yet
+  NotEnoughtMoneyMessage: 
+  stateChanged:
+    m_PersistentCalls:
+      m_Calls: []
