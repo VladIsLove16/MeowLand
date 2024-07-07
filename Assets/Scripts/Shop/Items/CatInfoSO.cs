@@ -5,6 +5,13 @@ using UnityEngine.Events;
 public class CatInfoSO : ScriptableObject
 {
     public AudioClip MeowSound;
+    public AudioClip AngrySound;
+    public AnimationClip IdleClip;
+    public AnimationClip AngryClip;
+    public AnimationClip MeowClip;
+    public Sprite IdleSprite;
+    public Sprite MeowSprite;
+    public Sprite AngrySprite;
     public Money Cost;
     [SerializeField]
     private bool isUnlocked;

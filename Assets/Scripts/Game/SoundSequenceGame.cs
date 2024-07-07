@@ -42,7 +42,14 @@ public class SoundSequenceGame : MonoBehaviour
         instance=this;
         audioSource = GetComponent<AudioSource>();
     }
-
+    private void Start()
+    {
+        foreach (Cat cat in AvailableCats)
+        {
+            cat.Clicked.RemoveAllListeners();
+            cat.Clicked.AddListener(() => OnCat_Click(cat));
+        }
+    }
     public void SetUpGame(List<Cat> AvailableCats, int StartedSequenceLength)
     {
         this.AvailableCats = AvailableCats;
@@ -50,11 +57,7 @@ public class SoundSequenceGame : MonoBehaviour
     }
     public void StartNewGame()
     {
-        foreach (Cat cat in AvailableCats)
-        {
-            cat.Clicked.RemoveAllListeners();
-            cat.Clicked.AddListener(() => OnCat_Click(cat));
-        }
+        
         CreateSequence(StartedSequenceLength);
         StartRound();
     }
@@ -77,15 +80,18 @@ public class SoundSequenceGame : MonoBehaviour
         SetCatsClickable(false);
         for (int i = 0; i < CatSequence.Count; i++)
         {
-            CatSequence[i].Play();
-            yield return new WaitForSeconds(CatSequence[i].MeowSound.length+0.1f);
+            CatSequence[i].Meow();
+            yield return new WaitForSeconds(CatSequence[i].shopItem.MeowSound.length+0.1f);
         }
         SetRoundState(roundState = RoundState.roundStarting);
         SetCatsClickable(true);
     }
     public void OnCat_Click(Cat cat)
     {
-        QueueCheck(cat);
+        if(roundState==RoundState.roundStarting || roundState == RoundState.playing)
+            QueueCheck(cat);
+        else
+            cat.Meow();
     }
     public void CreateSequence(int count)
     {
@@ -104,7 +110,7 @@ public class SoundSequenceGame : MonoBehaviour
         int num = UnityEngine.Random.Range(0, AvailableCats.Count);
         Cat cat = AvailableCats[num];
         CatSequence.Add(cat);
-        Debug.Log(cat.MeowSound.ToSafeString() + " added");
+        Debug.Log(cat.shopItem.MeowSound.ToSafeString() + " added");
     }
     private void QueueCheck(Cat cat)
     {
@@ -112,12 +118,13 @@ public class SoundSequenceGame : MonoBehaviour
         if(CurrentNum > 0 && roundState != RoundState.playing)
             SetRoundState(RoundState.playing);
         if(cat == CatSequence[CurrentNum])
-            OnRightAnswer();
+            OnRightAnswer(cat);
         else
-            OnWrongAnswer();
+            OnWrongAnswer(cat);
     }
-    private void OnRightAnswer()
+    private void OnRightAnswer(Cat cat)
     {
+        cat.Meow();
         if(CurrentNum == CatSequence.Count-1)
         {
            StartCoroutine(OnRihgtAnswer_Coroutine());
@@ -137,12 +144,13 @@ public class SoundSequenceGame : MonoBehaviour
         AddToSequence();
         StartRound();
     }
-    private void OnWrongAnswer()
+    private void OnWrongAnswer(Cat cat)
     {
-        RoundLost.Invoke(CurrentNum);
+        cat.Angry();
         audioSource.PlayOneShot(loseSound);
         SetCatsClickable(false);
         SetRoundState(RoundState.lost);
+        RoundLost.Invoke(CurrentNum);
     }
     private void SetCatsClickable(bool b)
     {

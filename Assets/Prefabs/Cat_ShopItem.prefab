@@ -1,5 +1,72 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3009927546708804712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7575223241952274428}
+  m_Layer: 5
+  m_Name: Buy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &7575223241952274428
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3009927546708804712}
+  m_LocalRotation: {x: -0, y: -0.33791837, z: -0, w: 0.9411754}
+  m_LocalPosition: {x: 0, y: 0, z: -362.76135}
+  m_LocalScale: {x: 0.009259259, y: 0.009259259, z: 0.009259259}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3121580704596569099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.5022443, y: -0.6027525}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &3321834183251794497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3121580704596569099}
+  m_Layer: 0
+  m_Name: Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3121580704596569099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3321834183251794497}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.33791837, z: -0, w: 0.9411754}
+  m_LocalPosition: {x: 24962.375, y: 65.097275, z: 30196.291}
+  m_LocalScale: {x: 108, y: 108, z: 108}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7575223241952274428}
+  m_Father: {fileID: 4564303838709812482}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7544434264073493851
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,10 +81,9 @@ GameObject:
   - component: {fileID: 1619200594780449950}
   - component: {fileID: 1866534269670009027}
   - component: {fileID: 2763180976982477373}
-  - component: {fileID: 97515299322582048}
   - component: {fileID: 4814309100950273518}
   m_Layer: 5
-  m_Name: Cat
+  m_Name: Cat_ShopItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +100,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3121580704596569099}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -244,24 +311,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0bf2372d51d9247b9f686ddeb67d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CatAnimator: {fileID: 0}
   shopItem: {fileID: 11400000, guid: a3ca6a884d2dd4747a4b506a48fe3474, type: 2}
+  OutlineEnabled: 0
+  MeowSound: {fileID: 0}
   Clicked:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &97515299322582048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7544434264073493851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a22aeb0478c8a049b6db522a4141d2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DoAnimation: 0
+  animator: {fileID: 0}
+  trigger_mode: 0
 --- !u!95 &4814309100950273518
 Animator:
   serializedVersion: 5
@@ -270,7 +327,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7544434264073493851}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: f8c55d47da42f7c48976b0369bcb42e2, type: 2}
   m_CullingMode: 0

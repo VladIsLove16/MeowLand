@@ -10,19 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cf519bfed4256a4aaf390437dc83ee1, type: 3}
-  m_Name: Cat2.1
+  m_Name: Cat2
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: d16b7be23b4f4db459462ed05b39be3e, type: 3}
-  OutlineSprite: {fileID: 21300000, guid: d7e3f609afd6a8348ac3cee11fff90c7, type: 3}
   MeowSound: {fileID: 8300000, guid: fa7d1b7e5913e3c4dbca9991acaf3a20, type: 3}
+  AngrySound: {fileID: 0}
+  IdleClip: {fileID: 0}
+  AngryClip: {fileID: 0}
+  MeowClip: {fileID: 0}
+  IdleSprite: {fileID: 21300000, guid: 869d0c472731865498a581f0571a55b6, type: 3}
+  MeowSprite: {fileID: 21300000, guid: f521bea51983de04ba809da996745667, type: 3}
+  AngrySprite: {fileID: 21300000, guid: 5d75c5c3a48010a4684014a5d34e8fbb, type: 3}
   Cost:
     SoftMoney: 3
     HardMoney: 0
   isUnlocked: 1
   isBought: 1
   CanBeSold: 0
-  NotUnlockedMessage: ChinMeow not unclocked yet
-  NotEnoughtMoneyMessage: 
   stateChanged:
     m_PersistentCalls:
       m_Calls: []

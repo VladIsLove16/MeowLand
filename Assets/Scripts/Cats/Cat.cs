@@ -12,40 +12,33 @@ using static UnityEngine.UI.CanvasScaler;
 [RequireComponent(typeof(AudioSource))]
 public class Cat : MonoBehaviour
 {
-    public CatInfoSO shopItem;
-    public bool OutlineEnabled;
     [HideInInspector]
-    public AudioClip MeowSound;
+    public CatAnimator CatAnimator;
+    [HideInInspector]
+
+    public CatInfoSO shopItem;
+    [HideInInspector]
     private AudioSource AudioSource;
-    //private Sprite OutlineSprite;
-    //private Sprite NoOutlineSprite;
-    private Image Image;
+    [HideInInspector]
+
     public UnityEvent Clicked;
     private Button button;
-    public Animator animator;
     public void Init(CatInfoSO shopItemSO)
     {
         shopItem = shopItemSO;
-        //OutlineSprite = shopItemSO.OutlineSprite;
-        //NoOutlineSprite = shopItemSO.Sprite;
-        MeowSound = shopItemSO.MeowSound;
-        //GetComponent<Image>().sprite = NoOutlineSprite;
-    }
-    private void Start()
-    {
-        AudioSource = GetComponent<AudioSource>();   
-        SetOutlineMode(true);
+        CatAnimator.Init(shopItemSO);
     }
     public void Awake()
     {
-        Image = GetComponent<Image>();
+        AudioSource = GetComponent<AudioSource>();
+        CatAnimator = GetComponent<CatAnimator>();
         button = GetComponent<Button>();
-        Init(shopItem);
-        animator = GetComponent<Animator>();
+        SetAnimationMode(true);
+
     }
-    public void SetOutlineMode(bool b)
+    public void SetAnimationMode(bool b)
     {
-        OutlineEnabled = b;
+        CatAnimator.SetAnimationMode(b);
     }
     public void SetUnclickable(bool b)
     {
@@ -54,38 +47,17 @@ public class Cat : MonoBehaviour
     public void OnClick()
     {
         Debug.Log("ButtonClicked");
-        Play();
         Clicked.Invoke();
     }
-    public void Play()
+    public void Meow()
     {
-        AudioSource.PlayOneShot(MeowSound);
-        PlayAnimation();
+        AudioSource.PlayOneShot(shopItem.MeowSound);
+        CatAnimator.StartAnimation(CatAnimator.AnimationType.Meow);
     }
-
-    private void PlayAnimation()
+    public void Angry()
     {
-        StartCoroutine(Animation());
-    }
-    private IEnumerator Animation()
-    {
-        animator.SetBool("IsMeowing", true);
-        float meowingLength = animator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(meowingLength);
-        animator.SetBool("IsMeowing", false);
-    }
-    private void ShowOutline() 
-    {
-        if (!OutlineEnabled) return;
-        if(Outlinev2.state==Outlinev2.OutlineState.show)
-        { //if (Outline.ShowOutline == true)
-            //    Outline.enabled = true;
-            //Image.sprite = OutlineSprite;
-            Invoke("HideOutline", MeowSound.length);
-        }
-    }
-    private void HideOutline()
-    {
-        //Image.sprite = NoOutlineSprite;
+        if(shopItem.AngrySound!=null)
+            AudioSource.PlayOneShot(shopItem.AngrySound);
+        CatAnimator.StartAnimation(CatAnimator.AnimationType.Angry);
     }
 }

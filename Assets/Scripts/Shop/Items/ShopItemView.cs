@@ -14,8 +14,7 @@ public class ShopItemView : MonoBehaviour
     {
         cat=GetComponent<Cat>();
         item  = cat.shopItem;
-        cat.OutlineEnabled = false;
-        Image = GetComponent<Image>();
+        Image = GetComponent<Image> ();
         //Image.sprite = item.Sprite;
         item.stateChanged.AddListener(SetImageColor);
         btn = GetComponent<Button>();

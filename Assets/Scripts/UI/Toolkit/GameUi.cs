@@ -7,7 +7,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
-using static UnityEditor.Progress;
 
 public class GameUi : MonoBehaviour
 {
