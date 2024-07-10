@@ -177,6 +177,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e556c7399345b1e4cb1ab0b588a5996e, type: 2}
   - {fileID: 11400000, guid: 0a43c6f68ad7ef348848eb6efd589874, type: 2}
   - {fileID: 11400000, guid: 23fa37db24a3e8c4882d89bfd4f4f2ad, type: 2}
+  - {fileID: 11400000, guid: d33d4188169c1094298f80b1b32145f4, type: 2}
+  - {fileID: 11400000, guid: c1eec05eff55daa4a9b60467021d69cc, type: 2}
+  - {fileID: 11400000, guid: b4ab216e8177e834aaec2a5eb2400392, type: 2}
+  - {fileID: 11400000, guid: 3e0c7f60539fd91408f68c2e109bdfdc, type: 2}
   WaitingTheirTimeCatsInfo: []
   CatsInfoInPlay: []
   DisabledCats:
@@ -407,8 +411,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Wallet: {fileID: 11400000, guid: 378e5f1b36a8e1241907b818e18b68e6, type: 2}
-  AliveHeart: {fileID: 21300000, guid: 388c07dc632534646b1e956031b4367c, type: 3}
-  DeadHeart: {fileID: 21300000, guid: 8c88c3406898c474ab590195245c2e27, type: 3}
   settingsUI: {fileID: 249173960}
 --- !u!114 &249173960
 MonoBehaviour:
@@ -1368,12 +1370,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -3118,8 +3120,8 @@ MonoBehaviour:
   StartedSequenceLength: 2
   AvailableCats: []
   CatSequence: []
-  loseSound: {fileID: 8300000, guid: 86b7e7d18b592444cb19a10d89256fff, type: 3}
-  winSound: {fileID: 8300000, guid: c5ee0e324435c1a419e1f8e072c0b0f8, type: 3}
+  loseSound: {fileID: 0}
+  winSound: {fileID: 8300000, guid: 24169679139fa8743a6f2a660eea2fdc, type: 3}
   PlayFullWinSound: 0
   catsClickable: 0
   roundStateChanged:
@@ -3159,7 +3161,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -7038989399731236199, guid: f24d4b1c610c2a246854e58b26afb15f, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.459
   m_Pitch: 1
   Loop: 0
   Mute: 0

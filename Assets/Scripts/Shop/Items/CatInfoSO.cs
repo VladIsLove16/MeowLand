@@ -12,6 +12,7 @@ public class CatInfoSO : ScriptableObject
     public Sprite IdleSprite;
     public Sprite MeowSprite;
     public Sprite AngrySprite;
+    public Sprite FlashingSprite;
     public Money Cost;
     [SerializeField]
     private bool isUnlocked;
@@ -39,7 +40,11 @@ public class CatInfoSO : ScriptableObject
         {
             isBought = item.IsBought;
             isUnlocked = item.IsUnlocked;
-        }; 
+        };
+        stateChanged.AddListener(() =>
+        {
+            ShopData.Set(this, new ShopDataItem() { IsBought = isBought, IsUnlocked = isUnlocked });
+        });
     }
     public virtual void Unlock()
     {

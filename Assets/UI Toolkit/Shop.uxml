@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="CatShopItemUI2" src="project://database/Assets/CatShopItemUI2.uxml?fileID=9197481963319205126&amp;guid=0453edce3cc4e0a449afce07aba11b3d&amp;type=3#CatShopItemUI2" />
+    <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/MainMenu.uss?fileID=7433441132597879392&amp;guid=6a4281d9f0439ce40bb8753c14e408c4&amp;type=3#MainMenu" />
+    <ui:VisualElement name="Background" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/new/%D0%9C%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD/%D1%84%D0%BE%D0%BD%20(2).png?fileID=21300000&amp;guid=d6c3049f47531b04288e1cf596e74eb6&amp;type=3#фон (2)&quot;); align-items: center; justify-content: center;">
+        <ui:VisualElement name="Money" style="flex-grow: 1; position: absolute; left: 189px; top: 38px; align-self: center; flex-direction: row; align-items: center;">
+            <ui:VisualElement name="MoneyIcon" style="flex-grow: 1; position: relative; background-image: url(&quot;project://database/Assets/Sprites/new/coin.png?fileID=21300000&amp;guid=5afefde5e9e06064b81358d07f49d666&amp;type=3#coin&quot;); width: 58px; height: 58px;" />
+            <ui:Label tabindex="-1" text="123" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MoneyText" class="text" style="color: rgb(255, 255, 255); background-image: url(&quot;project://database/Assets/Sprites/new/%D0%9C%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD/Rectangle%2072%20(2).png?fileID=21300000&amp;guid=69445ae6de881f74fa62ef980f99b6a0&amp;type=3#Rectangle 72 (2)&quot;); width: 208px; height: 58px; font-size: 20px; -unity-text-align: middle-center; position: relative; top: auto; left: auto; align-self: auto;" />
+        </ui:VisualElement>
+        <ui:GroupBox name="BuyOrActivate" style="position: relative; top: auto; left: auto; flex-direction: row; display: flex;">
+            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
+            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
+            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
+            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
+        </ui:GroupBox>
+        <ui:GroupBox name="BuyOrActivate1" style="position: relative; top: auto; left: auto; flex-direction: row; bottom: auto;">
+            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
+            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
+            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
+            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
+        </ui:GroupBox>
+        <ui:Label tabindex="-1" text="Маловато монеток" parse-escape-sequences="true" display-tooltip-when-elided="true" name="notenoughmoneyText" class="text notenoughmoneyText" />
+    </ui:VisualElement>
+    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Close" class="closebtn" style="overflow: visible; position: absolute; top: 84px; left: 1640px;" />
+</ui:UXML>

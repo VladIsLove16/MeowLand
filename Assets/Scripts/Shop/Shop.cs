@@ -24,25 +24,27 @@ public class Shop : MonoBehaviour
         Debug.Log("SaveChanges called");
         ShopData.Set(item, new ShopDataItem() { IsBought = a, IsUnlocked = b });
     }
-    public void TryBuy(CatInfoSO item)
+    public bool TryBuy(CatInfoSO item)
     {
         if(item.IsUnlocked==false)
         {
-            AlreadyBought(item);
-            return;
+            NotUnlocked(item);
+            return false;
         }
         if (item.IsBought == true   )
         {
             AlreadyBought(item);
-            return;
+            return false;
         }
         if (wallet.SpendMoney(item.Cost))
         {
             Buy(item);
+            return true;
         }
         else
         {
             CantBuy(item);
+            return false;
         }
     }
     public void SellAll()
@@ -61,7 +63,10 @@ public class Shop : MonoBehaviour
     {
         Debug.Log("AlreadyBought");
     }
-    
+    private void NotUnlocked(CatInfoSO item)
+    {
+        Debug.Log("NotUnlocked");
+    }
     private void Buy(CatInfoSO item)
     {
         Debug.Log("Bought");
@@ -83,4 +88,7 @@ public class Shop : MonoBehaviour
     {
         Loader.Load(Loader.Scene.MainMenu);
     }
+}
+public class ShopDataLoader : MonoBehaviour 
+{
 }

@@ -6,12 +6,12 @@
             <ui:VisualElement name="B" style="flex-grow: 1; height: 405px; width: 473px; position: absolute; top: 73px; left: 136px;">
                 <ui:Button text="Играть" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Play" class="mainmenubtn text" style="color: rgb(255, 255, 255);" />
                 <ui:Button text="Настройки" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Settings" class="mainmenubtn text" style="color: rgb(255, 255, 255);" />
-                <ui:Button text="Магазин" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Shop" class="mainmenubtn text" style="color: rgb(255, 255, 255); display: none; visibility: hidden;" />
+                <ui:Button text="Магазин" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Shop" class="mainmenubtn text" style="color: rgb(255, 255, 255); display: flex; visibility: visible; overflow: visible;" />
                 <ui:Button text="Выход" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Exit" class="mainmenubtn text" style="color: rgb(255, 255, 255);" />
                 <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="MyVK" class="mainmenubtn text" style="color: rgb(255, 255, 255); position: absolute; top: 126%; left: -4%; width: 160px; height: 160px; background-image: url(&quot;project://database/Assets/Sprites/old/free-icon-vk-145813.png?fileID=21300000&amp;guid=560b8de9a3882f14ba965491d4d9975f&amp;type=3#free-icon-vk-145813&quot;);" />
                 <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="MyTG" class="mainmenubtn text" style="color: rgb(255, 255, 255); position: absolute; top: 126%; left: 39%; width: 160px; height: 160px; background-image: url(&quot;project://database/Assets/Sprites/old/Telegram_2019_Logo.svg.png?fileID=21300000&amp;guid=cd3705e35bed74849beaf52ee75df8db&amp;type=3#Telegram_2019_Logo.svg&quot;);" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Instance template="SettingsMenu" name="SettingsMenu" style="height: auto; width: auto; top: -33%; flex-grow: 1; display: flex; min-width: 445px;" />
+        <ui:Instance template="SettingsMenu" name="SettingsMenu" style="height: auto; width: auto; top: -33%; flex-grow: 1; display: none; min-width: 445px;" />
     </ui:VisualElement>
 </ui:UXML>

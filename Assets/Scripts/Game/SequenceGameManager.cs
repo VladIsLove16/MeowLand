@@ -125,7 +125,8 @@ public class SequenceGameManager : MonoBehaviour
 
     private void OnRoundWon(int round)
     {
-        wallet.AddMoney(new Money() { SoftMoney = round - 1 });
+        if(HealthSystem.Health>0)
+            wallet.AddMoney(new Money() { SoftMoney = round});
         if (RoundToAddNewAvailableCat == 0)
             return;
 

@@ -14,8 +14,6 @@ public class Cat : MonoBehaviour
 {
     [HideInInspector]
     public CatAnimator CatAnimator;
-    [HideInInspector]
-
     public CatInfoSO shopItem;
     [HideInInspector]
     private AudioSource AudioSource;
@@ -23,6 +21,8 @@ public class Cat : MonoBehaviour
 
     public UnityEvent Clicked;
     private Button button;
+    [SerializeField]
+    private bool InitSelf=false ;
     public void Init(CatInfoSO shopItemSO)
     {
         shopItem = shopItemSO;
@@ -34,7 +34,8 @@ public class Cat : MonoBehaviour
         CatAnimator = GetComponent<CatAnimator>();
         button = GetComponent<Button>();
         SetAnimationMode(true);
-
+        if(InitSelf)
+            Init(shopItem);
     }
     public void SetAnimationMode(bool b)
     {
@@ -59,5 +60,17 @@ public class Cat : MonoBehaviour
         if(shopItem.AngrySound!=null)
             AudioSource.PlayOneShot(shopItem.AngrySound);
         CatAnimator.StartAnimation(CatAnimator.AnimationType.Angry);
+    }
+    public void RandomEmodji()
+    {
+
+        if (UnityEngine.Random.Range(0, 2) == 0)
+        {
+            Meow();
+        }
+        else
+        {
+            Angry();
+        }
     }
 }

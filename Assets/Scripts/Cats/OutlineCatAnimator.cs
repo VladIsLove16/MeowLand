@@ -4,20 +4,41 @@ using UnityEngine.UI;
 public class OutlineCatAnimator : CatAnimator
 {
     private Sprite IdleSprite;
+    private Sprite FlashingSprite;
     private Sprite MeowSprite;
     private Sprite AngrySprite;
     private float AnimationLength=1f;
+    private bool playingAnim;
+    private float timeBetweenFlashing;
     public override void Init(CatInfoSO infoSO)
     {
+        Awake();
         IdleSprite = infoSO.IdleSprite;
         MeowSprite = infoSO.MeowSprite;
         AngrySprite = infoSO.AngrySprite;
+        FlashingSprite = infoSO.FlashingSprite;
         Image.sprite = IdleSprite;
+    }
+    private void Update()
+    {
+        if (!playingAnim)
+        {
+            timeBetweenFlashing -= Time.deltaTime;
+            if (timeBetweenFlashing < 0)
+            {
+                CancelInvoke("OnAnimationEnd");
+                timeBetweenFlashing = 2f;
+                playingAnim = true;
+                Image.sprite = FlashingSprite;
+                Invoke("OnAnimationEnd", AnimationLength);
+            }
+        }
     }
     public override void StartAnimation(AnimationType type)
     {
         if (!DoAnimation) return;
         CancelInvoke("OnAnimationEnd");
+        playingAnim = true;
         switch (type)
         {
             case AnimationType.Meow:
@@ -32,6 +53,7 @@ public class OutlineCatAnimator : CatAnimator
     protected override void OnAnimationEnd()
     {
         Image.sprite = IdleSprite;
+        playingAnim = false;
     }
 }
 //public class AnimatorCatAnimator : CatAnimator

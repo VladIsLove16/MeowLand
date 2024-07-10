@@ -7,7 +7,8 @@ using UnityEngine.Events;
 public class Wallet : ScriptableObject
 {
     public Money Money;
-    public UnityEvent<Money> moneyChanged=new();
+    public UnityEvent<Money> moneyChangedBy=new();
+    public UnityEvent moneyChanged=new();
     private void Awake()
     {
         Debug.Log("Loading");
@@ -18,7 +19,8 @@ public class Wallet : ScriptableObject
     {
         Money.SoftMoney += money.SoftMoney;
         Money.HardMoney += money.HardMoney;
-        moneyChanged.Invoke(Money);
+        moneyChangedBy.Invoke(money);
+        moneyChanged.Invoke();
         SaveSystem.Save(Money);
     }
     public bool SpendMoney(Money money)
@@ -26,7 +28,8 @@ public class Wallet : ScriptableObject
         if(!IsEnoughMoney(money))return false;  
         Money.SoftMoney -= money.SoftMoney;
         Money.HardMoney -= money.HardMoney;
-        moneyChanged.Invoke(Money);
+        moneyChangedBy.Invoke(new Money(-money.SoftMoney,-money.HardMoney));
+        moneyChanged.Invoke();
         SaveSystem.Save(Money);
         return true;
     }

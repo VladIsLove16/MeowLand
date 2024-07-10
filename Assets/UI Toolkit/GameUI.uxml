@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="SettingsMenu" src="project://database/Assets/UI%20Toolkit/BtnTemplates/SettingsMenu.uxml?fileID=9197481963319205126&amp;guid=1c1b0acd64bb7fb45b6779e7150eedcf&amp;type=3#SettingsMenu" />
+    <ui:Template name="Heart" src="project://database/Assets/UI%20Toolkit/BtnTemplates/Heart.uxml?fileID=9197481963319205126&amp;guid=c9bb40dc8b121924daab869009275fc6&amp;type=3#Heart" />
     <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/GameUI.uss?fileID=7433441132597879392&amp;guid=a8b0ce9494b90714ebf192221bed8b1f&amp;type=3#GameUI" />
     <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/MainMenu.uss?fileID=7433441132597879392&amp;guid=6a4281d9f0439ce40bb8753c14e408c4&amp;type=3#MainMenu" />
     <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/ProgressBars.uss?fileID=7433441132597879392&amp;guid=a75a3200e2f4a3f41983b4a3bf27962d&amp;type=3#ProgressBars" />
@@ -8,6 +9,7 @@
             <ui:VisualElement name="Money" style="flex-grow: 0; align-items: center; top: auto; left: auto; width: auto; height: auto; flex-direction: row;">
                 <ui:VisualElement name="MoneySign" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/new/coin.png?fileID=2800000&amp;guid=5afefde5e9e06064b81358d07f49d666&amp;type=3#coin&quot;); height: 58px; width: 58px;" />
                 <ui:Label tabindex="-1" text="123" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MoneyText" class="text text-color-white" style="background-image: url(&quot;project://database/Assets/Sprites/new/%D0%A3%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C/Rectangle%2072%20(1).png?fileID=21300000&amp;guid=4d61f0aa8fbf7b34f8c1e5c9f49d8567&amp;type=3#Rectangle 72 (1)&quot;); width: 196px; height: 38px; -unity-text-align: middle-center; -unity-background-image-tint-color: rgba(255, 255, 255, 0.24);" />
+                <ui:Label text="+123" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MoneyAddedText" enable-rich-text="true" class="text moneytext" style="left: 171px; bottom: 16px;" />
             </ui:VisualElement>
             <ui:VisualElement name="Fishes" style="flex-grow: 0; align-items: center; height: 64px; flex-direction: row; align-self: flex-end;">
                 <ui:VisualElement name="FishSign" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/new/%D0%92%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B6%D0%B8%D0%B7%D0%BD%D0%B5%D0%B9/Fish.png?fileID=21300000&amp;guid=8104336dff8ffa642a20a3eae3933f2b&amp;type=3#Fish&quot;); height: 62px; width: 62px;" />
@@ -43,20 +45,20 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Hearts" style="align-self: flex-start; align-items: center; height: 107px; width: 960px; justify-content: flex-start; flex-direction: row; -unity-text-align: upper-left; left: 4%; bottom: auto; position: absolute; top: 86%;">
-            <ui:VisualElement name="Heart" style="align-self: flex-start; height: 80px; width: 80px; background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=21300000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;);" />
-            <ui:VisualElement name="Heart" style="background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=21300000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;); height: 80px; width: 80px; align-items: stretch; align-self: flex-start;" />
-            <ui:VisualElement name="Heart" style="background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=21300000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;); height: 80px; width: 80px; align-items: center; align-self: flex-start; justify-content: flex-end; flex-shrink: 1;" />
-            <ui:VisualElement name="Heart" style="align-self: flex-start; height: 80px; width: 80px; background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=21300000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;);" />
-            <ui:VisualElement name="Heart" style="align-self: flex-start; height: 80px; width: 80px; background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=21300000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;);" />
-            <ui:VisualElement name="Heart" style="align-self: flex-start; height: 80px; width: 80px; background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=21300000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;);" />
-            <ui:VisualElement name="Heart" style="align-self: flex-start; height: 80px; width: 80px; background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=21300000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;);" />
-            <ui:VisualElement name="Heart" style="align-self: flex-start; height: 80px; width: 80px; background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=21300000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;);" />
-            <ui:VisualElement name="Heart" style="align-self: flex-start; height: 80px; width: 80px; background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=21300000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;);" />
+            <ui:Instance template="Heart" name="Heart" />
+            <ui:Instance template="Heart" name="Heart" />
+            <ui:Instance template="Heart" name="Heart" />
+            <ui:Instance template="Heart" name="Heart" />
+            <ui:Instance template="Heart" name="Heart" />
+            <ui:Instance template="Heart" name="Heart" />
+            <ui:Instance template="Heart" name="Heart" />
+            <ui:Instance template="Heart" name="Heart" />
+            <ui:Instance template="Heart" name="Heart" />
         </ui:VisualElement>
         <ui:VisualElement name="PlayButtons" style="flex-grow: 1; position: relative; top: 41%; left: 30%;">
             <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Play" class="play" style="width: 160px; height: 160px; background-color: rgba(188, 188, 188, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-bottom: 40px;" />
             <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Repeat" class="repeat" />
         </ui:VisualElement>
-        <ui:Instance template="SettingsMenu" name="SettingsMenu" style="height: 477px; width: 445px; position: absolute; top: 316px; left: 723px; align-self: center; justify-content: center; flex-grow: 1; display: none;" />
+        <ui:Instance template="SettingsMenu" name="SettingsMenu" style="height: 477px; width: 445px; position: absolute; top: 316px; left: 723px; align-self: center; justify-content: center; flex-grow: 1; display: flex;" />
     </ui:VisualElement>
 </ui:UXML>

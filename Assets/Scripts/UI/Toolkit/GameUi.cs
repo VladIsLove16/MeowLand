@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -18,15 +19,12 @@ public class GameUi : MonoBehaviour
 
     private VisualElement UpperPanel;
     public Label SoftMoney;
+    public Label SoftMoneyAdded;
     public Label HardMoney;
     public Label TimeToHealLeft;
     public Label Lifes;
     [SerializeField]
     public List<VisualElement> HeartsList;
-    [SerializeField]
-    public Sprite AliveHeart;
-    [SerializeField]
-    public Sprite DeadHeart;
     public Button Pause;
     public Button GoToMenu;
     
@@ -59,6 +57,9 @@ public class GameUi : MonoBehaviour
 
         UpperPanel = root.Q("UpperPanel");
         SoftMoney = UpperPanel.Q("Money").Q("MoneyText") as Label;
+        SoftMoneyAdded = UpperPanel.Q("Money").Q("MoneyAddedText") as Label;
+        SoftMoneyAdded.SetEnabled(false);
+        Wallet.moneyChangedBy.AddListener((Money money)=> SoftMoneyChangedAnimation(money));
         HardMoney = UpperPanel.Q("Fishes").Q("FishText") as Label; 
         TimeToHealLeft = UpperPanel.Q("HeartsRecovery").Q("TimeText") as Label;
         Lifes = UpperPanel.Q("HeartsRecovery").Q("HealthText") as Label;
@@ -123,17 +124,32 @@ public class GameUi : MonoBehaviour
         };
     }
 
+    private async Task SoftMoneyChangedAnimation(Money money)
+    {
+        if (money.SoftMoney > 0)
+        {
+            SoftMoneyAdded.text = "+";
+        }
+        else
+            SoftMoneyAdded.text = "";
+        SoftMoneyAdded.text += money.SoftMoney.ToString();
+        SoftMoneyAdded.SetEnabled(true);
+        await Task.Delay(1500);
+        SoftMoneyAdded.SetEnabled(false);
+        SoftMoney.text = Wallet.Money.SoftMoney.ToString();
+    }
+
     private void OnHealthHeal(int arg0)
     {
         if (arg0 > 0)
-        HeartsList[arg0-1].style.backgroundImage = new StyleBackground(AliveHeart);
+        HeartsList[arg0-1].SetEnabled(true);
         Lifes.text = arg0.ToString() + "/9";
     }
 
     private void OnHealthLost(int arg0)
     {
         if(arg0 < HeartsList.Count)
-        HeartsList[arg0].style.backgroundImage = new StyleBackground(DeadHeart);
+        HeartsList[arg0].SetEnabled(false);
         Lifes.text = arg0.ToString() + "/9";
     }
 
@@ -147,7 +163,6 @@ public class GameUi : MonoBehaviour
     }
     private void Update()
     {
-        SoftMoney.text = Wallet.Money.SoftMoney.ToString();
         HardMoney.text = Wallet.Money.HardMoney.ToString();
         TimeToHealLeft.text = HealthSystem.TimeLeftString;
         if(SoundSequenceGame.instance.CatSequence.Count!=0)

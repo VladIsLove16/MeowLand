@@ -6,14 +6,13 @@ using UnityEngine.UI;
 public abstract class CatAnimator : MonoBehaviour
 {
     protected Image Image;
-
     public enum AnimationType
     {
         Meow,
         Angry
     }
     public bool DoAnimation;
-    private void Awake()
+    protected void Awake()
     {
         Image = GetComponent<Image>();
     }

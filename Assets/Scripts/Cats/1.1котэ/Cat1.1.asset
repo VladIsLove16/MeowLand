@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: Cat1.1
   m_EditorClassIdentifier: 
   MeowSound: {fileID: 8300000, guid: bffa6d2c14701ad4489e16575bab6939, type: 3}
-  AngrySound: {fileID: 0}
+  AngrySound: {fileID: 8300000, guid: 19729c428f3169f4aa4ce92768521027, type: 3}
   IdleClip: {fileID: 0}
   AngryClip: {fileID: 0}
   MeowClip: {fileID: 0}
   IdleSprite: {fileID: 21300000, guid: 0ca1b3fdbd7fffe4ba3b4721b334de1b, type: 3}
   MeowSprite: {fileID: 21300000, guid: d8d5ffdb387367f4ca1cde0f14391c24, type: 3}
   AngrySprite: {fileID: 21300000, guid: f593718083850d84d9eeca8e0bfcddcb, type: 3}
+  FlashingSprite: {fileID: 21300000, guid: d7d4757004f051c4885cc0343906a453, type: 3}
   Cost:
-    SoftMoney: 3
+    SoftMoney: 2
     HardMoney: 0
   isUnlocked: 1
   isBought: 1
