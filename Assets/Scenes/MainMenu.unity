@@ -315,6 +315,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: f24d4b1c610c2a246854e58b26afb15f, type: 2}
   settingsUI: {fileID: 249173960}
+  AudioSource: {fileID: 249173961}
+  clickSound: {fileID: 8300000, guid: 3cbf21f89e308914dada1e75a2185ae1, type: 3}
 --- !u!114 &249173960
 MonoBehaviour:
   m_ObjectHideFlags: 0
