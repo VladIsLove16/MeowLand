@@ -86,8 +86,6 @@ namespace Assets.Scripts.UI.Toolkit
 
         private async Task CantBuy()
         {
-            if (notenoughmoneyText.enabledSelf) 
-                return;
             notenoughmoneyText.SetEnabled(true);
             await Task.Delay(1500);
             notenoughmoneyText.SetEnabled(false);

@@ -26,10 +26,7 @@ public class MainMenuUI : MonoBehaviour
     private AudioMixer audioMixer;
     [SerializeField]
     private SettingsUI settingsUI;
-    [SerializeField]
-    AudioSource AudioSource;
-    [SerializeField]
-    AudioClip clickSound;
+
     private void Start()
     {
         document = GetComponent<UIDocument>();
@@ -71,22 +68,6 @@ public class MainMenuUI : MonoBehaviour
         {
             ManageSettingsMenu();
         };
-        SetupButtonHandler();
-    }
-    private void SetupButtonHandler()
-    {
-        VisualElement root = this.root;
-
-        var buttons = root.Query<Button>();
-        buttons.ForEach(RegisterHandler);
-    }
-    private void RegisterHandler(Button button)
-    {
-        button.RegisterCallback<ClickEvent>(ClickMessage);
-    }
-    private void ClickMessage(ClickEvent evt)
-    {
-        AudioSource.PlayOneShot(clickSound);
     }
     private void ManageSettingsMenu()
     {
