@@ -14,59 +14,46 @@ public class CatInfoSO : ScriptableObject
     public Sprite AngrySprite;
     public Sprite FlashingSprite;
     public Money Cost;
-    [SerializeField]
-    private bool isUnlocked;
-    // Свойство позволяет только чтение из кода
-    public bool IsUnlocked
-    {
-        get { return isUnlocked; }
-    }
-    [SerializeField]
-    private bool isBought;
-
-    // Свойство позволяет только чтение из кода
-    public bool IsBought
-    {
-        get { return isBought; }
-    }
+    public bool IsUnlocked;
+    public bool IsBought;
     public bool CanBeSold;
     //public string NotUnlockedMessage;
     //public string NotEnoughtMoneyMessage;
     public UnityEvent stateChanged;
     public void Awake()
     {
-        Debug.Log("So awake");
-        if(ShopData.Get(this,out ShopDataItem item))
-        {
-            isBought = item.IsBought;
-            isUnlocked = item.IsUnlocked;
-        };
-        stateChanged.AddListener(() =>
-        {
-            ShopData.Set(this, new ShopDataItem() { IsBought = isBought, IsUnlocked = isUnlocked });
-        });
+        //Debug.Log("So awake");
+        //if(ShopData.Get(this,out ShopDataItem item))
+        //{
+        //    isBought = item.IsBought;
+        //    isUnlocked = item.IsUnlocked;
+        //};
+        //stateChanged.AddListener(() =>
+        //{
+        //    ShopData.Set(this, new ShopDataItem() { IsBought = isBought, IsUnlocked = isUnlocked });
+        //});
     }
     public virtual void Unlock()
     {
-        isUnlocked = true;
+        IsUnlocked = true;
         stateChanged.Invoke();
     }
     public virtual void Buy()
     {
-        isBought = true;
+        IsBought = true;
         stateChanged.Invoke();
     }
     public virtual void Sell()
     {
         if (CanBeSold)
         {
-            isBought = false;
+            IsBought = false;
             stateChanged.Invoke();
         }
     }
     public virtual void Lock()
     {
-        isUnlocked = false;
+        IsUnlocked = false;
         stateChanged.Invoke();
     }
 }

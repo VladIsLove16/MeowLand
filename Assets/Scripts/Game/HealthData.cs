@@ -8,6 +8,11 @@ public class HealthData
         LastTimeRestored = date;
         Health  = health;
     }
+    public HealthData()
+    {
+        LastTimeRestored = DateTime.Now;
+        Health = HealthSystem.MaxHealth;
+    }
     public System.DateTime LastTimeRestored ;
     public int Health;
 }

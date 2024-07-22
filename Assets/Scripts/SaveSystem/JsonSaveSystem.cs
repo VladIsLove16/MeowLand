@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-public static class SaveSystem
+public static class JsonSaveSystem
 {
     public static void Save<T>(T data) where T : class
     {

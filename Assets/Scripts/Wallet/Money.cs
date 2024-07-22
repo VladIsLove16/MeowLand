@@ -4,7 +4,8 @@ public class Money
 {
     public Money()
     {
-
+        SoftMoney = 0;
+        HardMoney = 0;
     }
     public Money(int Soft,int Hard =0)
     {

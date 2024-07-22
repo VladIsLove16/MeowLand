@@ -6,17 +6,13 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "Wallet",menuName = "new Wallet")]
 public class Wallet : ScriptableObject
 {
-    public Money Money;
+    public Money Money=new();
     public UnityEvent<Money> moneyChangedBy=new();
     public UnityEvent moneyChanged=new();
-    private void Awake()
+    public void Load(Money money)
     {
-        Debug.Log("Loading");
-        Money money = SaveSystem.Load<Money>();
-        if (money != null)
-            Money = money;
-        else
-            Money = new Money(10, 0); 
+        Money.SoftMoney = money.SoftMoney;
+        Money.HardMoney = money.HardMoney;
     }
     public void AddMoney(Money money)
     {
@@ -24,7 +20,6 @@ public class Wallet : ScriptableObject
         Money.HardMoney += money.HardMoney;
         moneyChangedBy.Invoke(money);
         moneyChanged.Invoke();
-        SaveSystem.Save(Money);
     }
     public bool SpendMoney(Money money)
     {
@@ -33,7 +28,6 @@ public class Wallet : ScriptableObject
         Money.HardMoney -= money.HardMoney;
         moneyChangedBy.Invoke(new Money(-money.SoftMoney,-money.HardMoney));
         moneyChanged.Invoke();
-        SaveSystem.Save(Money);
         return true;
     }
     private bool IsEnoughMoney(Money money)

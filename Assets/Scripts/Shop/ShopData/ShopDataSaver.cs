@@ -3,18 +3,31 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-[Serializable]
-public class ShopData
+public class ShopDataSaver : MonoBehaviour
 {
-    private Dictionary<string, ShopDataItem> Data = new();
-    public void Set(CatInfoSO infoSO, ShopDataItem item)
+    [SerializeField]
+    List<CatInfoSO> Cats;
+    public void Load(ShopData data)
     {
-        Data[infoSO.name] = item;
+        foreach (CatInfoSO cat in Cats)
+        { 
+            data.Get(cat, out ShopDataItem item);
+            if (item != null)
+            {
+                cat.IsBought = item.IsBought;
+                cat.IsUnlocked = item.IsUnlocked;
+            }
+        }
     }
-    public bool Get(CatInfoSO infoSO, out ShopDataItem item)
+    public ShopData Get()
     {
-        return Data.TryGetValue(infoSO.name, out item);
-    }  
+        ShopData data = new ShopData();
+        foreach (CatInfoSO cat in Cats)
+        {
+            data.Set(cat, new ShopDataItem(cat));
+        }
+        return data;
+    }
     //public static void LoadIfNull()
     //{
     //    if (Data.Count == 0)

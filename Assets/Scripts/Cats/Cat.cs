@@ -21,8 +21,6 @@ public class Cat : MonoBehaviour
 
     public UnityEvent Clicked;
     private Button button;
-    [SerializeField]
-    private bool InitSelf=false ;
     public void Init(CatInfoSO shopItemSO)
     {
         shopItem = shopItemSO;
@@ -34,7 +32,7 @@ public class Cat : MonoBehaviour
         CatAnimator = GetComponent<CatAnimator>();
         button = GetComponent<Button>();
         SetAnimationMode(true);
-        if(InitSelf)
+        if(shopItem!=null)
             Init(shopItem);
     }
     public void SetAnimationMode(bool b)

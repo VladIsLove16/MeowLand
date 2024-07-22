@@ -16,13 +16,7 @@ public class Shop : MonoBehaviour
         {
             CatInfoSO item = DisplayshopItem.cat.shopItem;
             DisplayshopItem.OnClick.AddListener(() => TryBuy(item));
-            item.stateChanged.AddListener(() => SaveChanges(item, item.IsBought, item.IsUnlocked));
         }
-    }
-    private void SaveChanges(CatInfoSO item,bool a ,bool b)
-    {
-        Debug.Log("SaveChanges called");
-        ShopData.Set(item, new ShopDataItem() { IsBought = a, IsUnlocked = b });
     }
     public bool TryBuy(CatInfoSO item)
     {
@@ -88,7 +82,4 @@ public class Shop : MonoBehaviour
     {
         Loader.Load(Loader.Scene.MainMenu);
     }
-}
-public class ShopDataLoader : MonoBehaviour 
-{
 }

@@ -36,13 +36,11 @@ public static class HealthSystem
             LastTimeRestored = DateTime.Now;
         }
         healthLost.Invoke(Health);
-        SaveData();
     }
     public static void Heal(int amount = 1)
     {
         Health+= amount;
         Health = Math.Clamp(Health, 0, MaxHealth);
-        SaveData();
         healthHealed.Invoke(Health);
     }
     private static void HealByTime()
@@ -57,19 +55,21 @@ public static class HealthSystem
     }
     private static void UpdateTimePassed()
     {
-        if (!loaded) { loaded = true;try {
-                HealthData a = SaveSystem.Load<HealthData>();
-                LastTimeRestored = a.LastTimeRestored;
-                Health = a.Health;
-
-            } catch { } }
         TimePassed = DateTime.Now - LastTimeRestored;
         if (TimePassed > TimeToHeal)
             HealByTime();
     }
-    private static bool loaded = false;
-    public static void SaveData()
+
+    public static void Load(HealthData data)
     {
-        SaveSystem.Save<HealthData>(new HealthData(LastTimeRestored,Health)); ;
+        LastTimeRestored = data.LastTimeRestored;
+        Health = data.Health;
     }
+
+    internal static HealthData GetHealthData()
+    {
+        return new HealthData(LastTimeRestored, Health);
+    }
+
+    private static bool loaded = false;
 }
