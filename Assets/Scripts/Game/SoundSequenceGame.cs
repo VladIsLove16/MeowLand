@@ -148,7 +148,6 @@ public class SoundSequenceGame : MonoBehaviour
     {
         cat.Angry();
         audioSource.PlayOneShot(loseSound);
-        SetCatsClickable(false);
         SetRoundState(RoundState.lost);
         RoundLost.Invoke(CurrentNum);
     }

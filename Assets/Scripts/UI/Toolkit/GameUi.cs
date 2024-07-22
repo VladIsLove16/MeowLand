@@ -112,6 +112,8 @@ public class GameUi : MonoBehaviour
         //Outline = root.Q("Outline") as Toggle;
         //Outline.RegisterCallback<ClickEvent>(evt => OutlineChange(Outline.value));
         SoundSequenceGame.instance.roundStateChanged.AddListener(OnController_RoundStateChanged);
+        SoundSequenceGame.instance.roundStateChanged.Invoke(SoundSequenceGame.instance.roundState);
+
         ScoreManager.instance.ScoreChanged.AddListener(OnScoreChanged);
         //ScoreManager.instance.NewHighScoreReached.AddListener(OnHighScoreReached);
 

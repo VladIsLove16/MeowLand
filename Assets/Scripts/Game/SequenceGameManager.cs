@@ -65,16 +65,18 @@ public class SequenceGameManager : MonoBehaviour
         EnabledCats.Add(cat);
         DisabledCats.Remove(cat);
         cat.gameObject.SetActive(true);
-        cat.Init(AddNewCatInfoInPlay());
+        CatInfoSO catInfoSO = AddNewCatInfoInPlay();
+        if(catInfoSO != null)
+            cat.Init(catInfoSO);
     }
 
     private CatInfoSO AddNewCatInfoInPlay()
     {
         if (WaitingTheirTimeCatsInfo.Count == 0)
             WaitingTheirTimeCatsInfo = GetBoughtCats();
-
         CatInfoSO randomCat = GetRandom(WaitingTheirTimeCatsInfo);
-        if (randomCat == null) return null;
+        if (randomCat == default || randomCat == null)
+            return null;
 
         CatsInfoInPlay.Add(randomCat);
         WaitingTheirTimeCatsInfo.Remove(randomCat);
