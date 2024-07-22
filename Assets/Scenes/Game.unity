@@ -3121,7 +3121,7 @@ MonoBehaviour:
   AvailableCats: []
   CatSequence: []
   loseSound: {fileID: 0}
-  winSound: {fileID: 8300000, guid: 24169679139fa8743a6f2a660eea2fdc, type: 3}
+  winSound: {fileID: 8300000, guid: 6e4d24e04308f9e4dbc0bc12ccd59ccf, type: 3}
   PlayFullWinSound: 0
   catsClickable: 0
   roundStateChanged:

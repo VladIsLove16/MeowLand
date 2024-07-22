@@ -113,7 +113,7 @@ public class SequenceGameManager : MonoBehaviour
 
     private void OnRoundLost(int round)
     {
-        wallet.SpendMoney(new Money() { SoftMoney = 1 });
+        //wallet.SpendMoney(new Money() { SoftMoney = 1 });
         HealthSystem.LoseHealth(1);
         if (HealthSystem.Health == 0)
         {

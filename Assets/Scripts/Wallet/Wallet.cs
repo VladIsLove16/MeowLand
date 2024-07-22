@@ -12,8 +12,11 @@ public class Wallet : ScriptableObject
     private void Awake()
     {
         Debug.Log("Loading");
-        Money wallet = SaveSystem.Load<Money>();
-        Money = wallet;
+        Money money = SaveSystem.Load<Money>();
+        if (money != null)
+            Money = money;
+        else
+            Money = new Money(10, 0); 
     }
     public void AddMoney(Money money)
     {

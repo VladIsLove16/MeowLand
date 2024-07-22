@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf519bfed4256a4aaf390437dc83ee1, type: 3}
   m_Name: Cat2
   m_EditorClassIdentifier: 
-  MeowSound: {fileID: 8300000, guid: fbe349a955e816844b9872240088bc05, type: 3}
+  MeowSound: {fileID: 8300000, guid: 6517ac884bf307043bbe9520418e2012, type: 3}
   AngrySound: {fileID: 8300000, guid: a4a893500f7e2854b8e6b1f904c49626, type: 3}
   IdleClip: {fileID: 0}
   AngryClip: {fileID: 0}
