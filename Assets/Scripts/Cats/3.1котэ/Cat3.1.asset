@@ -24,8 +24,8 @@ MonoBehaviour:
   Cost:
     SoftMoney: 20
     HardMoney: 0
-  isUnlocked: 1
-  isBought: 1
+  IsUnlocked: 1
+  IsBought: 0
   CanBeSold: 0
   stateChanged:
     m_PersistentCalls:

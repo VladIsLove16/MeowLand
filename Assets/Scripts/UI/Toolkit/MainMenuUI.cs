@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UIElements;
+using YG;
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -68,6 +69,7 @@ public class MainMenuUI : MonoBehaviour
         {
             ManageSettingsMenu();
         };
+        YandexGame.GameReadyAPI();
     }
     private void ManageSettingsMenu()
     {

@@ -42,12 +42,16 @@ namespace Assets.Scripts.UI.Toolkit
             SetupCatShopItems(CatRow2.Children(),ref i);
 
             //HardMoney.text=wallet.Money.HardMoney.ToString();
-            SoftMoney.text=wallet.Money.SoftMoney.ToString();
             wallet.moneyChanged.AddListener(OnMoneyChange);
 
             notenoughmoneyText = root.Q("notenoughmoneyText") as Label;
             notenoughmoneyText.SetEnabled(false);
 
+        }
+        private void Start()
+        {
+            SoftMoney.text = wallet.Money.SoftMoney.ToString();
+            notenoughmoneyText.SetEnabled(false);
         }
         private void SetupCatShopItems(IEnumerable<VisualElement> children, ref int j)
         {

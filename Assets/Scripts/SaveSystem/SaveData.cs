@@ -2,13 +2,18 @@ using UnityEngine;
 using System.Collections;
 using YG;
 using System.Collections.Generic;
-
-namespace CapybaraAdventure.Save
+using System;
+[Serializable]
+public class SaveData : MonoBehaviour
 {
-    public class SaveData : MonoBehaviour
+    public Money Money;
+    public HealthData HealthData;
+    public ShopData ShopData;
+    public SaveData() { }
+    public SaveData(Money money, ShopData shopData, HealthData healthData)
     {
-        public Money Money;
-        public HealthData HealthData;
-        public ShopData ShopData;
-    }
+        Money = money;
+        HealthData = healthData;
+        ShopData = shopData;
+    }   
 }

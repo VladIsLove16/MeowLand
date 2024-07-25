@@ -81,8 +81,6 @@ public class GameUi : MonoBehaviour
         RepeatSoundsbtn = root.Q("PlayButtons"). Q("Repeat") as Button;
         NewGamebtn = root.Q("PlayButtons").Q("Play") as Button;
 
-        SoftMoney.text = Wallet.Money.SoftMoney.ToString();
-        HardMoney.text = Wallet.Money.HardMoney.ToString();
         TimeToHealLeft.text = HealthSystem.TimeLeftString;
         Lifes.text = HealthSystem.Health.ToString()+"/9";
         for (int i = 0;i<9;i++)
@@ -125,7 +123,11 @@ public class GameUi : MonoBehaviour
             ManageSettingsMenu();
         };
     }
-
+    private void Start()
+    {
+        SoftMoney.text = Wallet.Money.SoftMoney.ToString();
+        HardMoney.text = Wallet.Money.HardMoney.ToString();
+    }
     private async Task SoftMoneyChangedAnimation(Money money)
     {
         if (money.SoftMoney > 0)

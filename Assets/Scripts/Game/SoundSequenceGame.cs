@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using YG;
 using static Assets.Scripts.Outlinev2;
 
 public class SoundSequenceGame : MonoBehaviour
@@ -60,6 +61,7 @@ public class SoundSequenceGame : MonoBehaviour
         
         CreateSequence(StartedSequenceLength);
         StartRound();
+        YandexGame.GameReadyAPI();
     }
     public void StartRound()
     {

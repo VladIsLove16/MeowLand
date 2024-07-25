@@ -2,95 +2,88 @@ using UnityEngine;
 using System.Collections;
 using YG;
 using System.Collections.Generic;
-
-namespace CapybaraAdventure.Save
+public class SaveService : MonoBehaviour
 {
-    public class SaveService : MonoBehaviour
+    private const float AutoSaveInterval = 10f;
+
+    [SerializeField] private Wallet Wallet;
+    [SerializeField] private ShopDataSaver ShopDataSaver;
+
+    private YandexGamesSaveSystem _saveSystem;
+
+    #region MonoBehaviour
+
+    private void OnEnable()
     {
-        private const float AutoSaveInterval = 10f;
+        YandexGame.GetDataEvent += Load;
+    }
 
-        [SerializeField] private Wallet Wallet;
-        [SerializeField] private ShopDataSaver ShopDataSaver;
+    private void OnDisable()
+    {
+        YandexGame.GetDataEvent -= Load;
+    }
 
-        private YandexGamesSaveSystem _saveSystem;
+    private void Awake()
+    {
+        _saveSystem = new YandexGamesSaveSystem();
 
-        #region MonoBehaviour
-
-        private void OnEnable()
+        if (YandexGame.SDKEnabled == true)
         {
-            YandexGame.GetDataEvent += Load;
-        }
-
-        private void OnDisable()
-        {
-            YandexGame.GetDataEvent -= Load;
-        }
-
-        private void Awake()
-        {
-            _saveSystem = new YandexGamesSaveSystem();
-
-            if (YandexGame.SDKEnabled == true)
-            {
-                Load();
-                StartCoroutine(AutoSave());
-            }
-
-        }
-
-        private void OnApplicationQuit()
-        {
-            Save();
-        }
-
-        #endregion
-
-        public void ResetProcess()
-        {
-            Money emptyData = new ();
-            ShopData emptyData2 = new ();
-            HealthData data = new ();
-            SaveData saveData = new SaveData()
-            {
-                Money  = emptyData,
-                ShopData = emptyData2,
-                HealthData = data,
-            };
-            _saveSystem.Save(saveData);
             Load();
+            StartCoroutine(AutoSave());
         }
 
-        public void Save()
+    }
+
+    private void OnApplicationQuit()
+    {
+        Save();
+    }
+
+    #endregion
+
+    public void ResetProcess()
+    {
+        Money emptyMoney = new ();
+        ShopData emptyShopData = new ();
+        HealthData emptyHealthData = new ();
+        SaveData saveData = new SaveData()
         {
-            Money Money = Wallet.Money;
-            ShopData ShopData = ShopDataSaver.Get();
-            HealthData healthData = HealthSystem.GetHealthData();
-            SaveData saveData = new SaveData()
-            {
-                Money = Money,
-                ShopData = ShopData,
-                HealthData = healthData,
-            };
+            Money  = emptyMoney,
+            ShopData = emptyShopData,
+            HealthData = emptyHealthData,
+        };
+        _saveSystem.Save(saveData);
+        Load();
+    }
 
-            _saveSystem.Save(saveData);
-        }
+    public void Save()
+    {
+        Money money = Wallet.Money;
+        ShopData shopData = ShopDataSaver.Get();
+        HealthData healthData = HealthSystem.GetHealthData();
+        SaveData saveData = new SaveData(money, shopData, healthData);
 
-        private void Load()
+        _saveSystem.Save(saveData);
+    }
+
+    private void Load()
+    {
+        SaveData data = _saveSystem.Load();
+        if (data != null)
         {
-            SaveData data = _saveSystem.Load();
-
             Wallet.Load(data.Money);
             ShopDataSaver.Load(data.ShopData);
             HealthSystem.Load(data.HealthData);
         }
+    }
         
-        private IEnumerator AutoSave()
+    private IEnumerator AutoSave()
+    {
+        while (true)
         {
-            while (true)
-            {
-                Save();
-                yield return new WaitForSeconds(AutoSaveInterval);
-            }
+            Save();
+            yield return new WaitForSeconds(AutoSaveInterval);
         }
     }
 }

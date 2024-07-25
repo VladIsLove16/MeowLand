@@ -1,11 +1,6 @@
-using System.Collections.Generic;
-
-namespace CapybaraAdventure.Save
+public interface ISaveSystem
 {
-    public interface ISaveSystem
-    {
-        public void Save(SaveData saveData);
+    public void Save(SaveData saveData);
 
-        SaveData Load();
-    }
+    SaveData Load();
 }
