@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using YG;
-using TestAppOnWpf.FileSaveSystem;
-using System.Collections.Generic;
-using TestAppOnWpf.SaveLoaderSystem;
-using System;
 public class YandexGameSaver : MonoBehaviour
 {
     private const float AutoSaveInterval = 10f;
+    ISaveSystem saveSystem;
+    [SerializeField]
+    Wallet Wallet;
+    [SerializeField]
+    ShopDataSaver ShopDataSaver;
     #region MonoBehaviour
 
     private void OnEnable()
@@ -20,6 +21,7 @@ public class YandexGameSaver : MonoBehaviour
     }
     private void Awake()
     {
+        saveSystem = new YandexGamesSaveSystem();
         if (YandexGame.SDKEnabled == true)
         {
             Load();
@@ -34,19 +36,34 @@ public class YandexGameSaver : MonoBehaviour
 
     public void ResetProcess()
     {
-        SaveData saveData = new();
+        var emptyData = new SaveData();
+        saveSystem.Save(emptyData);
         Load();
     }
 
     public void Save()
     {
+        //приколы
+        SaveData data = new SaveData();
+
+        data.Money = Wallet.Money   ;
+        data.ShopData = ShopDataSaver.Get();
+        data.HealthData = HealthSystem.GetHealthData();
+        
+
+        saveSystem.Save(data);
     }
 
     private void Load()
     {
-        YandexGame.savesData.SaveData = new();
+        //custom save loader
+        SaveData data = saveSystem.Load();
+
+        MoneySaveLoader moneySaveLoader = new MoneySaveLoader();
+        moneySaveLoader.SetupData(data.Money, Wallet.Money);
+        HealthSystem.Load(data.HealthData);
+        ShopDataSaver.Load(data.ShopData);
     }
-        
     private IEnumerator AutoSave()
     {
         while (true)
