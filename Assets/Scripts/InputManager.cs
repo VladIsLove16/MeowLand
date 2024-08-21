@@ -14,12 +14,7 @@ public class InputManager : MonoBehaviour
     }
     void Update()
     {
-        if (Desktop)
-        {
-            
-        }
-        else
-        {
+        
             if (UIToolkit)
             {
                 if (Input.touchCount > 0)
@@ -40,6 +35,5 @@ public class InputManager : MonoBehaviour
                     }
                 }
             }
-        }
     }
 }
