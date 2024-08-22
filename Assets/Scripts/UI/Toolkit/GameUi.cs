@@ -29,7 +29,7 @@ public class GameUi : MonoBehaviour
     public Button GoToMenu;
     
     private VisualElement PreUpper;
-    public Label ScoreText;
+    public Label Progress;
     public ProgressBar LevelProgress;
 
 
@@ -67,8 +67,8 @@ public class GameUi : MonoBehaviour
         GoToMenu = UpperPanel.Q("Buttons").Q("Menu") as Button;
 
         PreUpper = root.Q("PreUpper");
-        ScoreText = PreUpper.Q("Progress").Q("LvlText") as Label;
-        LevelProgress = PreUpper.Q("Progress").Q("LvlProgress") as ProgressBar;
+        Progress = UpperPanel.Q("Progress").Q("LvlText") as Label;
+        LevelProgress = UpperPanel.Q("Progress").Q("LvlProgress") as ProgressBar;
 
         CatsContainer = root.Q("CatsContainer");
         Row1 = CatsContainer.Q("Row1");
@@ -90,7 +90,7 @@ public class GameUi : MonoBehaviour
             else 
                 OnHealthLost(i);
         }
-        ScoreText.text = "Уровень " + "1";
+        Progress.text = "Уровень " + "1";
         LevelProgress.value = 10;
 
         NewGamebtn.clicked += () =>
@@ -147,14 +147,14 @@ public class GameUi : MonoBehaviour
     {
         if (arg0 > 0)
         HeartsList[arg0-1].SetEnabled(true);
-        Lifes.text = arg0.ToString() + "/9";
+        //Lifes.text = arg0.ToString() + "/9";
     }
 
     private void OnHealthLost(int arg0)
     {
         if(arg0 < HeartsList.Count)
         HeartsList[arg0].SetEnabled(false);
-        Lifes.text = arg0.ToString() + "/9";
+        //Lifes.text = arg0.ToString() + "/9";
     }
 
     private void ManageSettingsMenu()
@@ -175,7 +175,7 @@ public class GameUi : MonoBehaviour
     private void OnScoreChanged(int score)
     {
         Debug.Log("dcore changed");
-        ScoreText.text = "Уровень " +score.ToString();
+        Progress.text = "Уровень " +score.ToString();
     }
     private void OnHighScoreReached()
     {
