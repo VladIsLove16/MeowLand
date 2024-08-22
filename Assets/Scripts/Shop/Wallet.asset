@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Wallet
   m_EditorClassIdentifier: 
   Money:
-    SoftMoney: 0
+    SoftMoney: 10
     HardMoney: 0
+  moneyChangedBy:
+    m_PersistentCalls:
+      m_Calls: []
   moneyChanged:
     m_PersistentCalls:
       m_Calls: []

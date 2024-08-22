@@ -59,7 +59,7 @@ public class GameUi : MonoBehaviour
         SoftMoney = UpperPanel.Q("Money").Q("MoneyText") as Label;
         SoftMoneyAdded = UpperPanel.Q("Money").Q("MoneyAddedText") as Label;
         SoftMoneyAdded.SetEnabled(false);
-        Wallet.moneyChangedBy.AddListener((Money money)=> SoftMoneyChangedAnimation(money));
+        Wallet.moneyChangedBy.AddListener((Money money) => StartCoroutine(SoftMoneyChangedAnimation(money)));
         HardMoney = UpperPanel.Q("Fishes").Q("FishText") as Label; 
         TimeToHealLeft = UpperPanel.Q("HeartsRecovery").Q("TimeText") as Label;
         Lifes = UpperPanel.Q("HeartsRecovery").Q("HealthText") as Label;
@@ -122,13 +122,16 @@ public class GameUi : MonoBehaviour
         {
             ManageSettingsMenu();
         };
+
+        Debug.Log("GameUI loaded with " + Wallet.Money.SoftMoney.ToString() + "soft money");
+
     }
     private void Start()
     {
         SoftMoney.text = Wallet.Money.SoftMoney.ToString();
         HardMoney.text = Wallet.Money.HardMoney.ToString();
     }
-    private async Task SoftMoneyChangedAnimation(Money money)
+    private  IEnumerator SoftMoneyChangedAnimation(Money money)
     {
         if (money.SoftMoney > 0)
         {
@@ -138,7 +141,7 @@ public class GameUi : MonoBehaviour
             SoftMoneyAdded.text = "";
         SoftMoneyAdded.text += money.SoftMoney.ToString();
         SoftMoneyAdded.SetEnabled(true);
-        await Task.Delay(1500);
+        yield return new WaitForSeconds(1f);
         SoftMoneyAdded.SetEnabled(false);
         SoftMoney.text = Wallet.Money.SoftMoney.ToString();
     }

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a402ca74c469f734984e2073e47ef507, type: 3}
+  m_Name: ShopSaver
+  m_EditorClassIdentifier: 
+  Cats:
+  - {fileID: 11400000, guid: 088ff6a69438e9d48ae6686c7872efb7, type: 2}
+  - {fileID: 11400000, guid: 0a43c6f68ad7ef348848eb6efd589874, type: 2}
+  - {fileID: 11400000, guid: 23fa37db24a3e8c4882d89bfd4f4f2ad, type: 2}
+  - {fileID: 11400000, guid: d33d4188169c1094298f80b1b32145f4, type: 2}
+  - {fileID: 11400000, guid: c1eec05eff55daa4a9b60467021d69cc, type: 2}
+  - {fileID: 11400000, guid: b4ab216e8177e834aaec2a5eb2400392, type: 2}
+  - {fileID: 11400000, guid: 3e0c7f60539fd91408f68c2e109bdfdc, type: 2}
+  - {fileID: 11400000, guid: e556c7399345b1e4cb1ab0b588a5996e, type: 2}

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-public class ShopDataSaver : MonoBehaviour
+
+[CreateAssetMenu(fileName = "new Item", menuName = "ShopItems/ShopDataSaver")]
+public class ShopDataSaver : ScriptableObject
 {
-    [SerializeField]
-    List<CatInfoSO> Cats;
+    public List<CatInfoSO> Cats;
     public void Load(ShopData data)
     {
         foreach (CatInfoSO cat in Cats)

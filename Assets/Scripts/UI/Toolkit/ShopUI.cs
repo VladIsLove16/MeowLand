@@ -15,7 +15,7 @@ namespace Assets.Scripts.UI.Toolkit
         private UIDocument document;
         private VisualElement root;
         [SerializeField]
-        Wallet  wallet;
+        Wallet  Wallet;
         Label SoftMoney;
         GroupBox CatRow1;
         GroupBox CatRow2;
@@ -42,15 +42,15 @@ namespace Assets.Scripts.UI.Toolkit
             SetupCatShopItems(CatRow2.Children(),ref i);
 
             //HardMoney.text=wallet.Money.HardMoney.ToString();
-            wallet.moneyChanged.AddListener(OnMoneyChange);
+            Wallet.moneyChanged.AddListener(OnMoneyChange);
 
             notenoughmoneyText = root.Q("notenoughmoneyText") as Label;
             notenoughmoneyText.SetEnabled(false);
-
+            Debug.Log("ShopUI Loaded with "+ Wallet.Money.SoftMoney.ToString() + "soft money");
         }
         private void Start()
         {
-            SoftMoney.text = wallet.Money.SoftMoney.ToString();
+            SoftMoney.text = Wallet.Money.SoftMoney.ToString();
             notenoughmoneyText.SetEnabled(false);
         }
         private void SetupCatShopItems(IEnumerable<VisualElement> children, ref int j)
@@ -84,21 +84,21 @@ namespace Assets.Scripts.UI.Toolkit
             }
             else
             {
-                CantBuy();
+               StartCoroutine(CantBuy());
             }
         }
 
-        private async Task CantBuy()
+        private IEnumerator CantBuy()
         {
             notenoughmoneyText.SetEnabled(true);
-            await Task.Delay(1500);
+            yield return new WaitForSeconds(1.5f);
             notenoughmoneyText.SetEnabled(false);
         }
 
         private void OnMoneyChange()
         {
             //HardMoney.text = money.HardMoney.ToString();
-            SoftMoney.text = wallet.Money.SoftMoney.ToString();
+            SoftMoney.text = Wallet.Money.SoftMoney.ToString();
         }
     }
     class BuyButton

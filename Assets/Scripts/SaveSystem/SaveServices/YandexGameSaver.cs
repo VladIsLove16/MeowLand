@@ -9,6 +9,7 @@ public class YandexGameSaver : MonoBehaviour
     Wallet Wallet;
     [SerializeField]
     ShopDataSaver ShopDataSaver;
+    public static YandexGameSaver Instance;
     #region MonoBehaviour
 
     private void OnEnable()
@@ -21,12 +22,23 @@ public class YandexGameSaver : MonoBehaviour
     }
     private void Awake()
     {
+        if ((Instance==null))
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+            return;
+        }
         saveSystem = new YandexGamesSaveSystem();
         if (YandexGame.SDKEnabled == true)
         {
             Load();
             StartCoroutine(AutoSave());
         }
+        Wallet.moneyChanged.AddListener(Save);
+        DontDestroyOnLoad(gameObject);
     }
     private void OnApplicationQuit()
     {
@@ -44,13 +56,12 @@ public class YandexGameSaver : MonoBehaviour
     public void Save()
     {
         //приколы
+        Debug.Log("saveProcess");
         SaveData data = new SaveData();
 
         data.Money = Wallet.Money   ;
         data.ShopData = ShopDataSaver.Get();
         data.HealthData = HealthSystem.GetHealthData();
-        
-
         saveSystem.Save(data);
     }
 
