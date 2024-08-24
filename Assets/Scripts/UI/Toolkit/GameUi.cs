@@ -82,7 +82,8 @@ public class GameUi : MonoBehaviour
         NewGamebtn = root.Q("PlayButtons").Q("Play") as Button;
 
         TimeToHealLeft.text = HealthSystem.TimeLeftString;
-        Lifes.text = HealthSystem.Health.ToString()+"/9";
+        //Lifes.text = HealthSystem.Health.ToString()+"/9";
+        Lifes.text = "";
         for (int i = 0;i<9;i++)
         {
             if (i < HealthSystem.Health)
@@ -150,14 +151,14 @@ public class GameUi : MonoBehaviour
     {
         if (arg0 > 0)
         HeartsList[arg0-1].SetEnabled(true);
-        Lifes.text = arg0.ToString() + "/9";
+        //Lifes.text = arg0.ToString() + "/9";
     }
 
     private void OnHealthLost(int arg0)
     {
         if(arg0 < HeartsList.Count)
         HeartsList[arg0].SetEnabled(false);
-        Lifes.text = arg0.ToString() + "/9";
+        //Lifes.text = arg0.ToString() + "/9";
     }
 
     private void ManageSettingsMenu()
