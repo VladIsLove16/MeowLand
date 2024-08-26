@@ -30,6 +30,8 @@ public class SequenceGameManager : MonoBehaviour
         SoundSequenceGame.Awake();
         SoundSequenceGame.RoundWon.AddListener(OnRoundWon);
         SoundSequenceGame.RoundLost.AddListener(OnRoundLost);
+        
+
     }
 
     private void Start()
@@ -117,12 +119,8 @@ public class SequenceGameManager : MonoBehaviour
     {
         //wallet.SpendMoney(new Money() { SoftMoney = 1 });
         HealthSystem.LoseHealth(1);
-        if (HealthSystem.Health == 0)
-        {
-            Debug.Log("Health is 0");
-            return;
-        }
-        Invoke(nameof(SoundSequenceGame.StartRound), 1f);
+        YGAdsProvider.TryShowFullscreenAdWithChance(round*5);
+        //Invoke(nameof(SoundSequenceGame.StartRound), 1f);
     }
 
     private void OnRoundWon(int round)

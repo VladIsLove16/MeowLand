@@ -5,7 +5,7 @@
     <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/MainMenu.uss?fileID=7433441132597879392&amp;guid=6a4281d9f0439ce40bb8753c14e408c4&amp;type=3#MainMenu" />
     <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/ProgressBars.uss?fileID=7433441132597879392&amp;guid=a75a3200e2f4a3f41983b4a3bf27962d&amp;type=3#ProgressBars" />
     <ui:VisualElement name="Background" style="align-items: center; flex-direction: column; align-self: stretch; height: auto; width: auto; margin-top: 0; background-image: url(&quot;project://database/Assets/Sprites/new/fon_doma.png?fileID=2800000&amp;guid=81ba02a48d4b65743a07a73d33d34ab8&amp;type=3#fon_doma&quot;); padding-top: 0; padding-left: 0; padding-right: 0; padding-bottom: 0; display: flex; flex-grow: 1;">
-        <ui:VisualElement name="UpperPanel" style="flex-direction: row; top: 5%; align-self: stretch; justify-content: flex-start; align-items: stretch; margin-left: 100px; margin-right: 48px;">
+        <ui:VisualElement name="UpperPanel" style="flex-direction: row; top: 5%; align-self: stretch; justify-content: flex-start; align-items: stretch; margin-left: 100px; margin-right: 48px; display: flex;">
             <ui:VisualElement name="Money" style="flex-grow: 0; align-items: center; top: auto; left: auto; width: auto; height: auto; flex-direction: row; font-size: 32px;">
                 <ui:VisualElement name="MoneySign" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/new/coin.png?fileID=2800000&amp;guid=5afefde5e9e06064b81358d07f49d666&amp;type=3#coin&quot;); height: 58px; width: 58px; display: flex;" />
                 <ui:Label tabindex="-1" text="123" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MoneyText" class="text text-color-white" style="background-image: none; width: 152px; height: 38px; -unity-text-align: middle-left; -unity-background-image-tint-color: rgba(255, 255, 255, 0.24); font-size: 48px; align-self: auto; margin-left: 20px;" />
@@ -54,7 +54,7 @@
                 <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="cat" style="width: 168px; height: 191px; align-items: auto; justify-content: flex-start; align-self: auto;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="PlayButtons" style="flex-grow: 1; position: absolute; top: 221px; left: 1725px; flex-direction: column;">
+        <ui:VisualElement name="PlayButtons" style="flex-grow: 1; position: absolute; top: 23%; left: 86%; flex-direction: column; display: flex;">
             <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Play" class="play" style="width: 160px; height: 160px; background-color: rgba(188, 188, 188, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-bottom: 40px;" />
             <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Repeat" class="repeat" />
         </ui:VisualElement>
