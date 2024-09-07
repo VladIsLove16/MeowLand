@@ -36,7 +36,6 @@ public static class HealthSystem
             LastTimeRestored = DateTime.Now;
         }
         healthLost.Invoke(Health);
-        YGAdsProvider.TryShowFullscreenAdWithChance(100);
     }
     public static void Heal(int amount = 1)
     {

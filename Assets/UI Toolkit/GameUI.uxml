@@ -5,38 +5,44 @@
     <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/MainMenu.uss?fileID=7433441132597879392&amp;guid=6a4281d9f0439ce40bb8753c14e408c4&amp;type=3#MainMenu" />
     <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/ProgressBars.uss?fileID=7433441132597879392&amp;guid=a75a3200e2f4a3f41983b4a3bf27962d&amp;type=3#ProgressBars" />
     <ui:VisualElement name="Background" style="align-items: center; flex-direction: column; align-self: stretch; height: auto; width: auto; margin-top: 0; background-image: url(&quot;project://database/Assets/Sprites/new/fon_doma.png?fileID=2800000&amp;guid=81ba02a48d4b65743a07a73d33d34ab8&amp;type=3#fon_doma&quot;); padding-top: 0; padding-left: 0; padding-right: 0; padding-bottom: 0; display: flex; flex-grow: 1;">
-        <ui:VisualElement name="UpperPanel" style="flex-direction: row; top: 5%; align-self: stretch; justify-content: flex-start; align-items: stretch; margin-left: 100px; margin-right: 48px; display: flex;">
-            <ui:VisualElement name="Money" style="flex-grow: 0; align-items: center; top: auto; left: auto; width: auto; height: auto; flex-direction: row; font-size: 32px;">
-                <ui:VisualElement name="MoneySign" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/new/coin.png?fileID=2800000&amp;guid=5afefde5e9e06064b81358d07f49d666&amp;type=3#coin&quot;); height: 58px; width: 58px; display: flex;" />
-                <ui:Label tabindex="-1" text="123" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MoneyText" class="text text-color-white" style="background-image: none; width: 152px; height: 38px; -unity-text-align: middle-left; -unity-background-image-tint-color: rgba(255, 255, 255, 0.24); font-size: 48px; align-self: auto; margin-left: 20px;" />
-                <ui:Label text="+123" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MoneyAddedText" enable-rich-text="true" class="text moneytext" style="left: 171px; bottom: 16px; font-size: 32px;" />
+        <ui:VisualElement name="UpperPanel" style="flex-direction: row; top: 5%; align-self: stretch; justify-content: space-between; align-items: stretch; margin-left: 100px; margin-right: 48px; display: flex;">
+            <ui:VisualElement name="LeftElements" style="flex-grow: 1; flex-direction: row; width: 617px;">
+                <ui:VisualElement name="Money" style="flex-grow: 0; align-items: center; top: auto; left: auto; width: auto; height: auto; flex-direction: row; font-size: 32px; margin-left: 0; padding-left: 1px;">
+                    <ui:VisualElement name="MoneySign" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/new/coin.png?fileID=2800000&amp;guid=5afefde5e9e06064b81358d07f49d666&amp;type=3#coin&quot;); height: 58px; width: 58px; display: flex;" />
+                    <ui:Label tabindex="-1" text="123" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MoneyText" class="text text-color-white" style="background-image: none; width: 78px; height: 38px; -unity-text-align: middle-left; -unity-background-image-tint-color: rgba(255, 255, 255, 0.24); font-size: 48px; align-self: auto; margin-left: 2px; min-width: 60px;" />
+                    <ui:Label text="+123" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MoneyAddedText" enable-rich-text="true" class="text moneytext" style="left: 171px; bottom: 16px; font-size: 32px; width: 60px; min-width: auto;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Fishes" style="flex-grow: 0; align-items: center; height: 64px; flex-direction: row; align-self: flex-end; display: none; visibility: hidden; overflow: hidden;">
+                    <ui:VisualElement name="FishSign" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/new/%D0%92%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B6%D0%B8%D0%B7%D0%BD%D0%B5%D0%B9/Fish.png?fileID=21300000&amp;guid=8104336dff8ffa642a20a3eae3933f2b&amp;type=3#Fish&quot;); height: 62px; width: 62px;" />
+                    <ui:Label tabindex="-1" text="123" parse-escape-sequences="true" display-tooltip-when-elided="true" name="FishText" class="text text-color-white" style="background-image: url(&quot;project://database/Assets/Sprites/new/%D0%A3%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C/Rectangle%2082%20(2).png?fileID=2800000&amp;guid=fed6082d3c76d94428ebc3d560b6583c&amp;type=3#Rectangle 82 (2)&quot;); -unity-text-align: upper-center; font-size: 48px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="HeartsRecovery" style="width: auto; align-self: center; align-items: center; flex-direction: row; flex-grow: 1; max-width: 168px; padding-left: 100px; left: auto;">
+                    <ui:Label tabindex="-1" text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HealthText" class="text text-color-white" style="background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=21300000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;); width: 60px; height: 60px; min-width: auto; -unity-text-align: upper-center; display: flex;" />
+                    <ui:Label tabindex="-1" text="1:02" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeText" class="text-color-white text" style="background-image: none; -unity-text-align: upper-center; font-size: 48px; width: 109px; flex-grow: 1; min-width: 62px; min-height: auto; flex-wrap: nowrap; max-width: 100px;" />
+                </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="Fishes" style="flex-grow: 0; align-items: center; height: 64px; flex-direction: row; align-self: flex-end; display: none; visibility: hidden; overflow: hidden;">
-                <ui:VisualElement name="FishSign" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/new/%D0%92%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B6%D0%B8%D0%B7%D0%BD%D0%B5%D0%B9/Fish.png?fileID=21300000&amp;guid=8104336dff8ffa642a20a3eae3933f2b&amp;type=3#Fish&quot;); height: 62px; width: 62px;" />
-                <ui:Label tabindex="-1" text="123" parse-escape-sequences="true" display-tooltip-when-elided="true" name="FishText" class="text text-color-white" style="background-image: url(&quot;project://database/Assets/Sprites/new/%D0%A3%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C/Rectangle%2082%20(2).png?fileID=2800000&amp;guid=fed6082d3c76d94428ebc3d560b6583c&amp;type=3#Rectangle 82 (2)&quot;); -unity-text-align: upper-center; font-size: 48px;" />
+            <ui:VisualElement name="CentralElements" style="flex-grow: 1; flex-direction: row; align-self: center; align-items: flex-start; justify-content: flex-end;">
+                <ui:VisualElement name="Progress" style="flex-grow: 1; flex-direction: column; width: 600px; top: 17px; align-self: center; left: auto; max-width: 600px; min-width: 600px;">
+                    <ui:Label tabindex="-1" text="Уровень 2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LvlText" class="text-color-white text" style="font-size: 68px; width: auto; align-self: auto; -unity-text-align: upper-center; min-width: 60px;" />
+                    <ui:ProgressBar value="100" name="LvlProgress" class="Progressbar" style="max-width: none; min-width: auto; width: auto;" />
+                </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="HeartsRecovery" style="width: 0; align-self: center; align-items: center; flex-direction: row; flex-grow: 1;">
-                <ui:Label tabindex="-1" text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HealthText" class="text text-color-white" style="background-image: url(&quot;project://database/Assets/Sprites/new/Heart.png?fileID=21300000&amp;guid=388c07dc632534646b1e956031b4367c&amp;type=3#Heart&quot;); width: 60px; height: 60px; min-width: auto; -unity-text-align: upper-center; display: flex;" />
-                <ui:Label tabindex="-1" text="1:02" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeText" class="text-color-white text" style="background-image: none; -unity-text-align: upper-center; font-size: 48px; width: 121px; flex-grow: 1; min-width: 0; min-height: auto; flex-wrap: nowrap;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="Progress" style="flex-grow: 1; flex-direction: column; width: 200px; top: 17px; align-self: auto; left: 24px;">
-                <ui:Label tabindex="-1" text="Уровень 2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LvlText" class="text-color-white text" style="font-size: 68px; width: auto; align-self: auto; -unity-text-align: upper-center;" />
-                <ui:ProgressBar value="100" name="LvlProgress" class="Progressbar" />
-            </ui:VisualElement>
-            <ui:VisualElement name="Hearts" style="align-self: center; align-items: center; height: auto; width: auto; justify-content: flex-start; flex-direction: row; -unity-text-align: upper-left; left: auto; bottom: auto; position: relative; top: auto; flex-wrap: wrap-reverse; margin-right: 25px; margin-left: 25px;">
-                <ui:Instance template="Heart" name="Heart" />
-                <ui:Instance template="Heart" name="Heart" />
-                <ui:Instance template="Heart" name="Heart" />
-                <ui:Instance template="Heart" name="Heart" />
-                <ui:Instance template="Heart" name="Heart" />
-                <ui:Instance template="Heart" name="Heart" />
-                <ui:Instance template="Heart" name="Heart" />
-                <ui:Instance template="Heart" name="Heart" />
-                <ui:Instance template="Heart" name="Heart" />
-            </ui:VisualElement>
-            <ui:VisualElement name="Buttons" style="flex-grow: 0; flex-direction: row; justify-content: center; align-self: center; left: 21px; position: relative; top: -44px; background-color: rgba(0, 0, 0, 0);">
-                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Pause" class="pausebtn" style="transition-property: opacity; transition-duration: 2s; display: none;" />
-                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Menu" class="homebtn" style="width: 73px; height: 73px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; align-self: center; justify-content: flex-end; align-items: center;" />
+            <ui:VisualElement name="RightElements" style="flex-grow: 1; flex-direction: row; justify-content: flex-end;">
+                <ui:VisualElement name="Hearts" style="align-self: center; align-items: center; height: auto; width: auto; justify-content: flex-start; flex-direction: row; -unity-text-align: upper-left; left: auto; bottom: auto; position: relative; top: auto; flex-wrap: wrap-reverse; margin-right: 25px; margin-left: 25px;">
+                    <ui:Instance template="Heart" name="Heart" />
+                    <ui:Instance template="Heart" name="Heart" />
+                    <ui:Instance template="Heart" name="Heart" />
+                    <ui:Instance template="Heart" name="Heart" />
+                    <ui:Instance template="Heart" name="Heart" />
+                    <ui:Instance template="Heart" name="Heart" />
+                    <ui:Instance template="Heart" name="Heart" />
+                    <ui:Instance template="Heart" name="Heart" />
+                    <ui:Instance template="Heart" name="Heart" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Buttons" style="flex-grow: 0; flex-direction: row; justify-content: center; align-self: center; left: 0; position: relative; top: -44px; background-color: rgba(0, 0, 0, 0);">
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Pause" class="pausebtn" style="transition-property: opacity; transition-duration: 2s; display: none;" />
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Menu" class="homebtn" style="width: 73px; height: 73px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; align-self: center; justify-content: flex-end; align-items: center;" />
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="PreUpper" style="flex-grow: 0; top: 57px; position: relative; left: 786px; align-self: center; align-items: center; justify-content: flex-start;" />
@@ -54,7 +60,7 @@
                 <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="cat" style="width: 168px; height: 191px; align-items: auto; justify-content: flex-start; align-self: auto;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="PlayButtons" style="flex-grow: 1; position: absolute; top: 23%; left: 86%; flex-direction: column; display: flex;">
+        <ui:VisualElement name="PlayButtons" style="flex-grow: 0; position: absolute; top: 23%; left: 86%; flex-direction: column; display: flex; flex-shrink: 0;">
             <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Play" class="play" style="width: 160px; height: 160px; background-color: rgba(188, 188, 188, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-bottom: 40px;" />
             <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Repeat" class="repeat" />
         </ui:VisualElement>

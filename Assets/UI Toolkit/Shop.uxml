@@ -18,7 +18,7 @@
             <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
             <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
         </ui:GroupBox>
-        <ui:Label tabindex="-1" text="Маловато монеток" parse-escape-sequences="true" display-tooltip-when-elided="true" name="notenoughmoneyText" class="text notenoughmoneyText" />
+        <ui:Label tabindex="-1" text="Маловато монеток" parse-escape-sequences="true" display-tooltip-when-elided="true" name="notenoughmoneyText" class="text notenoughmoneyText" style="position: absolute; top: 10%; left: auto; align-items: center; height: 704px; width: 1486px; align-self: center; justify-content: flex-end; -unity-text-align: upper-center;" />
     </ui:VisualElement>
-    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Close" class="closebtn" style="overflow: visible; position: absolute; top: 84px; left: 1640px;" />
+    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Close" class="closebtn" style="overflow: visible; position: absolute; top: 7%; left: 86.5%;" />
 </ui:UXML>

@@ -99,9 +99,7 @@
 
 .moneytext:disabled {
     color: rgb(255, 255, 255);
-    position: absolute;
     font-size: 20px;
-    display: none;
     transition-property: visibility;
 }
 
