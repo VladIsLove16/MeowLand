@@ -38,7 +38,7 @@ public class ScoreManager: MonoBehaviour
         switch (state)
         {
             case SoundSequenceGame.RoundState.roundStarting: 
-                Set(SoundSequenceGame.instance.CatSequence.Count) ;
+                Set(SoundSequenceGame.instance.GetCatSequenceLength()) ;
                 break;
 
         }

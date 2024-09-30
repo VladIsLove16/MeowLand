@@ -14,7 +14,7 @@ public class Cat : MonoBehaviour
 {
     [HideInInspector]
     public CatAnimator CatAnimator;
-    public CatInfoSO shopItem;
+    public CatInfoSO catInfoSO;
     [HideInInspector]
     private AudioSource AudioSource;
     [HideInInspector]
@@ -23,8 +23,9 @@ public class Cat : MonoBehaviour
     private Button button;
     public void Init(CatInfoSO shopItemSO)
     {
-        shopItem = shopItemSO;
+        catInfoSO = shopItemSO;
         CatAnimator.Init(shopItemSO);
+        gameObject.SetActive(true);
     }
     public void Awake()
     {
@@ -32,8 +33,8 @@ public class Cat : MonoBehaviour
         CatAnimator = GetComponent<CatAnimator>();
         button = GetComponent<Button>();
         SetAnimationMode(true);
-        if(shopItem!=null)
-            Init(shopItem);
+        if(catInfoSO!=null)
+            Init(catInfoSO);
     }
     public void SetAnimationMode(bool b)
     {
@@ -50,13 +51,13 @@ public class Cat : MonoBehaviour
     }
     public void Meow()
     {
-        AudioSource.PlayOneShot(shopItem.MeowSound);
+        AudioSource.PlayOneShot(catInfoSO.MeowSound);
         CatAnimator.StartAnimation(CatAnimator.AnimationType.Meow);
     }
     public void Angry()
     {
-        if(shopItem.AngrySound!=null)
-            AudioSource.PlayOneShot(shopItem.AngrySound);
+        if(catInfoSO.AngrySound!=null)
+            AudioSource.PlayOneShot(catInfoSO.AngrySound);
         CatAnimator.StartAnimation(CatAnimator.AnimationType.Angry);
     }
     public void RandomEmodji()

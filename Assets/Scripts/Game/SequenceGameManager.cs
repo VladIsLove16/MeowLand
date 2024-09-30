@@ -66,10 +66,10 @@ public class SequenceGameManager : MonoBehaviour
 
         EnabledCats.Add(cat);
         DisabledCats.Remove(cat);
-        cat.gameObject.SetActive(true);
         CatInfoSO catInfoSO = AddNewCatInfoInPlay();
         if(catInfoSO != null)
             cat.Init(catInfoSO);
+        cat.Clicked.AddListener(()=>SoundSequenceGame.OnCat_Click(cat));
     }
 
     private CatInfoSO AddNewCatInfoInPlay()
@@ -125,19 +125,14 @@ public class SequenceGameManager : MonoBehaviour
 
     private void OnRoundWon(int round)
     {
-        if(HealthSystem.Health>0)
-            wallet.AddMoney(new Money() { SoftMoney = round});
+        if (HealthSystem.Health > 0)
+            wallet.AddMoney(new Money(round));
         if (RoundToAddNewAvailableCat == 0)
             return;
-
-        if (round % RoundToAddNewAvailableCat == 0)
+        else if (round % RoundToAddNewAvailableCat == 0)
         {
-            Cat randomCat = GetRandom(DisabledCats);
-            if (randomCat == null) return;
-
-            randomCat.Init(AddNewCatInfoInPlay());
-            randomCat.gameObject.SetActive(true);
-            SoundSequenceGame.AddNewCat(randomCat);
+            AddNewCatInGame();
         }
     }
+
 }

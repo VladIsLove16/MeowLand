@@ -13,7 +13,7 @@ public class ShopItemView : MonoBehaviour
     public void Awake()
     {
         cat=GetComponent<Cat>();
-        item  = cat.shopItem;
+        item  = cat.catInfoSO;
         Image = GetComponent<Image> ();
         //Image.sprite = item.Sprite;
         item.stateChanged.AddListener(SetImageColor);

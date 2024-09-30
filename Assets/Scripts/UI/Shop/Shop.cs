@@ -14,7 +14,7 @@ public class Shop : MonoBehaviour
     {
         foreach (var DisplayshopItem in DisplayShopItemList)
         {
-            CatInfoSO item = DisplayshopItem.cat.shopItem;
+            CatInfoSO item = DisplayshopItem.cat.catInfoSO;
             DisplayshopItem.OnClick.AddListener(() => TryBuy(item));
         }
     }
@@ -45,7 +45,7 @@ public class Shop : MonoBehaviour
     {
         foreach (var DisplayshopItem in DisplayShopItemList)
         {
-            DisplayshopItem.cat.shopItem.Sell();
+            DisplayshopItem.cat.catInfoSO.Sell();
         }
     }
     public void Unlock(CatInfoSO item)

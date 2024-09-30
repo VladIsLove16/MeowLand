@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
@@ -29,7 +30,7 @@ public class GameUi : MonoBehaviour
     public Button GoToMenu;
     
     private VisualElement PreUpper;
-    public Label Progress;
+    public AdaptiveText Progress;
     public ProgressBar LevelProgress;
 
 
@@ -67,7 +68,8 @@ public class GameUi : MonoBehaviour
         GoToMenu = UpperPanel.Q("Buttons").Q("Menu") as Button;
 
         PreUpper = root.Q("PreUpper");
-        Progress = UpperPanel.Q("Progress").Q("LvlText") as Label;
+        Progress = UpperPanel.Q("Progress").Q("LvlText") as AdaptiveText; 
+        Progress.OnEnable();
         LevelProgress = UpperPanel.Q("Progress").Q("LvlProgress") as ProgressBar;
 
         CatsContainer = root.Q("CatsContainer");
@@ -173,8 +175,8 @@ public class GameUi : MonoBehaviour
     {
         HardMoney.text = Wallet.Money.HardMoney.ToString();
         TimeToHealLeft.text = HealthSystem.TimeLeftString;
-        if(SoundSequenceGame.instance.CatSequence.Count!=0)
-            LevelProgress.value = SoundSequenceGame.instance.CurrentNum * 100 / SoundSequenceGame.instance.CatSequence.Count;
+        if(SoundSequenceGame.instance.GetCatSequenceLength()!=0)
+            LevelProgress.value = SoundSequenceGame.instance.CurrentNum * 100 / SoundSequenceGame.instance.GetCatSequenceLength();
     }
     private void OnScoreChanged(int score)
     {

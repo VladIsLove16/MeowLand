@@ -62,13 +62,13 @@ namespace Assets.Scripts.UI.Toolkit
                 
                 Button buy = buttons.Q("Buy") as Button;
                 int currentIndex = j;
-                if (cats[currentIndex].shopItem.IsBought)
+                if (cats[currentIndex].catInfoSO.IsBought)
                 {
                     buy.SetEnabled(false); 
                     buy.text = "Куплено"; 
                 }
                 else
-                    buy.text += " за " + cats[currentIndex].shopItem.Cost.SoftMoney;
+                    buy.text += " за " + cats[currentIndex].catInfoSO.Cost.SoftMoney;
 
                 buy.clicked += () => {TryBuy(currentIndex, buy); };
                 Button activate = buttons.Q("Activate") as Button;
@@ -77,7 +77,7 @@ namespace Assets.Scripts.UI.Toolkit
         }
         private void TryBuy(int j,Button buy)
         {
-            if (shop.TryBuy(cats[j].shopItem))
+            if (shop.TryBuy(cats[j].catInfoSO))
             {
                 buy.SetEnabled(false);
                 buy.text = "Куплено";

@@ -16,8 +16,9 @@ public class SoundSequenceGame : MonoBehaviour
     public static SoundSequenceGame instance;
     [SerializeField]
     public int StartedSequenceLength;
-    public List<Cat> AvailableCats;
-    public List<Cat> CatSequence;
+    [SerializeField]
+    private List<Cat> AvailableCats;
+    private List<Cat> CatSequence = new();
     [HideInInspector]
     private AudioSource audioSource;
     public AudioClip loseSound;
@@ -43,14 +44,6 @@ public class SoundSequenceGame : MonoBehaviour
         instance=this;
         audioSource = GetComponent<AudioSource>();
     }
-    private void Start()
-    {
-        foreach (Cat cat in AvailableCats)
-        {
-            cat.Clicked.RemoveAllListeners();
-            cat.Clicked.AddListener(() => OnCat_Click(cat));
-        }
-    }
     public void SetUpGame(List<Cat> AvailableCats, int StartedSequenceLength)
     {
         this.AvailableCats = AvailableCats;
@@ -62,6 +55,10 @@ public class SoundSequenceGame : MonoBehaviour
         CreateSequence(StartedSequenceLength);
         StartRound();
         YandexGame.GameReadyAPI();
+    }
+    public int GetCatSequenceLength()
+    {
+        return CatSequence.Count;
     }
     public void StartRound()
     {
@@ -83,7 +80,7 @@ public class SoundSequenceGame : MonoBehaviour
         for (int i = 0; i < CatSequence.Count; i++)
         {
             CatSequence[i].Meow();
-            yield return new WaitForSeconds(CatSequence[i].shopItem.MeowSound.length+0.1f);
+            yield return new WaitForSeconds(CatSequence[i].catInfoSO.MeowSound.length+0.1f);
         }
         SetRoundState(roundState = RoundState.roundStarting);
         SetCatsClickable(true);
@@ -103,16 +100,12 @@ public class SoundSequenceGame : MonoBehaviour
             AddToSequence();
         }
     }
-    public void AddNewCat(Cat cat)
-    {
-        AvailableCats.Add(cat);
-    }
     public void AddToSequence()
     {
         int num = UnityEngine.Random.Range(0, AvailableCats.Count);
         Cat cat = AvailableCats[num];
         CatSequence.Add(cat);
-        Debug.Log(cat.shopItem.MeowSound.ToSafeString() + " added");
+        Debug.Log(cat.catInfoSO.MeowSound.ToSafeString() + " added");
     }
     private void QueueCheck(Cat cat)
     {
