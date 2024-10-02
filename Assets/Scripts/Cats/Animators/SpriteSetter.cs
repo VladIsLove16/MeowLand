@@ -1,29 +1,10 @@
-﻿using Assets.Scripts;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-public abstract class CatAnimator : MonoBehaviour
+﻿using UnityEngine;
+
+public abstract class SpriteSetter
 {
-    protected Image Image;
-    public enum AnimationType
-    {
-        Meow,
-        Angry
-    }
-    public bool DoAnimation;
-    protected void Awake()
-    {
-        Image = GetComponent<Image>();
-    }
-    public  void SetAnimationMode(bool b)
-    {
-        DoAnimation = b;    
-    }
-    public abstract void Init(CatInfoSO infoSO);
-    public abstract void StartAnimation(AnimationType type);
-    protected abstract void OnAnimationEnd();
+    public abstract void Set(Sprite sprite);
 }
+
 //public class AnimatorCatAnimator : CatAnimator
 //{
 //    //private Animator animator;

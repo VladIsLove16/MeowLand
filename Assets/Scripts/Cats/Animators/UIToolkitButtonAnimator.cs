@@ -1,59 +1,71 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-
-public class OutlineCatAnimator : CatAnimator
+﻿using System;
+using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.UIElements;
+public class UIToolkitButtonAnimator : CatAnimatorBase
 {
-    private Sprite IdleSprite;
-    private Sprite FlashingSprite;
-    private Sprite MeowSprite;
-    private Sprite AngrySprite;
-    private float AnimationLength=1f;
-    private bool playingAnim;
-    private float timeBetweenFlashing;
-    public override void Init(CatInfoSO infoSO)
-    {
-        Awake();
-        IdleSprite = infoSO.IdleSprite;
-        MeowSprite = infoSO.MeowSprite;
-        AngrySprite = infoSO.AngrySprite;
-        FlashingSprite = infoSO.FlashingSprite;
-        Image.sprite = IdleSprite;
+    Button Button;
+    private float currentAnimTime;
+    public UIToolkitButtonAnimator()
+    { 
     }
-    private void Update()
+    public UIToolkitButtonAnimator(CatInfoSO infoSO, Button button)
     {
-        if (!playingAnim)
-        {
-            timeBetweenFlashing -= Time.deltaTime;
-            if (timeBetweenFlashing < 0)
-            {
-                CancelInvoke("OnAnimationEnd");
-                timeBetweenFlashing = 2f;
-                playingAnim = true;
-                Image.sprite = FlashingSprite;
-                Invoke("OnAnimationEnd", AnimationLength);
-            }
-        }
+        Init(infoSO);
+        Init(button);
+    }
+    public  void Init(Button button)
+    {
+        this.Button = button;
+        SpriteSetter = new VisualElementSpriteSetter(button);
+    }
+    public void Update()
+    {
+        if(!playingAnim)
+            FlashingAnim();
+        else if (currentAnimTime<0)
+            OnAnimationEnd();
+        else
+            currentAnimTime -= Time.deltaTime;
     }
     public override void StartAnimation(AnimationType type)
     {
-        if (!DoAnimation) return;
-        CancelInvoke("OnAnimationEnd");
         playingAnim = true;
         switch (type)
         {
             case AnimationType.Meow:
-                Image.sprite = MeowSprite;
+                SpriteSetter.Set(MeowSprite);
                 break;
             case AnimationType.Angry:
-                Image.sprite = AngrySprite;
+                SpriteSetter.Set(AngrySprite);
                 break;
         }
-        Invoke("OnAnimationEnd", AnimationLength);
+        currentAnimTime = AnimationLength + 300;
     }
     protected override void OnAnimationEnd()
     {
-        Image.sprite = IdleSprite;
+        SpriteSetter.Set(IdleSprite);
         playingAnim = false;
+    }
+
+    internal void OnDisable()
+    {
+        Button.style.visibility = Visibility.Hidden;
+    }
+    internal void OnEnable()
+    {
+        Button.style.visibility = Visibility.Visible;
+    }
+    protected override void FlashingAnim()
+    {
+        timeBetweenFlashing -= Time.deltaTime;
+        if (timeBetweenFlashing < 0)
+        {
+            timeBetweenFlashing = GetFlashingDelay();
+            SpriteSetter.Set(FlashingSprite);
+            playingAnim = true;
+            currentAnimTime = AnimationLength;
+        }
     }
 }
 //public class AnimatorCatAnimator : CatAnimator

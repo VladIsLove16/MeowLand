@@ -34,9 +34,10 @@ public class GameUi : MonoBehaviour
     public ProgressBar LevelProgress;
 
 
+    private VisualElement PlayButtons;
     private VisualElement CatsContainer;
-    private VisualElement Row1;
-    private VisualElement Row2;
+    private VisualElement CatRow1;
+    private VisualElement CatRow2;
 
     private VisualElement Hearts;
 
@@ -51,6 +52,7 @@ public class GameUi : MonoBehaviour
     private SettingsUI settingsUI;
 
     private VisualElement SettingsMenu;
+    public SequenceGameManager SequenceGameManager;
     private void Awake()
     {
         document = GetComponent<UIDocument>();
@@ -72,9 +74,13 @@ public class GameUi : MonoBehaviour
         Progress.OnEnable();
         LevelProgress = UpperPanel.Q("Progress").Q("LvlProgress") as ProgressBar;
 
-        CatsContainer = root.Q("CatsContainer");
-        Row1 = CatsContainer.Q("Row1");
-        Row2 = CatsContainer.Q("Row2");
+        PlayButtons = root.Q("PlayButtons");
+        CatsContainer = PlayButtons.Q("CatsContainer");
+        CatRow1 = CatsContainer.Q("Row1") as VisualElement;
+        CatRow2 = CatsContainer.Q("Row2") as VisualElement;
+        int j = 0;
+        SetupCatShopItems(CatRow1.Children(), ref j);
+        SetupCatShopItems(CatRow2.Children(), ref j);
 
         Hearts = root.Q("Hearts");
         Debug.Log(Hearts.Children().Count());
@@ -118,9 +124,9 @@ public class GameUi : MonoBehaviour
         ScoreManager.instance.ScoreChanged.AddListener(OnScoreChanged);
         //ScoreManager.instance.NewHighScoreReached.AddListener(OnHighScoreReached);
 
-        SettingsMenu = root.Q("SettingsMenu");
-        SettingsMenu.style.display = DisplayStyle.None;
-        settingsUI.Setup(SettingsMenu);
+        //SettingsMenu = root.Q("SettingsMenu");
+        //SettingsMenu.style.display = DisplayStyle.None;
+        //settingsUI.Setup(SettingsMenu);
         Pause.clicked += () =>
         {
             ManageSettingsMenu();
@@ -222,8 +228,6 @@ public class GameUi : MonoBehaviour
                     RepeatSoundsbtn.SetEnabled(true);
                     break;
                 }
-
-
         }
 
     }
@@ -237,5 +241,20 @@ public class GameUi : MonoBehaviour
             Outlinev2.state = Outlinev2.OutlineState.show;
         else
             Outlinev2.state = Outlinev2.OutlineState.hide;
+    }
+    private void SetupCatShopItems(IEnumerable<VisualElement> children, ref int j)
+    {
+        List<Cat> cats = SequenceGameManager.GetCats();
+        Debug.Log(cats.Count);
+        foreach (VisualElement item in children)
+        {
+            Button catBtn = item.Q<Button>();
+            Cat cat = cats[j];
+            Debug.Log(cat.name);
+            cat.Init(catBtn);
+            catBtn.clicked += () => { SequenceGameManager.OnCatClick(cat); };
+            //Button activate = buttons.Q("Activate") as Button;
+            j++;
+        }
     }
 }

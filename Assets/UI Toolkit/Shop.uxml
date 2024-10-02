@@ -1,24 +1,24 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="CatShopItemUI2" src="project://database/Assets/CatShopItemUI2.uxml?fileID=9197481963319205126&amp;guid=0453edce3cc4e0a449afce07aba11b3d&amp;type=3#CatShopItemUI2" />
+    <ui:Template name="CatShopItemUI2_0" src="project://database/Assets/CatShopItemUI2_0.uxml?fileID=9197481963319205126&amp;guid=59f1e1b8b81a18248a9357b19f25c591&amp;type=3#CatShopItemUI2_0" />
     <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/MainMenu.uss?fileID=7433441132597879392&amp;guid=6a4281d9f0439ce40bb8753c14e408c4&amp;type=3#MainMenu" />
-    <ui:VisualElement name="Background" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/new/%D0%9C%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD/%D1%84%D0%BE%D0%BD%20(2).png?fileID=21300000&amp;guid=d6c3049f47531b04288e1cf596e74eb6&amp;type=3#фон (2)&quot;); align-items: center; justify-content: center;">
+    <ui:VisualElement name="Background" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/new/%D0%9C%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD/%D1%84%D0%BE%D0%BD%20(2).png?fileID=21300000&amp;guid=d6c3049f47531b04288e1cf596e74eb6&amp;type=3#фон (2)&quot;); align-items: center; justify-content: center; flex-direction: column;">
         <ui:VisualElement name="Money" style="flex-grow: 1; position: absolute; left: 189px; top: 38px; align-self: center; flex-direction: row; align-items: center;">
             <ui:VisualElement name="MoneyIcon" style="flex-grow: 1; position: relative; background-image: url(&quot;project://database/Assets/Sprites/new/coin.png?fileID=21300000&amp;guid=5afefde5e9e06064b81358d07f49d666&amp;type=3#coin&quot;); width: 58px; height: 58px;" />
             <ui:Label tabindex="-1" text="123" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MoneyText" class="text" style="color: rgb(255, 255, 255); background-image: url(&quot;project://database/Assets/Sprites/new/%D0%9C%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD/Rectangle%2072%20(2).png?fileID=21300000&amp;guid=69445ae6de881f74fa62ef980f99b6a0&amp;type=3#Rectangle 72 (2)&quot;); width: 208px; height: 58px; font-size: 20px; -unity-text-align: middle-center; position: relative; top: auto; left: auto; align-self: auto;" />
         </ui:VisualElement>
-        <ui:GroupBox name="BuyOrActivate" style="position: relative; top: auto; left: auto; flex-direction: row; display: flex; height: 334px; width: 1420px; justify-content: space-between; padding-bottom: -10px;">
-            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
-            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
-            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
-            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
-        </ui:GroupBox>
-        <ui:GroupBox name="BuyOrActivate1" style="position: relative; top: auto; left: auto; flex-direction: row; bottom: auto; width: 1420px; justify-content: space-between;">
-            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
-            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
-            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
-            <ui:Instance template="CatShopItemUI2" name="CatShopItemUI2" />
-        </ui:GroupBox>
         <ui:Label tabindex="-1" text="Маловато монеток" parse-escape-sequences="true" display-tooltip-when-elided="true" name="notenoughmoneyText" class="text notenoughmoneyText" style="position: absolute; top: 10%; left: auto; align-items: center; height: 704px; width: 1486px; align-self: center; justify-content: flex-end; -unity-text-align: upper-center;" />
+        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Close" class="closebtn" style="overflow: visible; position: absolute; top: 7%; left: 86.5%; flex-shrink: 1;" />
+        <ui:GroupBox name="BuyOrActivate" style="position: relative; top: auto; left: auto; flex-direction: row; display: flex; height: auto; width: auto; justify-content: space-around; flex-shrink: 1; align-self: stretch; -unity-background-scale-mode: scale-to-fit; flex-grow: 1; align-items: flex-end; padding-left: 0; margin-left: 11%; margin-right: 11%; padding-top: 9%;">
+            <ui:Instance template="CatShopItemUI2_0" name="CatShopItemUI2_0" style="flex-grow: 1;" />
+            <ui:Instance template="CatShopItemUI2_0" name="CatShopItemUI2_0" style="flex-grow: 1;" />
+            <ui:Instance template="CatShopItemUI2_0" name="CatShopItemUI2_0" style="flex-grow: 1;" />
+            <ui:Instance template="CatShopItemUI2_0" name="CatShopItemUI2_0" style="flex-grow: 1;" />
+        </ui:GroupBox>
+        <ui:GroupBox name="BuyOrActivate2" style="position: relative; top: auto; left: auto; flex-direction: row; display: flex; height: auto; width: auto; justify-content: space-around; flex-shrink: 1; align-self: stretch; -unity-background-scale-mode: scale-to-fit; flex-grow: 1; align-items: stretch; padding-left: 0; margin-left: 11%; margin-right: 11%; padding-bottom: 7%;">
+            <ui:Instance template="CatShopItemUI2_0" name="CatShopItemUI2_0" style="flex-grow: 1;" />
+            <ui:Instance template="CatShopItemUI2_0" name="CatShopItemUI2_0" style="flex-grow: 1;" />
+            <ui:Instance template="CatShopItemUI2_0" name="CatShopItemUI2_0" style="flex-grow: 1;" />
+            <ui:Instance template="CatShopItemUI2_0" name="CatShopItemUI2_0" style="flex-grow: 1;" />
+        </ui:GroupBox>
     </ui:VisualElement>
-    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Close" class="closebtn" style="overflow: visible; position: absolute; top: 7%; left: 86.5%;" />
 </ui:UXML>

@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/UnityThemes/Shop.uss?fileID=7433441132597879392&amp;guid=ed3a27e1018af77468053e7508a19f43&amp;type=3#Shop" />
-    <ui:VisualElement name="CatShopItemUI" style="width: 284px; height: 284px; align-items: center;">
+    <ui:VisualElement name="CatShopItemUI" style="align-items: center; -unity-background-scale-mode: scale-to-fit;">
         <ui:VisualElement name="Cat" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/old/1-49-256.png?fileID=21300000&amp;guid=28a450f8ec9f2324ab34191b5cecd37c&amp;type=3#1-49-256&quot;); width: 185px; height: 185px; position: relative; display: none;" />
         <ui:VisualElement name="Buttons" class="Buttonscontainer" style="width: auto; height: auto;">
             <ui:Button text="Купить за" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Buy" class="text buyButton" style="overflow: visible; display: flex; visibility: visible; font-size: 30px; width: 320px; height: 71px;" />

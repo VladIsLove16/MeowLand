@@ -27,14 +27,13 @@ namespace Assets.Scripts.UI.Toolkit
         Sprite AlreadyBought;
         Label notenoughmoneyText;
         Button Close;
-        
         private void Awake()
         {
             document = GetComponent<UIDocument>();
             root = document.rootVisualElement;
             SoftMoney = root.Q("Money").Q("MoneyText") as Label;
             CatRow1 = root.Q("BuyOrActivate") as GroupBox;
-            CatRow2 = root.Q("BuyOrActivate1") as GroupBox;
+            CatRow2 = root.Q("BuyOrActivate2") as GroupBox;
             Close = root.Q("Close") as Button;
             Close.clicked += () => Loader.Load(Loader.Scene.MainMenu);
             int i = 0;
@@ -57,21 +56,23 @@ namespace Assets.Scripts.UI.Toolkit
         {
             foreach (VisualElement item in children)
             {
-                VisualElement root = item.Q("CatShopItemUI");
-                VisualElement buttons = root.Q("Buttons");
-                
-                Button buy = buttons.Q("Buy") as Button;
+                VisualElement root = item.Q("CatShopItemUI2_0");
+                Button buy = root.Q("Buy") as Button;
+                Button catBtn = root.Q("Cat") as Button;
                 int currentIndex = j;
-                if (cats[currentIndex].catInfoSO.IsBought)
+                Cat cat = cats[currentIndex];
+                CatInfoSO catInfo = cat.catInfoSO;
+                cat.Init(catInfo);
+                if (catInfo.IsBought)
                 {
                     buy.SetEnabled(false); 
                     buy.text = "Куплено"; 
                 }
                 else
-                    buy.text += " за " + cats[currentIndex].catInfoSO.Cost.SoftMoney;
-
+                    buy.text = "Купить за " + catInfo.Cost.SoftMoney;
                 buy.clicked += () => {TryBuy(currentIndex, buy); };
-                Button activate = buttons.Q("Activate") as Button;
+                catBtn.clicked += () => { cat.RandomEmodji(); };
+                //Button activate = buttons.Q("Activate") as Button;
                 j++;
             }
         }

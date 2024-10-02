@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1619200594780449950}
   - component: {fileID: 1866534269670009027}
   - component: {fileID: 2763180976982477373}
-  - component: {fileID: 97515299322582048}
   - component: {fileID: 4814309100950273518}
   m_Layer: 5
   m_Name: Cat
@@ -245,23 +244,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CatAnimator: {fileID: 0}
-  shopItem: {fileID: 11400000, guid: a3ca6a884d2dd4747a4b506a48fe3474, type: 2}
-  Clicked:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &97515299322582048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7544434264073493851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a22aeb0478c8a049b6db522a4141d2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DoAnimation: 0
+  catInfoSO: {fileID: 0}
+  IsClickable: 0
 --- !u!95 &4814309100950273518
 Animator:
   serializedVersion: 5

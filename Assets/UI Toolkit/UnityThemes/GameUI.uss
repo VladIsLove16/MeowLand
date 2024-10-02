@@ -45,12 +45,6 @@
 
 .repeat {
     background-image: url("project://database/Assets/Sprites/new/%D0%A3%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C/%D0%BF%D0%BE%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D1%82%D1%8C.png?fileID=2800000&guid=621dff2d5d655074f9932cc30ad1816e&type=3#повторить");
-    width: 160px;
-    height: 160px;
-    border-top-width: 0;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 0;
     border-left-color: rgba(149, 149, 149, 0);
     border-right-color: rgba(149, 149, 149, 0);
     border-top-color: rgba(149, 149, 149, 0);

@@ -23,6 +23,10 @@ public class SettingsUI : MonoBehaviour
     const string MusicVolume = "MusicVolume";
     const string MeowingVolume = "MeowingVolume";
     const string ButtonsVolume = "ButtonsVolume";
+    private void Awake()
+    {
+        audioSource = gameObject.GetComponent<AudioSource>();
+    }
     public void Setup(VisualElement root)
     {
         MusicVolumeSlider = root.Q("Music") as Slider;
@@ -72,7 +76,6 @@ public class SettingsUI : MonoBehaviour
         switch (type)
         {
             case MeowingVolume:
-                    audioSource = gameObject.GetComponent<AudioSource>();
                     if (!audioSource.isPlaying)
                     {
                         audioSource.clip = MeowSound;

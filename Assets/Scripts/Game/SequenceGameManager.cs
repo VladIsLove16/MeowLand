@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class SequenceGameManager : MonoBehaviour
 {
@@ -30,49 +31,66 @@ public class SequenceGameManager : MonoBehaviour
         SoundSequenceGame.Awake();
         SoundSequenceGame.RoundWon.AddListener(OnRoundWon);
         SoundSequenceGame.RoundLost.AddListener(OnRoundLost);
-        
-
     }
 
     private void Start()
     {
         GameInit();
     }
-
+    public List<Cat> GetCats()
+    {
+        List<Cat> catList = new List<Cat>(EnabledCats);
+        foreach(Cat cat in DisabledCats)
+            catList.Add(cat);
+        return catList;
+    }
     private void GameInit()
     {
-        foreach (var cat in DisabledCats)
+        while(EnabledCats.Any())
         {
-            if (cat != null)
-                cat.gameObject.SetActive(false);
+            DisableCat(EnabledCats[0]);
         }
         for (int i = 0; i < StartedAvailableCatsCount; i++)
             AddNewCatInGame();
         SoundSequenceGame.SetUpGame(EnabledCats, StartedSequenceLength);
+    }
+    private void DisableCat(Cat cat)
+    {
+        cat.Disable();
+        EnabledCats.Remove(cat);
+        DisabledCats.Add(cat);
+    }
+    public void EnableCat(Cat cat)
+    {
+        cat.Enable();
+        EnabledCats.Add(cat);
+        DisabledCats.Remove(cat);
     }
 
     private Cat GetDisabledCat()
     {
         return GetRandom(DisabledCats);
     }
-
+    public void OnCatClick(Cat cat)
+    {
+        if(cat.IsClickable)
+        {
+            SoundSequenceGame.OnCat_Click(cat);
+        }
+    }
     public void AddNewCatInGame()
     {
         if (!DisabledCats.Any())
             return;
 
         Cat cat = GetDisabledCat();
+        EnableCat(cat);
         if (cat == null) return;
-
-        EnabledCats.Add(cat);
-        DisabledCats.Remove(cat);
         CatInfoSO catInfoSO = AddNewCatInfoInPlay();
         if(catInfoSO != null)
             cat.Init(catInfoSO);
-        cat.Clicked.AddListener(()=>SoundSequenceGame.OnCat_Click(cat));
     }
-
-    private CatInfoSO AddNewCatInfoInPlay()
+        private CatInfoSO AddNewCatInfoInPlay()
     {
         if (WaitingTheirTimeCatsInfo.Count == 0)
             WaitingTheirTimeCatsInfo = GetBoughtCats();
