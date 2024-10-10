@@ -1,18 +1,11 @@
 using Assets.Scripts;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
-
 public class GameUi : MonoBehaviour
 {
-
     private UIDocument document;
     private VisualElement root;
     [SerializeField]
@@ -53,7 +46,7 @@ public class GameUi : MonoBehaviour
 
     private VisualElement SettingsMenu;
     public SequenceGameManager SequenceGameManager;
-    private void Awake()
+    private void Start()
     {
         document = GetComponent<UIDocument>();
         root = document.rootVisualElement;
@@ -79,9 +72,10 @@ public class GameUi : MonoBehaviour
         CatRow1 = CatsContainer.Q("Row1") as VisualElement;
         CatRow2 = CatsContainer.Q("Row2") as VisualElement;
         int j = 0;
-        SetupCatShopItems(CatRow1.Children(), ref j);
-        SetupCatShopItems(CatRow2.Children(), ref j);
-
+        List<VisualElement> list1 = CatRow1.Children().ToList();
+        List<VisualElement> list2 = CatRow2.Children().ToList();
+        list1.AddRange(list2);
+        SetupCatShopItems(list1, ref j);
         Hearts = root.Q("Hearts");
         Debug.Log(Hearts.Children().Count());
         HeartsList = Hearts.Children().ToList();
@@ -133,10 +127,6 @@ public class GameUi : MonoBehaviour
         };
 
         Debug.Log("GameUI loaded with " + Wallet.Money.SoftMoney.ToString() + "soft money");
-
-    }
-    private void Start()
-    {
         SoftMoney.text = Wallet.Money.SoftMoney.ToString();
         HardMoney.text = Wallet.Money.HardMoney.ToString();
     }
@@ -154,7 +144,6 @@ public class GameUi : MonoBehaviour
         SoftMoneyAdded.SetEnabled(false);
         SoftMoney.text = Wallet.Money.SoftMoney.ToString();
     }
-
     private void OnHealthHeal(int arg0)
     {
         if (arg0 > 0)
@@ -245,15 +234,14 @@ public class GameUi : MonoBehaviour
     private void SetupCatShopItems(IEnumerable<VisualElement> children, ref int j)
     {
         List<Cat> cats = SequenceGameManager.GetCats();
-        Debug.Log(cats.Count);
         foreach (VisualElement item in children)
         {
             Button catBtn = item.Q<Button>();
             Cat cat = cats[j];
-            Debug.Log(cat.name);
-            cat.Init(catBtn);
-            catBtn.clicked += () => { SequenceGameManager.OnCatClick(cat); };
-            //Button activate = buttons.Q("Activate") as Button;
+
+            cat.CatAnimator.Init(catBtn);
+            Debug.Log(cat.name + " inited with " + j);
+            catBtn.clicked += () => { SequenceGameManager.OnCatClick(cat); Debug.Log("catbtnClicked" + cat.name); };
             j++;
         }
     }

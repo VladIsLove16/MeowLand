@@ -361,6 +361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: f24d4b1c610c2a246854e58b26afb15f, type: 2}
   settingsUI: {fileID: 249173960}
+  wallet: {fileID: 11400000, guid: 378e5f1b36a8e1241907b818e18b68e6, type: 2}
 --- !u!114 &249173960
 MonoBehaviour:
   m_ObjectHideFlags: 0

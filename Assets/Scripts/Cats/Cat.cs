@@ -21,13 +21,9 @@ public class Cat : MonoBehaviour
     public bool IsClickable;
     public void Init(CatInfoSO shopItemSO)
     {
+        Debug.Log(name + " Init with "  + shopItemSO.name);
         catInfoSO = shopItemSO;
         CatAnimator.Init(shopItemSO);
-        gameObject.SetActive(true);
-    }
-    public void Init(Button btn)
-    {
-        CatAnimator.Init(btn);
     }
         //public void Init(UIToolkitButtonAnimator catAnimator)
         //{
@@ -39,17 +35,16 @@ public class Cat : MonoBehaviour
         CatAnimator = GetComponent<UIToolkitButtonAnimator>();
         if (catInfoSO!=null)
             Init(catInfoSO);
-    }
-    private void Update()
-    {
-        CatAnimator.Update();
+        IsClickable = true;
     }
     public void Disable()
     {
+        Debug.Log(name + "Disable");
         gameObject.SetActive(false);
     }
     public void Enable()
     {
+        Debug.Log(name + "Enable");
         gameObject.SetActive(true);
     }
     private void OnEnable()
@@ -62,7 +57,6 @@ public class Cat : MonoBehaviour
     }
     public void Meow()
     {
-        if (IsClickable)
         {
             AudioSource.PlayOneShot(catInfoSO.MeowSound);
             CatAnimator.StartAnimation(AnimationType.Meow);
@@ -70,7 +64,6 @@ public class Cat : MonoBehaviour
     }
     public void Angry()
     {
-        if (IsClickable)
         {
             if (catInfoSO.AngrySound != null)
                 AudioSource.PlayOneShot(catInfoSO.AngrySound);

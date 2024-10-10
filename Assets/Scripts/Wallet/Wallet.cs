@@ -9,6 +9,7 @@ public class Wallet : ScriptableObject
     public Money Money=new();
     public UnityEvent<Money> moneyChangedBy=new();
     public UnityEvent moneyChanged=new();
+    public bool PromoEntered;
     public void Load(Money money)
     {
         Money.SoftMoney = money.SoftMoney;

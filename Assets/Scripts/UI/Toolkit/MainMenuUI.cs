@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UIElements;
@@ -15,7 +12,8 @@ public class MainMenuUI : MonoBehaviour
     private VisualElement CenterPanel;
     private VisualElement DownPanel;
     private VisualElement SettingsMenu;
-
+    private UnityEngine.UIElements.TextField PromocodeField;
+    private Button Submit;
 
     private Button MyVK;
     private Button MyTG;
@@ -27,6 +25,8 @@ public class MainMenuUI : MonoBehaviour
     private AudioMixer audioMixer;
     [SerializeField]
     private SettingsUI settingsUI;
+    [SerializeField]
+    Wallet  wallet;
 
     private void Start()
     {
@@ -70,6 +70,25 @@ public class MainMenuUI : MonoBehaviour
             ManageSettingsMenu();
         };
         YandexGame.GameReadyAPI();
+
+        PromocodeField = root.Q("Promocode") as TextField;
+        Submit = PromocodeField.Q<Button>();
+
+        if (wallet.PromoEntered)
+        {
+            Submit.text = "Добавлено!";
+            Submit.SetEnabled(false);
+        }
+        Submit.clicked += () =>
+        {
+            if (PromocodeField.text == "whatislove")
+            {
+                wallet.AddMoney(new Money(100));
+                wallet.PromoEntered = true;
+                Submit.text = "Добавлено!";
+                Submit.SetEnabled(false);
+            }
+        };
     }
     private void ManageSettingsMenu()
     {

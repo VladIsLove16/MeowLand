@@ -20,6 +20,6 @@ public partial class AdaptiveText : Label
 
             // Устанавливаем размер шрифта
             style.fontSize = newFontSize;
-            Debug.Log($"{parentWidth}, {parentHeight}, {style.fontSize}, {newFontSize}");
+            //Debug.Log($"{parentWidth}, {parentHeight}, {style.fontSize}, {newFontSize}");
         }
 }

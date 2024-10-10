@@ -13,6 +13,7 @@ using static Assets.Scripts.Outlinev2;
 
 public class SoundSequenceGame : MonoBehaviour
 {
+    private const float TimeBetweenAnimations = 0.2f;
     public static SoundSequenceGame instance;
     [SerializeField]
     public int StartedSequenceLength;
@@ -76,11 +77,10 @@ public class SoundSequenceGame : MonoBehaviour
     private IEnumerator PlayStartSoundSequence()
     {
         SetRoundState(RoundState.playingSounds);
-        SetCatsClickable(false);
         for (int i = 0; i < CatSequence.Count; i++)
         {
             CatSequence[i].Meow();
-            yield return new WaitForSeconds(CatSequence[i].catInfoSO.MeowSound.length+0.1f);
+            yield return new WaitForSeconds(CatSequence[i].catInfoSO.MeowSound.length+ TimeBetweenAnimations);
         }
         SetRoundState(roundState = RoundState.roundStarting);
         SetCatsClickable(true);
@@ -105,7 +105,7 @@ public class SoundSequenceGame : MonoBehaviour
         int num = UnityEngine.Random.Range(0, AvailableCats.Count);
         Cat cat = AvailableCats[num];
         CatSequence.Add(cat);
-        Debug.Log(cat.catInfoSO.MeowSound.ToSafeString() + " added");
+        //Debug.Log(cat.catInfoSO.MeowSound.ToSafeString() + " added");
     }
     private void QueueCheck(Cat cat)
     {

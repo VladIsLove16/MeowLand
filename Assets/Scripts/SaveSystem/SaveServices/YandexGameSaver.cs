@@ -62,6 +62,7 @@ public class YandexGameSaver : MonoBehaviour
         data.Money = Wallet.Money   ;
         data.ShopData = ShopDataSaver.Get();
         data.HealthData = HealthSystem.GetHealthData();
+        data.PromoEntered = Wallet.PromoEntered;
         saveSystem.Save(data);
     }
 

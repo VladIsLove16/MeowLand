@@ -1,5 +1,5 @@
 {
-    "idSave": 49,
+    "idSave": 139,
     "isFirstSession": false,
     "language": "en",
     "promptDone": false,
@@ -12,10 +12,11 @@
     ],
     "SaveData": {
         "Money": {
-            "SoftMoney": 13,
+            "SoftMoney": 122,
             "HardMoney": 0
         },
         "ShopData": {},
+        "PromoEntered": false,
         "Level": 0
     }
 }

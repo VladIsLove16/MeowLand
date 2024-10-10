@@ -1,35 +1,90 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 public class UIToolkitButtonAnimator : CatAnimatorBase
 {
     Button Button;
-    private float currentAnimTime;
-    public UIToolkitButtonAnimator()
-    { 
-    }
-    public UIToolkitButtonAnimator(CatInfoSO infoSO, Button button)
+    private float CurrentAnimTime;
+    private bool CanFlash;
+    private void Start()
     {
-        Init(infoSO);
-        Init(button);
+        SoundSequenceGame.instance.roundStateChanged.AddListener(OnSoundSequenceGame_roundStateChanged);
     }
-    public  void Init(Button button)
+    public void Init(Button button)
     {
         this.Button = button;
         SpriteSetter = new VisualElementSpriteSetter(button);
     }
-    public void Update()
-    {
-        if(!playingAnim)
-            FlashingAnim();
-        else if (currentAnimTime<0)
-            OnAnimationEnd();
-        else
-            currentAnimTime -= Time.deltaTime;
-    }
     public override void StartAnimation(AnimationType type)
     {
+        StartCoroutine(StartAnimation_Coroutine(type));
+    }
+    private void OnSoundSequenceGame_roundStateChanged(SoundSequenceGame.RoundState state)
+    {
+        if(state == SoundSequenceGame.RoundState.playingSounds)
+        {
+            SpriteSetter.Set(IdleSprite);
+            ToggleFlashing(false);
+        }
+        else
+        {
+            ToggleFlashing(true);
+        }
+    }
+
+    private void ToggleFlashing(bool state)
+    {
+        CanFlash = state;
+    }
+
+    private void Update()
+    {
+        //Debug.Log(playingAnim + " " + timeBetweenFlashing);
+        AnimationTimer();
+        if (!playingAnim && CanFlash)
+        {
+            StartCoroutine(FlashingAnim());
+        }
+    }
+
+    private void AnimationTimer()
+    {
+        CurrentAnimTime -= Time.deltaTime;
+        if (CurrentAnimTime < 0)
+        {
+            if (SpriteSetter == null)
+                Debug.Log("SpriteSetter is null");
+            SpriteSetter.Set(IdleSprite);
+            playingAnim = false;
+        }
+    }
+
+    protected  IEnumerator  FlashingAnim()
+    {
+        //Debug.Log("Flashing");
+        timeBetweenFlashing -= Time.deltaTime;
+        if (timeBetweenFlashing < 0)
+        {
+            CancelInvoke("OnAnimationEnd");
+            timeBetweenFlashing = GetFlashDelay();
+            playingAnim = true;
+            SpriteSetter.Set(FlashingSprite);
+            CurrentAnimTime = AnimationLength;
+            yield return new WaitForSeconds(AnimationLength);
+            OnAnimationEnd();
+        }
+    }
+    private float GetFlashDelay()
+    {
+        return UnityEngine.Random.Range(1.5f, 4f);
+    }
+
+    private IEnumerator StartAnimation_Coroutine(AnimationType type)
+    {
+        CancelInvoke("OnAnimationEnd");
         playingAnim = true;
         switch (type)
         {
@@ -40,32 +95,25 @@ public class UIToolkitButtonAnimator : CatAnimatorBase
                 SpriteSetter.Set(AngrySprite);
                 break;
         }
-        currentAnimTime = AnimationLength + 300;
+        CurrentAnimTime = AnimationLength;
+        yield return new WaitForSeconds(AnimationLength);
+        OnAnimationEnd();
     }
+
     protected override void OnAnimationEnd()
     {
-        SpriteSetter.Set(IdleSprite);
-        playingAnim = false;
+       
     }
 
     internal void OnDisable()
     {
-        Button.style.visibility = Visibility.Hidden;
+        if(Button!=null)
+            Button.style.visibility = Visibility.Hidden;
     }
     internal void OnEnable()
     {
-        Button.style.visibility = Visibility.Visible;
-    }
-    protected override void FlashingAnim()
-    {
-        timeBetweenFlashing -= Time.deltaTime;
-        if (timeBetweenFlashing < 0)
-        {
-            timeBetweenFlashing = GetFlashingDelay();
-            SpriteSetter.Set(FlashingSprite);
-            playingAnim = true;
-            currentAnimTime = AnimationLength;
-        }
+        if (Button != null)
+            Button.style.visibility = Visibility.Visible;
     }
 }
 //public class AnimatorCatAnimator : CatAnimator

@@ -1,2 +1,2 @@
 Build path: D:/Projects/Unity/MeowLand/Build/WebGL
-Build number: 16
+Build number: 24

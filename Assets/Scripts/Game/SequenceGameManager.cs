@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.UI.Toolkit;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -25,7 +26,7 @@ public class SequenceGameManager : MonoBehaviour
     public int StartedSequenceLength;
     public int StartedAvailableCatsCount;
     public int RoundToAddNewAvailableCat;
-
+    public GameUi GameUi;
     private void Awake()
     {
         SoundSequenceGame.Awake();
@@ -40,15 +41,17 @@ public class SequenceGameManager : MonoBehaviour
     public List<Cat> GetCats()
     {
         List<Cat> catList = new List<Cat>(EnabledCats);
-        foreach(Cat cat in DisabledCats)
+        foreach (Cat cat in DisabledCats)
             catList.Add(cat);
         return catList;
     }
     private void GameInit()
     {
-        while(EnabledCats.Any())
+        List<Cat> cats = GetCats();
+        while (cats.Any())
         {
-            DisableCat(EnabledCats[0]);
+            DisableCat(cats[0]);
+            cats.RemoveAt(0);
         }
         for (int i = 0; i < StartedAvailableCatsCount; i++)
             AddNewCatInGame();
@@ -57,14 +60,18 @@ public class SequenceGameManager : MonoBehaviour
     private void DisableCat(Cat cat)
     {
         cat.Disable();
-        EnabledCats.Remove(cat);
-        DisabledCats.Add(cat);
+        if (EnabledCats.Contains(cat))
+            EnabledCats.Remove(cat);
+        if (!DisabledCats.Contains(cat))
+            DisabledCats.Add(cat);
     }
     public void EnableCat(Cat cat)
     {
         cat.Enable();
-        EnabledCats.Add(cat);
-        DisabledCats.Remove(cat);
+        if (!EnabledCats.Contains(cat))
+            EnabledCats.Add(cat);
+        if (DisabledCats.Contains(cat))
+            DisabledCats.Remove(cat);
     }
 
     private Cat GetDisabledCat()
@@ -73,7 +80,7 @@ public class SequenceGameManager : MonoBehaviour
     }
     public void OnCatClick(Cat cat)
     {
-        if(cat.IsClickable)
+        if (cat.IsClickable)
         {
             SoundSequenceGame.OnCat_Click(cat);
         }
@@ -82,22 +89,25 @@ public class SequenceGameManager : MonoBehaviour
     {
         if (!DisabledCats.Any())
             return;
+        AddNewCatInGame(AddNewCatInfoInPlay());
 
-        Cat cat = GetDisabledCat();
-        EnableCat(cat);
-        if (cat == null) return;
-        CatInfoSO catInfoSO = AddNewCatInfoInPlay();
-        if(catInfoSO != null)
-            cat.Init(catInfoSO);
     }
-        private CatInfoSO AddNewCatInfoInPlay()
+    private void AddNewCatInGame(CatInfoSO catInfoSO)
+    {
+        Cat cat = GetDisabledCat();
+        if (cat == null)
+            return;
+
+        EnableCat(cat);
+        cat.Init(catInfoSO);
+    }
+    private CatInfoSO AddNewCatInfoInPlay()
     {
         if (WaitingTheirTimeCatsInfo.Count == 0)
             WaitingTheirTimeCatsInfo = GetBoughtCats();
         CatInfoSO randomCat = GetRandom(WaitingTheirTimeCatsInfo);
         if (randomCat == default || randomCat == null)
             return null;
-
         CatsInfoInPlay.Add(randomCat);
         WaitingTheirTimeCatsInfo.Remove(randomCat);
         return randomCat;
@@ -149,6 +159,7 @@ public class SequenceGameManager : MonoBehaviour
             return;
         else if (round % RoundToAddNewAvailableCat == 0)
         {
+
             AddNewCatInGame();
         }
     }

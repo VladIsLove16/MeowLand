@@ -27,7 +27,7 @@ namespace Assets.Scripts.UI.Toolkit
         Sprite AlreadyBought;
         Label notenoughmoneyText;
         Button Close;
-        private void Awake()
+        public void Start()
         {
             document = GetComponent<UIDocument>();
             root = document.rootVisualElement;
@@ -46,9 +46,6 @@ namespace Assets.Scripts.UI.Toolkit
             notenoughmoneyText = root.Q("notenoughmoneyText") as Label;
             notenoughmoneyText.SetEnabled(false);
             Debug.Log("ShopUI Loaded with "+ Wallet.Money.SoftMoney.ToString() + "soft money");
-        }
-        private void Start()
-        {
             SoftMoney.text = Wallet.Money.SoftMoney.ToString();
             notenoughmoneyText.SetEnabled(false);
         }
@@ -61,8 +58,8 @@ namespace Assets.Scripts.UI.Toolkit
                 Button catBtn = root.Q("Cat") as Button;
                 int currentIndex = j;
                 Cat cat = cats[currentIndex];
+                cat.CatAnimator.Init(catBtn);
                 CatInfoSO catInfo = cat.catInfoSO;
-                cat.Init(catInfo);
                 if (catInfo.IsBought)
                 {
                     buy.SetEnabled(false); 

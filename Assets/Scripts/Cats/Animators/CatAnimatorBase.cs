@@ -5,7 +5,7 @@ public abstract class  CatAnimatorBase : MonoBehaviour
     protected Sprite FlashingSprite;
     protected Sprite MeowSprite;
     protected Sprite AngrySprite;
-    protected int AnimationLength = 1000;
+    protected float AnimationLength = 1f;
     protected bool playingAnim;
     protected float timeBetweenFlashing;
     protected SpriteSetter SpriteSetter;
@@ -16,12 +16,13 @@ public abstract class  CatAnimatorBase : MonoBehaviour
     }
     public virtual void Init(CatInfoSO infoSO)
     {
+        //Debug.Log(name + "Init with " + infoSO.name);
         IdleSprite = infoSO.IdleSprite;
         MeowSprite = infoSO.MeowSprite;
         AngrySprite = infoSO.AngrySprite;
         FlashingSprite = infoSO.FlashingSprite;
     }
-    protected abstract void FlashingAnim();
+    //protected abstract void FlashingAnim();
     public abstract void StartAnimation(AnimationType type);
     protected abstract void OnAnimationEnd();
 }

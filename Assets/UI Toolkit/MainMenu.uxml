@@ -13,5 +13,8 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:Instance template="SettingsMenu" name="SettingsMenu" style="height: auto; width: auto; top: -33%; flex-grow: 1; display: none; min-width: 445px;" />
+        <ui:TextField picking-mode="Ignore" label="Промокод:" is-delayed="true" name="Promocode" style="position: absolute; left: 0; top: 0; margin-top: 34px; margin-right: 27px; margin-bottom: 45px; margin-left: 16px; flex-grow: 1; height: 37px; width: 504px;">
+            <ui:Button text="Подтвердить" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+        </ui:TextField>
     </ui:VisualElement>
 </ui:UXML>
